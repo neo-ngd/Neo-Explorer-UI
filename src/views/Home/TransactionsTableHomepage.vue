@@ -90,7 +90,6 @@ export default {
       isLoading: true,
     };
   },
-
   methods: {
     convertGas,
     convertTime,
@@ -119,7 +118,7 @@ export default {
 
   color: #86909c;
 }
-.hometabletxright {
+.hometableright {
   text-align: right;
 }
 .hometxtitle {
@@ -154,16 +153,16 @@ export default {
 
 @media screen and (max-width: 2000px) {
   .txidhomepage {
-    width: 160px !important;
+    width: 250px !important;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     font-size: 14px !important;
   }
 }
-@media screen and (max-width: 2000px) {
+@media screen and (max-width: 1200px) {
   .txidhomepage {
-    width: 90px !important;
+    width: 150px !important;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

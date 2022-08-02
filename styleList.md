@@ -1,0 +1,1 @@
+1. change Net and Language in head bar

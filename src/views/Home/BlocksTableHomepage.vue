@@ -28,22 +28,15 @@
         tbody-classes="list"
         :data="tableData"
       >
-        <!--template v-slot:columns>
-          <th>{{ $t("blockinfo.hash") }}</th>
-          <th>{{ $t("blockinfo.height") }}</th>
-          <th>{{ $t("blockinfo.time") }}</th>
-          <th>{{ $t("blockinfo.txns") }}</th>
-          <th>{{ $t("blockinfo.size") }}</th>
-        </template-->
         <template v-slot:columns>
           <th class="hometable">{{ $t("blockinfo.height") }}</th>
           <th class="hometable">{{ $t("blockinfo.txns") }}</th>
-          <th class="hometable hometableright">{{ $t("blockinfo.size") }}</th>
-          <th class="hometable hometableright">{{ $t("blockinfo.time") }}</th>
+          <th class="hometable hometableRight">{{ $t("blockinfo.size") }}</th>
+          <th class="hometable hometableRight">{{ $t("blockinfo.time") }}</th>
         </template>
         <template v-slot:default="row">
           <td class="homeblockcontent">
-            <div>
+            <div class="homeblockcontent-word">
               <router-link
                 class="name mb-0"
                 style="cursor: pointer"
@@ -53,10 +46,14 @@
             </div>
           </td>
           <td class="homeblockcontent">
-            <div class="">{{ row.item.transactioncount }} txns</div>
+            <div class="homeblockcontent-word">
+              {{ row.item.transactioncount }} txns
+            </div>
           </td>
           <td class="homeblockcontent homeblockcontentright">
-            <div>{{ row.item.size }} {{ $t("bytes") }}</div>
+            <div class="homeblockcontent-word">
+              {{ row.item.size }} {{ $t("bytes") }}
+            </div>
           </td>
           <td class="homeblockcontent homeblockcontentright">
             <div
@@ -109,13 +106,17 @@ export default {
 };
 </script>
 <style>
-.blockid {
-  width: 200px !important;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  font-size: 14px;
+.homeblocktitle {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 24px;
+  /* identical to box height, or 133% */
+  /* grey900 */
+  color: #1d2129;
 }
+
 .hometable {
   background-color: #ffffff !important;
   max-width: 10px;
@@ -126,23 +127,10 @@ export default {
   line-height: 18px !important;
   text-transform: none !important;
   border-top: none !important;
-
   color: #86909c !important;
 }
-.hometableright {
+.hometableRight {
   text-align: right;
-}
-.homeblocktitle {
-  font-family: Inter;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 18px;
-  line-height: 24px;
-  /* identical to box height, or 133% */
-
-  /* grey900 */
-
-  color: #1d2129;
 }
 .homeblockcontent {
   font-family: Inter;
@@ -155,6 +143,9 @@ export default {
   /* grey900 */
 
   color: #1d2129;
+}
+.homeblockcontent-word {
+  text-align: left;
 }
 .homeblockcontentright {
   text-align: right;
