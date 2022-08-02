@@ -18,15 +18,14 @@
         <!--        </div>-->
         <!--        </router-link>-->
       </slot>
-<!--      <navbar-toggle-button-->
-<!--        v-if="showToggleButton"-->
-<!--        :toggled="toggled"-->
-<!--        :target="contentId"-->
-<!--        @click.stop="toggled = !toggled"-->
-<!--      >-->
-<!--        <span class="navbar-toggler-icon"></span>-->
-<!--      </navbar-toggle-button>-->
-
+      <!--      <navbar-toggle-button-->
+      <!--        v-if="showToggleButton"-->
+      <!--        :toggled="toggled"-->
+      <!--        :target="contentId"-->
+      <!--        @click.stop="toggled = !toggled"-->
+      <!--      >-->
+      <!--        <span class="navbar-toggler-icon"></span>-->
+      <!--      </navbar-toggle-button>-->
       <div
         class="navbar-collapse"
         :class="{ show: toggled }"
@@ -39,11 +38,9 @@
   </nav>
 </template>
 <script>
-
 export default {
   name: "base-nav",
-  components: {
-  },
+  components: {},
   props: {
     type: {
       type: String,
@@ -92,4 +89,3 @@ export default {
   },
 };
 </script>
-<style></style>

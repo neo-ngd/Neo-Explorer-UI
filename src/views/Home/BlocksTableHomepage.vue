@@ -1,18 +1,20 @@
 <template>
   <div
-      class="card-header border-0"
-      :class="type === 'dark' ? 'bg-transparent' : ''"
+    class="card-header border-0"
+    :class="type === 'dark' ? 'bg-transparent' : ''"
   >
     <div class="row align-items-center">
       <div class="col">
-        <h3 class="mb-0 homeblocktitle" :class="type === 'dark' ? 'text-white' : ''">
+        <h3
+          class="mb-0 homeblocktitle"
+          :class="type === 'dark' ? 'text-white' : ''"
+        >
           {{ title }}
         </h3>
       </div>
       <div class="col text-right">
-        <span class="seeMoreButton" @click="toBlocksTable()">{{
-            $t("homePage.more")
-          }}
+        <span class="seeMoreButton" @click="toBlocksTable()"
+          >{{ $t("homePage.more") }}
         </span>
       </div>
     </div>
@@ -20,7 +22,7 @@
   <div class="card border-0" :class="type === 'dark' ? 'bg-default' : ''">
     <div class="table-responsive">
       <base-table
-        class="table align-items-center table-hover  hometablelist"
+        class="table align-items-center table-hover hometablelist"
         :class="type === 'dark' ? 'table-dark' : ''"
         :thead-classes="type === 'dark' ? 'thead-dark' : 'thead-light'"
         tbody-classes="list"
@@ -34,35 +36,33 @@
           <th>{{ $t("blockinfo.size") }}</th>
         </template-->
         <template v-slot:columns>
-          <th class="hometable ">{{$t("blockinfo.height")}}</th>
-          <th class="hometable ">{{$t("blockinfo.txns")}}</th>
-          <th class="hometable hometableright">{{$t("blockinfo.size")}}</th>
-          <th class="hometable hometableright">{{$t("blockinfo.time")}}</th>
-
+          <th class="hometable">{{ $t("blockinfo.height") }}</th>
+          <th class="hometable">{{ $t("blockinfo.txns") }}</th>
+          <th class="hometable hometableright">{{ $t("blockinfo.size") }}</th>
+          <th class="hometable hometableright">{{ $t("blockinfo.time") }}</th>
         </template>
         <template v-slot:default="row">
           <td class="homeblockcontent">
-              <div >
-                <router-link
-                    class="name mb-0 "
-                    style="cursor: pointer;"
-                    :to="'/blockinfo/'+row.item.hash"
-                >{{ row.item.index }}</router-link>
-              </div>
-
-          </td>
-          <td class="homeblockcontent" >
-            <div class="">
-              {{ row.item.transactioncount }} txns
+            <div>
+              <router-link
+                class="name mb-0"
+                style="cursor: pointer"
+                :to="'/blockinfo/' + row.item.hash"
+                >{{ row.item.index }}</router-link
+              >
             </div>
           </td>
-          <td class="homeblockcontent homeblockcontentright" >
-            <div>{{ row.item.size }} {{$t("bytes")}}
-            </div>
-
+          <td class="homeblockcontent">
+            <div class="">{{ row.item.transactioncount }} txns</div>
           </td>
-          <td class="homeblockcontent homeblockcontentright" >
-            <div  class="timeago "  :datetime="(convertISOTime(row.item.timestamp)).toString()"></div>
+          <td class="homeblockcontent homeblockcontentright">
+            <div>{{ row.item.size }} {{ $t("bytes") }}</div>
+          </td>
+          <td class="homeblockcontent homeblockcontentright">
+            <div
+              class="timeago"
+              :datetime="convertISOTime(row.item.timestamp).toString()"
+            ></div>
           </td>
         </template>
       </base-table>
@@ -70,9 +70,8 @@
   </div>
 </template>
 <script>
-import {convertTime,convertISOTime} from "../../store/util";
+import { convertTime, convertISOTime } from "../../store/util";
 import net from "../../store/store";
-
 
 export default {
   name: "blocks-table-homepage",
@@ -81,7 +80,7 @@ export default {
       type: String,
     },
     title: String,
-    tableData:Object,
+    tableData: Object,
   },
   data() {
     return {
@@ -94,16 +93,11 @@ export default {
       placeHolder: 0,
     };
   },
-  created() {
+  created() {},
 
-  },
-
-  mounted() {
-
-  },
+  mounted() {},
 
   methods: {
-
     convertTime,
     convertISOTime,
     toBlocksTable() {
@@ -111,8 +105,6 @@ export default {
         path: `/blocks/1`,
       });
     },
-
-
   },
 };
 </script>
@@ -124,23 +116,23 @@ export default {
   text-overflow: ellipsis;
   font-size: 14px;
 }
-.hometable{
-  background-color: #FFFFFF!important;
+.hometable {
+  background-color: #ffffff !important;
   max-width: 10px;
-  font-family: Inter!important;
-  font-style: normal!important;
-  font-weight: normal!important;
-  font-size: 12px!important;
-  line-height: 18px!important;
-  text-transform:none!important;
-  border-top:none!important;
+  font-family: Inter !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-size: 12px !important;
+  line-height: 18px !important;
+  text-transform: none !important;
+  border-top: none !important;
 
-  color: #86909C!important;
+  color: #86909c !important;
 }
-.hometableright{
+.hometableright {
   text-align: right;
 }
-.homeblocktitle{
+.homeblocktitle {
   font-family: Inter;
   font-style: normal;
   font-weight: 600;
@@ -150,9 +142,9 @@ export default {
 
   /* grey900 */
 
-  color: #1D2129
+  color: #1d2129;
 }
-.homeblockcontent{
+.homeblockcontent {
   font-family: Inter;
   font-style: normal;
   font-weight: normal;
@@ -160,12 +152,11 @@ export default {
   line-height: 30px;
   /* identical to box height, or 129% */
 
-
   /* grey900 */
 
-  color: #1D2129;
+  color: #1d2129;
 }
-.homeblockcontentright{
+.homeblockcontentright {
   text-align: right;
 }
 </style>

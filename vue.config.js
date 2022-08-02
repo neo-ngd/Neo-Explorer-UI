@@ -17,35 +17,34 @@
 // setProxy(VINCENT_API)
 
 const webpack = require("webpack");
-const CompressionWebpackPlugin = require('compression-webpack-plugin')
-const productionGzipExtensions = ['js', 'css']
-
+const CompressionWebpackPlugin = require("compression-webpack-plugin");
+const productionGzipExtensions = ["js", "css"];
 
 module.exports = {
   devServer: {
     proxy: {
       "/api": {
         changeOrigin: true,
-        // target: m "http://127.0.0.1:1926",
-        // target: "https://testneofura.ngd.network:444",
-        target:"https://neofura.ngd.network",
+        // target: "http://127.0.0.1:1926",
+        target: "https://testneofura.ngd.network:444",
+        // target: "https://neofura.ngd.network",
         // target:"https://testmagnet.ngd.network",
         // target: "http://106.14.204.151:1926",
         // target: "http://192.168.1.89:1926"
       },
       "/bpi": {
         changeOrigin: true,
-        // target: m "http://127.0.0.1:1926",
+        // target: "http://127.0.0.1:1926",
         // target: "https://testneofura.ngd.network:444",
-        target:"https://neofura.ngd.network:1927",
+        target: "https://neofura.ngd.network:1927",
         // target: "http://106.14.204.151:1926",
         // target: "http://192.168.1.89:1926"
       },
       "/hahaha": {
         changeOrigin: true,
-        // target: m "http://127.0.0.1:1926",
+        target: "http://127.0.0.1:1926",
         // target: "https://testneofura.ngd.network:444",
-        target:"http://127.0.0.1:1926/upload",
+        // target: "http://127.0.0.1:1926/upload",
         // target: "http://106.14.204.151:1926",
         // target: "http://192.168.1.89:1926"
       },
@@ -54,21 +53,21 @@ module.exports = {
   },
   configureWebpack: {
     // Set up all the aliases we use in our app.
-    externals:{
+    externals: {
       vue: "Vue",
       // axios: "axios",
-      "element-plus": "ElementPlus"
+      "element-plus": "ElementPlus",
     },
     plugins: [
       new CompressionWebpackPlugin({
-        algorithm: 'gzip',
-        test: new RegExp('\\.(' + productionGzipExtensions.join('|') + ')$'),
+        algorithm: "gzip",
+        test: new RegExp("\\.(" + productionGzipExtensions.join("|") + ")$"),
         threshold: 10240,
-        minRatio: 0.8
-      }) ,
+        minRatio: 0.8,
+      }),
       new webpack.optimize.LimitChunkCountPlugin({
         maxChunks: 5,
-        minChunkSize: 100
+        minChunkSize: 100,
       }),
     ],
   },
@@ -84,4 +83,3 @@ module.exports = {
     sourceMap: process.env.NODE_ENV !== "production",
   },
 };
-

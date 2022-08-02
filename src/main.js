@@ -1,4 +1,3 @@
-
 import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./router";
@@ -8,21 +7,14 @@ import ElementPlus from "element-plus";
 
 // import Vuex  from "vuex";
 
-
-import './assets/css/global.css'
-
-
-
+import "./assets/css/global.css";
 
 const appInstance = createApp(App);
+appInstance.config.devtools = true;
 appInstance.use(router);
 appInstance.use(i18n);
-appInstance.use(ElementPlus)
+appInstance.use(ElementPlus);
 appInstance.use(NeoDashboard);
 appInstance.mount("#app");
 
 // export default {store}
-
-
-
-

@@ -1,26 +1,25 @@
 <template>
   <div
-      class="card-header border-0"
-      :class="type === 'dark' ? 'bg-transparent' : ''"
+    class="card-header border-0"
+    :class="type === 'dark' ? 'bg-transparent' : ''"
   >
     <div class="row align-items-center">
       <div class="col">
-        <h3 class="mb-0 hometxtitle" :class="type === 'dark' ? 'text-white' : ''">
+        <h3
+          class="mb-0 hometxtitle"
+          :class="type === 'dark' ? 'text-white' : ''"
+        >
           {{ title }}
         </h3>
       </div>
       <div class="col text-right">
-        <span
-            class="seeMoreButton"
-            @click="toTransactionsTable()"
-        >{{ $t("homePage.more") }}
-        </span
-        >
+        <span class="seeMoreButton" @click="toTransactionsTable()"
+          >{{ $t("homePage.more") }}
+        </span>
       </div>
     </div>
   </div>
   <div class="card border-0" :class="type === 'dark' ? 'bg-default' : ''">
-
     <div class="table-responsive">
       <base-table
         class="table align-items-center table-hover hometablelist"
@@ -29,43 +28,40 @@
         tbody-classes="list"
         :data="tableData"
       >
-        <!--template v-slot:columns>
-          <th>{{ $t("homePage.txTable.txID") }}</th>
-          <th>{{ $t("homePage.txTable.size") }}</th>
-          <th>{{ $t("homePage.txTable.time") }}</th>
-          <th>{{ $t("homePage.txTable.gas") }}</th>
-        </template-->
         <template v-slot:columns>
           <th class="hometabletx">{{ $t("homePage.txTable.txID") }}</th>
           <th class="hometabletx">{{ $t("homePage.txTable.gas") }}</th>
-          <th class="hometabletx hometableright">{{ $t("homePage.txTable.size") }}</th>
-          <th class="hometabletx hometableright">{{ $t("homePage.txTable.time") }}</th>
-
+          <th class="hometabletx hometableright">
+            {{ $t("homePage.txTable.size") }}
+          </th>
+          <th class="hometabletx hometableright">
+            {{ $t("homePage.txTable.time") }}
+          </th>
         </template>
         <template v-slot:default="row">
-
           <td class="hometxcontent">
-            <div class="txidhomepage ">
+            <div class="txidhomepage">
               <router-link
-                class="name mb-0 "
-                style="cursor: pointer;"
-                :to="'/transactionInfo/'+row.item.hash"
+                class="name mb-0"
+                style="cursor: pointer"
+                :to="'/transactionInfo/' + row.item.hash"
                 >{{ row.item.hash }}</router-link
               >
             </div>
-
           </td>
           <td class="hometxcontent">
             <div class="">
               {{ this.convertGas(row.item.netfee + row.item.sysfee) }} gas
             </div>
           </td>
-          <td class="hometxcontent hometxcontentright" >
-            <div > {{ row.item.size }} {{ $t("bytes") }}</div>
-
+          <td class="hometxcontent hometxcontentright">
+            <div>{{ row.item.size }} {{ $t("bytes") }}</div>
           </td>
           <td class="hometxcontent hometxcontentright">
-            <div  class="timeago"  :datetime="(convertISOTime(row.item.blocktime)).toString()"></div>
+            <div
+              class="timeago"
+              :datetime="convertISOTime(row.item.blocktime).toString()"
+            ></div>
           </td>
         </template>
       </base-table>
@@ -73,9 +69,8 @@
   </div>
 </template>
 <script>
-import { convertGas, convertTime,convertISOTime } from "../../store/util";
+import { convertGas, convertTime, convertISOTime } from "../../store/util";
 import net from "../../store/store";
-
 
 export default {
   name: "transactions-table-homepage",
@@ -96,7 +91,6 @@ export default {
     };
   },
 
-
   methods: {
     convertGas,
     convertTime,
@@ -110,27 +104,25 @@ export default {
 };
 </script>
 <style>
-
-.hometabletx{
-  background-color: #FFFFFF!important;
-  font-family: Inter!important;
-  font-style: normal!important;
-  font-weight: normal!important;
-  font-size: 12px!important;
-  line-height: 18px!important;
-  text-transform:none!important;
-  border-top:none!important;
+.hometabletx {
+  background-color: #ffffff !important;
+  font-family: Inter !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-size: 12px !important;
+  line-height: 18px !important;
+  text-transform: none !important;
+  border-top: none !important;
   /* identical to box height, or 129% */
-
 
   /* grey500 */
 
-  color: #86909C;
+  color: #86909c;
 }
-.hometabletxright{
+.hometabletxright {
   text-align: right;
 }
-.hometxtitle{
+.hometxtitle {
   font-family: Inter;
   font-style: normal;
   font-weight: 600;
@@ -142,7 +134,7 @@ export default {
 
   /* grey900 */
 
-  color: #1D2129;
+  color: #1d2129;
 }
 .hometxcontent {
   font-family: Inter;
@@ -152,16 +144,15 @@ export default {
   line-height: 30px;
   /* identical to box height, or 129% */
 
-
   /* grey900 */
 
-  color: #1D2129;
+  color: #1d2129;
 }
-.hometxcontentright{
+.hometxcontentright {
   text-align: right;
 }
 
-@media screen and (max-width: 2000px ){
+@media screen and (max-width: 2000px) {
   .txidhomepage {
     width: 160px !important;
     white-space: nowrap;
@@ -169,9 +160,8 @@ export default {
     text-overflow: ellipsis;
     font-size: 14px !important;
   }
-
 }
-@media screen and (max-width: 2000px ){
+@media screen and (max-width: 2000px) {
   .txidhomepage {
     width: 90px !important;
     white-space: nowrap;
@@ -179,7 +169,5 @@ export default {
     text-overflow: ellipsis;
     font-size: 14px !important;
   }
-
 }
-
 </style>
