@@ -1,9 +1,14 @@
 <template>
-  <div style="padding-bottom: 10%!important; background: #f7f8fa">
-    <div class=" list container-fluid mt--8" style="background: #f7f8fa; width: 85%">
+  <div style="padding-bottom: 10% !important; background: #f7f8fa">
+    <div
+      class="list container-fluid mt--8"
+      style="background: #f7f8fa; width: 85%"
+    >
       <div class="row">
         <div class="col">
-          <transactions-table :title="$t('blockinfo.txnsList')"></transactions-table>
+          <transactions-table
+            :title="$t('blockinfo.txnsList')"
+          ></transactions-table>
         </div>
       </div>
     </div>
@@ -16,10 +21,6 @@ export default {
   components: {
     TransactionsTable,
   },
-
 };
 </script>
-<style>
-
-
-</style>
+<style></style>

@@ -35,8 +35,8 @@
           <th class="tableHeader">{{ $t("candidate.address") }}</th>
           <th class="tableHeader">
             {{ $t("candidate.committee") }}
-            <el-tooltip   :content=this.content placement="top" >
-              <i class="el-icon-question"/>
+            <el-tooltip :content="this.content" placement="top">
+              <i class="el-icon-question" />
             </el-tooltip>
           </th>
           <th class="tableHeader">{{ $t("candidate.rank") }}</th>
@@ -46,10 +46,10 @@
 
         <template v-slot:default="row">
           <td class="budget">
-            <div class="short" style="text-align: center" >
+            <div class="short" style="text-align: center">
               <router-link
-                class=" table-list-item-blue mb-0 "
-                style="cursor: pointer;"
+                class="table-list-item-blue mb-0"
+                style="cursor: pointer"
                 :to="'/accountprofile/' + row.item.candidate"
               >
                 {{ row.item.candidate }}
@@ -57,49 +57,63 @@
             </div>
           </td>
           <td>
-            <span v-if="row.item.isCommittee && (row.index + 1 + (this.pagination-1)*this.resultsPerPage) <=7 " ><span></span>  {{ $t("candidate.consensus") }}</span>
-            <span v-else-if="row.item.isCommittee && (row.index + 1 + (this.pagination-1)*this.resultsPerPage) >7" >
+            <span
+              v-if="
+                row.item.isCommittee &&
+                row.index + 1 + (this.pagination - 1) * this.resultsPerPage <= 7
+              "
+              ><span></span> {{ $t("candidate.consensus") }}</span
+            >
+            <span
+              v-else-if="
+                row.item.isCommittee &&
+                row.index + 1 + (this.pagination - 1) * this.resultsPerPage > 7
+              "
+            >
               <span></span> {{ $t("candidate.committees") }}
             </span>
-            <span v-else>  {{ $t("candidate.candidate") }}</span>
+            <span v-else> {{ $t("candidate.candidate") }}</span>
           </td>
-          <td  class="table-list-item">
-            {{ row.index + 1 + (this.pagination-1)*this.resultsPerPage }}
-          </td >
-          <td  class="table-list-item">
+          <td class="table-list-item">
+            {{ row.index + 1 + (this.pagination - 1) * this.resultsPerPage }}
+          </td>
+          <td class="table-list-item">
             {{ row.item.votesOfCandidate }}
           </td>
-          <td  class="table-list-item">
+          <td class="table-list-item">
             {{ getVotePercentage(row.item.votesOfCandidate) }}
           </td>
         </template>
       </base-table>
     </div>
 
-    <div v-if="totalCount>=10"
-            class="card-footer d-flex justify-content-end"
-            :class="type === 'dark' ? 'bg-transparent' : ''"
-            style="height: 70px"
+    <div
+      v-if="totalCount >= 10"
+      class="card-footer d-flex justify-content-end"
+      :class="type === 'dark' ? 'bg-transparent' : ''"
+      style="height: 70px"
     >
       <el-pagination
-          v-if="windowWidth > 552"
-          @current-change="handleCurrentChange"
-          :hide-on-single-page="totalCount<=10"
-          :current-page="parseInt(pagination)"
-          :pager-count= "5"
-          :page-size= "10"
-          layout="jumper, prev, pager, next"
-          :total="totalCount">
+        v-if="windowWidth > 552"
+        @current-change="handleCurrentChange"
+        :hide-on-single-page="totalCount <= 10"
+        :current-page="parseInt(pagination)"
+        :pager-count="5"
+        :page-size="10"
+        layout="jumper, prev, pager, next"
+        :total="totalCount"
+      >
       </el-pagination>
       <el-pagination
-          v-if="windowWidth < 552"
-          small
-          @current-change="handleCurrentChange"
-          :hide-on-single-page="totalCount<=10"
-          :current-page="parseInt(pagination)"
-          :pager-count= "5"
-          layout="prev,pager,next"
-          :total="totalCount">
+        v-if="windowWidth < 552"
+        small
+        @current-change="handleCurrentChange"
+        :hide-on-single-page="totalCount <= 10"
+        :current-page="parseInt(pagination)"
+        :pager-count="5"
+        layout="prev,pager,next"
+        :total="totalCount"
+      >
       </el-pagination>
     </div>
   </div>
@@ -118,17 +132,16 @@ export default {
     },
     title: String,
   },
-  computed:{
-    content:function (){
-      if(this.$i18n.locale==='en'){
-        return "Account includes consensus, committee, candidate, normal, 4 types."
-      } else if (this.$i18n.locale==='cn'){
-        return "账户包括 共识结点，委员会结点，候选人结点，普通结点四种类型"
+  computed: {
+    content: function () {
+      if (this.$i18n.locale === "en") {
+        return "Account includes consensus, committee, candidate, normal, 4 types.";
+      } else if (this.$i18n.locale === "cn") {
+        return "账户包括 共识结点，委员会结点，候选人结点，普通结点四种类型";
       } else {
-        return "Le compte contiens 4 types: consensus, comité, candidature, normal"
+        return "Le compte contiens 4 types: consensus, comité, candidature, normal";
       }
-
-    }
+    },
   },
 
   components: {
@@ -146,13 +159,13 @@ export default {
       count: 0,
       isLoading: true,
       countPage: 0,
-      windowWidth:window.innerWidth,
+      windowWidth: window.innerWidth,
     };
   },
 
   created() {
     window.scroll(0, 0);
-    this.getCandidateList((this.pagination-1)*this.resultsPerPage);
+    this.getCandidateList((this.pagination - 1) * this.resultsPerPage);
     this.getTotalVotes();
   },
   watch: {
@@ -161,7 +174,7 @@ export default {
   methods: {
     getVotePercentage(votes) {
       // var per = votes / this.votesCount;
-      var per = votes / 100000000
+      var per = votes / 100000000;
       if (votes == 0) {
         return 0;
       }
@@ -186,10 +199,9 @@ export default {
       //如果路由有变化，执行的对应的动作
       // console.log(this.$route.name)
       if (this.$route.name === "Candidates") {
-        console.log(this.pagination)
-        this.pagination = this.$route.params.page
-        this.getCandidateList((this.pagination-1)*this.resultsPerPage)
-
+        console.log(this.pagination);
+        this.pagination = this.$route.params.page;
+        this.getCandidateList((this.pagination - 1) * this.resultsPerPage);
       }
     },
     getCandidateList(skip) {

@@ -23,21 +23,44 @@
           <th class="tableHeader">{{ $t("tokenTx.tokenID") }}</th>
           <th class="tableHeader">
             {{ $t("tokenTx.from") }}
-            <el-button type="info" :plain="true" size="small" style="height: 19px;margin-left: 4px" @click="changeFormat(fromButton)">
-              {{fromButton.buttonName}}</el-button>
+            <el-button
+              type="info"
+              :plain="true"
+              size="small"
+              style="height: 19px; margin-left: 4px"
+              @click="changeFormat(fromButton)"
+            >
+              {{ fromButton.buttonName }}</el-button
+            >
           </th>
-          <th class="tableHeader" style="text-align:center ">{{ $t("tokenTx.amount") }}</th>
+          <th class="tableHeader" style="text-align: center">
+            {{ $t("tokenTx.amount") }}
+          </th>
           <th class="tableHeader">
             {{ $t("tokenTx.to") }}
-            <el-button type="info" :plain="true" size="small" style="height: 19px;margin-left: 4px" @click="changeFormat(toButton)">
-              {{toButton.buttonName}}</el-button>
+            <el-button
+              type="info"
+              :plain="true"
+              size="small"
+              style="height: 19px; margin-left: 4px"
+              @click="changeFormat(toButton)"
+            >
+              {{ toButton.buttonName }}</el-button
+            >
           </th>
 
-          <th class="tableHeader">{{ $t("tokenTx.time") }}
-            <el-button type="info" :plain="true" size="small" style="height: 19px;margin-left: 4px" @click="switchTime(time)">
-              Format</el-button>
+          <th class="tableHeader">
+            {{ $t("tokenTx.time") }}
+            <el-button
+              type="info"
+              :plain="true"
+              size="small"
+              style="height: 19px; margin-left: 4px"
+              @click="switchTime(time)"
+            >
+              Format</el-button
+            >
           </th>
-
         </template>
 
         <template v-slot:default="row">
@@ -55,9 +78,9 @@
                 </div>
                 <div class="txid" v-else>
                   <router-link
-                    class="  mb-0 table-list-item-blue"
-                    style="cursor: pointer;"
-                    :to="'/transactionInfo/'+row.item.txid"
+                    class="mb-0 table-list-item-blue"
+                    style="cursor: pointer"
+                    :to="'/transactionInfo/' + row.item.txid"
                     >{{ row.item.txid }}</router-link
                   >
                 </div>
@@ -76,41 +99,40 @@
               </div>
               <div v-else-if="fromButton.state" class="addr">
                 <router-link
-                  class="  mb-0 table-list-item-blue"
-                  style="cursor: pointer; "
-                  :to="'/accountprofile/'+row.item.from"
+                  class="mb-0 table-list-item-blue"
+                  style="cursor: pointer"
+                  :to="'/accountprofile/' + row.item.from"
                   >{{ scriptHashToAddress(row.item.from) }}</router-link
                 >
               </div>
 
               <div v-else class="addr">
                 <router-link
-                  class="  mb-0 table-list-item-blue"
-                  style="cursor: pointer; "
-                  :to="'/accountprofile/'+row.item.from"
+                  class="mb-0 table-list-item-blue"
+                  style="cursor: pointer"
+                  :to="'/accountprofile/' + row.item.from"
                   >{{ row.item.from }}</router-link
                 >
               </div>
             </div>
           </td>
-          <td   class="pt-4" style="text-align: center">
+          <td class="pt-4" style="text-align: center">
             <div class="table-list-item mt-2" style="text-align: center">
-            {{ convertToken(row.item.value, this.decimal) }}
+              {{ convertToken(row.item.value, this.decimal) }}
             </div>
-            <span style="color: #42b983;font-size: 30px">&#10230;</span>
+            <span style="color: #42b983; font-size: 30px">&#10230;</span>
             <div>
               <span
-                  class="text-success"
-                  v-if="row.item.from === null"
-                  type="primary"
-              >{{ $t("mint") }}</span
+                class="text-success"
+                v-if="row.item.from === null"
+                type="primary"
+                >{{ $t("mint") }}</span
               >
               <span class="text-danger" v-else-if="row.item.to === null">
                 {{ $t("burn") }}
               </span>
-              <span  v-else style="color: seagreen"> {{ $t("transfer") }}</span>
+              <span v-else style="color: seagreen"> {{ $t("transfer") }}</span>
             </div>
-
           </td>
           <td class="To">
             <div>
@@ -119,58 +141,63 @@
               </div>
               <div class="addr" v-else-if="toButton.state">
                 <router-link
-                  class="  mb-0 table-list-item-blue"
-                  style="cursor: pointer; "
-                  :to="'/accountprofile/'+row.item.to"
+                  class="mb-0 table-list-item-blue"
+                  style="cursor: pointer"
+                  :to="'/accountprofile/' + row.item.to"
                   >{{ scriptHashToAddress(row.item.to) }}</router-link
                 >
               </div>
               <div class="addr" v-else>
                 <router-link
-                  class="  mb-0 table-list-item-blue"
-                  style="cursor: pointer; "
-                  :to="'/accountprofile/'+row.item.to"
+                  class="mb-0 table-list-item-blue"
+                  style="cursor: pointer"
+                  :to="'/accountprofile/' + row.item.to"
                   >{{ row.item.to }}</router-link
                 >
               </div>
             </div>
           </td>
           <td class="table-list-item">
-            {{time.state? this.convertTime(row.item.timestamp, this.$i18n.locale):this.convertISOTime(row.item.timestamp) }}
+            {{
+              time.state
+                ? this.convertTime(row.item.timestamp, this.$i18n.locale)
+                : this.convertISOTime(row.item.timestamp)
+            }}
           </td>
-
         </template>
       </base-table>
     </div>
 
-    <div v-if="totalCount>=10"
-            class="card-footer d-flex justify-content-end"
-            :class="type === 'dark' ? 'bg-transparent' : ''"
-            style="height: 70px"
+    <div
+      v-if="totalCount >= 10"
+      class="card-footer d-flex justify-content-end"
+      :class="type === 'dark' ? 'bg-transparent' : ''"
+      style="height: 70px"
     >
       <el-pagination
-          v-if="windowWidth > 552"
-          @current-change="handleCurrentChange"
-          :hide-on-single-page="totalCount<=10"
-          :current-page="parseInt(pagination)"
-          :pager-count= "5"
-          :page-size= "10"
-          layout="jumper, prev, pager, next"
-          :total="totalCount">
+        v-if="windowWidth > 552"
+        @current-change="handleCurrentChange"
+        :hide-on-single-page="totalCount <= 10"
+        :current-page="parseInt(pagination)"
+        :pager-count="5"
+        :page-size="10"
+        layout="jumper, prev, pager, next"
+        :total="totalCount"
+      >
       </el-pagination>
       <el-pagination
-          v-if="windowWidth < 552"
-          small ="true"
-          @current-change="handleCurrentChange"
-          :hide-on-single-page="totalCount<=10"
-          :current-page="parseInt(pagination)"
-          :pager-count= "4"
-          layout="prev,pager,next"
-          :total="totalCount">
+        v-if="windowWidth < 552"
+        small="true"
+        @current-change="handleCurrentChange"
+        :hide-on-single-page="totalCount <= 10"
+        :current-page="parseInt(pagination)"
+        :pager-count="4"
+        layout="prev,pager,next"
+        :total="totalCount"
+      >
       </el-pagination>
     </div>
   </div>
-
 </template>
 <script>
 import axios from "axios";
@@ -202,7 +229,7 @@ export default {
   },
   data() {
     return {
-      time:{state:true},
+      time: { state: true },
       network: net.url,
       NEP11TxList: [],
       totalCount: 0,
@@ -211,9 +238,9 @@ export default {
       isLoading: true,
       firstTime: true,
       countPage: 0,
-      fromButton: {state: true, buttonName: "Hash"},
-      toButton: {state: true, buttonName: "Hash"},
-      windowWidth:window.innerWidth
+      fromButton: { state: true, buttonName: "Hash" },
+      toButton: { state: true, buttonName: "Hash" },
+      windowWidth: window.innerWidth,
     };
   },
   created() {
@@ -242,7 +269,7 @@ export default {
       const skip = (val - 1) * this.resultsPerPage;
       this.getTokenList(skip);
     },
-    hashToBase64(hash){
+    hashToBase64(hash) {
       var res = Neon.u.hex2base64(hash);
       return res;
     },
@@ -277,8 +304,6 @@ export default {
         this.isLoading = false;
       });
     },
-
-
   },
 };
 </script>

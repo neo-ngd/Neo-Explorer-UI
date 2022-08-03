@@ -1,9 +1,6 @@
 <template>
   <div>
-    <div
-      class="container-fluid mt--8"
-      style="background-color: #f7f8fa"
-    >
+    <div class="container-fluid mt--8" style="background-color: #f7f8fa">
       <div class="row">
         <div class="col">
           <div class="top">
@@ -17,16 +14,13 @@
             <div class="row mt-3"></div>
 
             <card shadow class="card-style">
-
-
-              <div class="row  mb-1" >
-                <div class="col-md-3" >
-
+              <div class="row mb-1">
+                <div class="col-md-3">
                   <el-image
                     style="width: 150px"
                     :src="this.image"
-                    :preview-src-list="this.imageList">
-
+                    :preview-src-list="this.imageList"
+                  >
                   </el-image>
                 </div>
               </div>
@@ -44,12 +38,9 @@
                   {{ $t("nftInfo.name") }}
                 </div>
                 <div class="col-md-9 context-black">
-                  {{
-                    this.nftName
-                  }}
+                  {{ this.nftName }}
                 </div>
               </div>
-
 
               <div class="row info mt-3 mb-1">
                 <div class="col-md-3 lable-title">
@@ -65,33 +56,23 @@
                   {{ $t("nftInfo.address") }}
                 </div>
                 <div class="col-md-9 context-black">
-                  {{
-                    this.token_info["address"]
-                  }}
+                  {{ this.token_info["address"] }}
                 </div>
               </div>
-              <div class="row info mt-3 mb-1" v-if="this.description!==''">
+              <div class="row info mt-3 mb-1" v-if="this.description !== ''">
                 <div class="col-md-3 lable-title">
                   {{ $t("nftInfo.description") }}
                 </div>
                 <div class="col-md-9 context-black">
-                  {{
-                    this.description
-                  }}
+                  {{ this.description }}
                 </div>
               </div>
-
-
             </card>
 
             <div class="row mt-5"></div>
             <el-tabs
               v-model="activeName"
-              style="
-                width: 80%;
-                margin-left: 10%;
-                background-color: #f7f8fa;
-              "
+              style="width: 80%; margin-left: 10%; background-color: #f7f8fa"
             >
               <el-tab-pane :label="$t('tokenInfo.transactions')" name="first">
                 <tokens-tx-nep11
@@ -102,9 +83,7 @@
               </el-tab-pane>
             </el-tabs>
           </div>
-          <div style="margin-top: 30px;margin-bottom: 20px">
-
-          </div>
+          <div style="margin-top: 30px; margin-bottom: 20px"></div>
         </div>
       </div>
     </div>
@@ -116,12 +95,7 @@ import axios from "axios";
 import Loading from "vue-loading-overlay";
 import "vue-loading-overlay/dist/vue-loading.css";
 
-import {
-  convertPreciseTime,
-  convertToken,
-
-  copyItem,
-} from "../../store/util";
+import { convertPreciseTime, convertToken, copyItem } from "../../store/util";
 
 import Neon from "@cityofzion/neon-js";
 import TokensTxNep11 from "./TokenTxNep11";
@@ -135,34 +109,39 @@ export default {
   data() {
     return {
       token_id: this.$route.params.tokenId,
-      contractHash:this.$route.params.contractHash,
-      address:this.$route.params.address,
+      contractHash: this.$route.params.contractHash,
+      address: this.$route.params.address,
       isLoading: true,
       token_info: [],
       standard: 0,
       manifest: "",
       decimal: "",
       activeName: "first",
-      activeNames: ['0'],
-      activeNames2:['0'],
-      properties:1,
-      nftName:"——",
-      image:"",
-      imageList:[],
-      description:"",
-
+      activeNames: ["0"],
+      activeNames2: ["0"],
+      properties: 1,
+      nftName: "——",
+      image: "",
+      imageList: [],
+      description: "",
     };
   },
   created() {
-    window.scroll(0,0);
+    window.scroll(0, 0);
 
-    this.GetNep11BalanceByContractHashAddressTokenId(this.contractHash,this.hashToBase64(this.token_id),this.address)
-    this.GetNep11PropertiesByContractHashTokenId(this.contractHash,this.hashToBase64(this.token_id))
+    this.GetNep11BalanceByContractHashAddressTokenId(
+      this.contractHash,
+      this.hashToBase64(this.token_id),
+      this.address
+    );
+    this.GetNep11PropertiesByContractHashTokenId(
+      this.contractHash,
+      this.hashToBase64(this.token_id)
+    );
 
     // console.log(this.contractHash)
     // console.log(this.token_id)
     // console.log(this.address)
-
   },
   watch: {
     $route: "watchrouter",
@@ -174,18 +153,21 @@ export default {
     watchrouter() {
       //如果路由有变化，执行的对应的动作
       if (this.$route.name === "NFTinfo") {
-        this.token_id= this.$route.params.tokenId;
-        this.contractHash=this.$route.params.contractHash;
-        this.address=this.$route.params.address;
-        this.GetNep11BalanceByContractHashAddressTokenId(this.contractHash,this.hashToBase64(this.token_id),this.address)
-
+        this.token_id = this.$route.params.tokenId;
+        this.contractHash = this.$route.params.contractHash;
+        this.address = this.$route.params.address;
+        this.GetNep11BalanceByContractHashAddressTokenId(
+          this.contractHash,
+          this.hashToBase64(this.token_id),
+          this.address
+        );
       }
     },
     getContract(hash) {
       this.$router.push(`/contractinfo/${hash}`);
     },
 
-    hashToBase64(hash){
+    hashToBase64(hash) {
       var res = Neon.u.hex2base64(hash);
       return res;
     },
@@ -195,14 +177,22 @@ export default {
       return res;
     },
 
-    GetNep11BalanceByContractHashAddressTokenId(contract_hash,token_id,address) {
+    GetNep11BalanceByContractHashAddressTokenId(
+      contract_hash,
+      token_id,
+      address
+    ) {
       axios({
         method: "post",
         url: "/api",
         data: {
           jsonrpc: "2.0",
           id: 1,
-          params: { ContractHash:contract_hash,TokenId:token_id,Address:address },
+          params: {
+            ContractHash: contract_hash,
+            TokenId: token_id,
+            Address: address,
+          },
           method: "GetNep11BalanceByContractHashAddressTokenId",
         },
         headers: {
@@ -216,14 +206,14 @@ export default {
         this.isLoading = false;
       });
     },
-    GetNep11PropertiesByContractHashTokenId(contract_hash,token_id) {
+    GetNep11PropertiesByContractHashTokenId(contract_hash, token_id) {
       axios({
         method: "post",
         url: "/api",
         data: {
           jsonrpc: "2.0",
           id: 1,
-          params: { ContractHash:contract_hash,tokenIds:[token_id] },
+          params: { ContractHash: contract_hash, tokenIds: [token_id] },
           method: "GetNep11PropertiesByContractHashTokenId",
         },
         headers: {
@@ -232,31 +222,32 @@ export default {
           crossDomain: "true",
         },
       }).then((res) => {
-       console.log(res)
+        console.log(res);
         // console.log(this.tableData)
         this.isLoading = false;
-        var value = res["data"]["result"]["result"][0]
-        console.log(value["asset"])
-        console.log(value["properties"])
-        this.nftName = value["name"]
-        this.image = value["image"].startsWith('ipfs') ? value['image'].replace(/^(ipfs:\/\/)|^(ipfs-video:\/\/)/, 'https://ipfs.infura.io/ipfs/'):value["image"]
-        this.imageList.push(this.image)
-        this.description=value["description"]
-
+        var value = res["data"]["result"]["result"][0];
+        console.log(value["asset"]);
+        console.log(value["properties"]);
+        this.nftName = value["name"];
+        this.image = value["image"].startsWith("ipfs")
+          ? value["image"].replace(
+              /^(ipfs:\/\/)|^(ipfs-video:\/\/)/,
+              "https://ipfs.infura.io/ipfs/"
+            )
+          : value["image"];
+        this.imageList.push(this.image);
+        this.description = value["description"];
       });
     },
-
-
   },
 };
 </script>
 
 <style>
-@media screen and (max-width: 790px ){
-  .info{
-    margin-top:1.5rem!important;
-    margin-bottom:1.5rem!important; ;
+@media screen and (max-width: 790px) {
+  .info {
+    margin-top: 1.5rem !important;
+    margin-bottom: 1.5rem !important;
   }
-
 }
 </style>

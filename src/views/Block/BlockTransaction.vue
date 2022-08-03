@@ -17,9 +17,17 @@
           <th class="tableHeader">{{ $t("blockinfo.txTable.txID") }}</th>
           <th class="tableHeader">{{ $t("blockinfo.txTable.height") }}</th>
           <th class="tableHeader">{{ $t("blockinfo.txTable.size") }}</th>
-          <th class="tableHeader">{{ $t("blockinfo.txTable.time") }}
-            <el-button type="info" :plain="true" size="small" style="height: 19px;margin-left: 4px" @click="switchTime(time)">
-              Format</el-button>
+          <th class="tableHeader">
+            {{ $t("blockinfo.txTable.time") }}
+            <el-button
+              type="info"
+              :plain="true"
+              size="small"
+              style="height: 19px; margin-left: 4px"
+              @click="switchTime(time)"
+            >
+              Format</el-button
+            >
           </th>
           <th class="tableHeader">{{ $t("blockinfo.txTable.gas") }}</th>
         </template>
@@ -28,9 +36,9 @@
           <td>
             <div class="txid short">
               <router-link
-                class="table-list-item-blue mb-0 "
-                style="cursor: pointer; "
-                :to="'/transactionInfo/'+ row.item.hash"
+                class="table-list-item-blue mb-0"
+                style="cursor: pointer"
+                :to="'/transactionInfo/' + row.item.hash"
                 >{{ row.item.hash }}</router-link
               >
             </div>
@@ -39,42 +47,50 @@
             {{ row.item.blockIndex }}
           </td>
           <td class="table-list-item">{{ row.item.size }} bytes</td>
-          <td  class="table-list-item">
-            {{time.state? this.convertTime(row.item.blocktime, this.$i18n.locale):this.convertISOTime(row.item.blocktime) }}
+          <td class="table-list-item">
+            {{
+              time.state
+                ? this.convertTime(row.item.blocktime, this.$i18n.locale)
+                : this.convertISOTime(row.item.blocktime)
+            }}
           </td>
 
-          <td  class="table-list-item">
+          <td class="table-list-item">
             {{ convertGas(row.item.netfee + row.item.sysfee) }}
           </td>
         </template>
       </base-table>
     </div>
 
-    <div v-if="totalCount>=10"
-            class="card-footer d-flex justify-content-end"
-            :class="type === 'dark' ? 'bg-transparent' : ''"
-            style="height: 70px"
+    <div
+      v-if="totalCount >= 10"
+      class="card-footer d-flex justify-content-end"
+      :class="type === 'dark' ? 'bg-transparent' : ''"
+      style="height: 70px"
     >
       <el-pagination
-          v-if="windowWidth > 552"
-          @current-change="handleCurrentChange"
-          :hide-on-single-page="totalCount<=10"
-          :current-page="parseInt(pagination)"
-          :pager-count= "5"
-          :page-size= "10"
-          layout="jumper, prev, pager, next"
-          :total="totalCount">
+        v-if="windowWidth > 552"
+        @current-change="handleCurrentChange"
+        :hide-on-single-page="totalCount <= 10"
+        :current-page="parseInt(pagination)"
+        :pager-count="5"
+        :page-size="10"
+        layout="jumper, prev, pager, next"
+        :total="totalCount"
+      >
       </el-pagination>
       <el-pagination
-          v-if="windowWidth < 552"
-          small ="true"
-          @current-change="handleCurrentChange"
-          :hide-on-single-page="totalCount<=10"
-          :current-page="parseInt(pagination)"
-          :pager-count= "5"
-          layout="prev,pager,next"
-          :total="totalCount">
-      </el-pagination>    </div>
+        v-if="windowWidth < 552"
+        small="true"
+        @current-change="handleCurrentChange"
+        :hide-on-single-page="totalCount <= 10"
+        :current-page="parseInt(pagination)"
+        :pager-count="5"
+        layout="prev,pager,next"
+        :total="totalCount"
+      >
+      </el-pagination>
+    </div>
   </div>
 </template>
 
@@ -82,7 +98,12 @@
 import axios from "axios";
 import Loading from "vue-loading-overlay";
 import "vue-loading-overlay/dist/vue-loading.css";
-import {convertTime, convertGas,convertISOTime,switchTime} from "../../store/util";
+import {
+  convertTime,
+  convertGas,
+  convertISOTime,
+  switchTime,
+} from "../../store/util";
 import net from "../../store/store";
 
 export default {
@@ -99,7 +120,7 @@ export default {
   },
   data() {
     return {
-      time: {state: true},
+      time: { state: true },
       network: net.url,
       tableData: [],
       totalCount: 0,
@@ -108,7 +129,7 @@ export default {
       placeHolder: 0,
       isLoading: true,
       countPage: 0,
-      windowWidth:window.innerWidth,
+      windowWidth: window.innerWidth,
     };
   },
   created() {

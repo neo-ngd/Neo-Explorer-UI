@@ -4,7 +4,7 @@
       {{ title }}
     </h1>
   </div>
-  <div class="card shadow " :class="type === 'd  ark' ? 'bg-default' : ''" >
+  <div class="card shadow" :class="type === 'd  ark' ? 'bg-default' : ''">
     <!--div
       class="card-header border-0"
       :class="type === 'dark' ? 'bg-transparent' : ''"
@@ -33,33 +33,44 @@
         <template v-slot:columns>
           <th class="tableHeader">{{ $t("blockinfo.height") }}</th>
           <th class="tableHeader shortHidden">{{ $t("blockinfo.hash") }}</th>
-          <th class="tableHeader">{{ $t("blockinfo.time") }}
-            <el-button type="info" :plain="true" size="small" style="height: 19px;margin-left: 4px" @click="switchTime(time)">
-              Format</el-button>
+          <th class="tableHeader">
+            {{ $t("blockinfo.time") }}
+            <el-button
+              type="info"
+              :plain="true"
+              size="small"
+              style="height: 19px; margin-left: 4px"
+              @click="switchTime(time)"
+            >
+              Format</el-button
+            >
           </th>
           <th class="tableHeader">{{ $t("blockinfo.txns") }}</th>
           <th class="tableHeader">{{ $t("blockinfo.size") }}</th>
-
         </template>
 
         <template v-slot:default="row">
-
-          <td >
-            <div  class="table-list-item" >
+          <td>
+            <div class="table-list-item">
               <router-link
-                  class="table-list-item-blue name mb-0"
-                  style="cursor: pointer;"
-                  :to="'/blockinfo/'+row.item.hash"
-              >{{ row.item.index }}</router-link>
+                class="table-list-item-blue name mb-0"
+                style="cursor: pointer"
+                :to="'/blockinfo/' + row.item.hash"
+                >{{ row.item.index }}</router-link
+              >
             </div>
           </td>
-          <td class="shortHidden" style="text-align: center;">
-            <div >
+          <td class="shortHidden" style="text-align: center">
+            <div>
               {{ row.item.hash }}
             </div>
           </td>
           <td class="table-list-item">
-            {{time.state? this.convertTime(row.item.timestamp, this.$i18n.locale):this.convertISOTime(row.item.timestamp) }}
+            {{
+              time.state
+                ? this.convertTime(row.item.timestamp, this.$i18n.locale)
+                : this.convertISOTime(row.item.timestamp)
+            }}
           </td>
           <td class="table-list-item">
             {{ row.item.transactioncount }}
@@ -69,42 +80,43 @@
       </base-table>
     </div>
 
-    <div v-if="totalCount>=10"
-          class="card-footer d-flex justify-content-end"
-          :class="type === 'dark' ? 'bg-transparent' : ''"
-          style="height: 70px"
-  >
+    <div
+      v-if="totalCount >= 10"
+      class="card-footer d-flex justify-content-end"
+      :class="type === 'dark' ? 'bg-transparent' : ''"
+      style="height: 70px"
+    >
       <el-pagination
-          v-if="windowWidth > 552"
-          @current-change="handleCurrentChange"
-          :hide-on-single-page="totalCount<=10"
-          :current-page="parseInt(pagination)"
-          :pager-count= "5"
-          :page-size= "10"
-          layout="jumper, prev, pager, next"
-          :total="totalCount">
+        v-if="windowWidth > 552"
+        @current-change="handleCurrentChange"
+        :hide-on-single-page="totalCount <= 10"
+        :current-page="parseInt(pagination)"
+        :pager-count="5"
+        :page-size="10"
+        layout="jumper, prev, pager, next"
+        :total="totalCount"
+      >
       </el-pagination>
       <el-pagination
-          v-if="windowWidth < 552"
-          small
-          @current-change="handleCurrentChange"
-          :hide-on-single-page="totalCount<=10"
-          :current-page="parseInt(pagination)"
-          :pager-count= "5"
-          layout="prev,pager,next"
-          :total="totalCount">
+        v-if="windowWidth < 552"
+        small
+        @current-change="handleCurrentChange"
+        :hide-on-single-page="totalCount <= 10"
+        :current-page="parseInt(pagination)"
+        :pager-count="5"
+        layout="prev,pager,next"
+        :total="totalCount"
+      >
       </el-pagination>
+    </div>
   </div>
-  </div>
-  <div style="margin-top: 30px;margin-bottom: 20px">
-
-  </div>
+  <div style="margin-top: 30px; margin-bottom: 20px"></div>
 </template>
 <script>
 import axios from "axios";
 import Loading from "vue-loading-overlay";
 import "vue-loading-overlay/dist/vue-loading.css";
-import {convertTime,convertISOTime,switchTime} from "../../store/util";
+import { convertTime, convertISOTime, switchTime } from "../../store/util";
 import net from "../../store/store";
 export default {
   name: "blocks-table",
@@ -119,7 +131,7 @@ export default {
   },
   data() {
     return {
-      time: {state: true},
+      time: { state: true },
       network: net.url,
       blockList: [],
       totalCount: 0,
@@ -128,14 +140,12 @@ export default {
       isLoading: true,
       placeHolder: 0,
       countPage: 0,
-      windowWidth:window.innerWidth,
-
+      windowWidth: window.innerWidth,
     };
   },
   created() {
-      // console.log(this.pagination)
-      this.getBlockList((this.pagination-1)*this.resultsPerPage)
-
+    // console.log(this.pagination)
+    this.getBlockList((this.pagination - 1) * this.resultsPerPage);
   },
   watch: {
     $route: "watchrouter",
@@ -149,9 +159,8 @@ export default {
       this.$router.push(`/blockinfo/${hash}`);
     },
     handleCurrentChange(val) {
-          this.isLoading = true;
-          this.pagination = val;
-
+      this.isLoading = true;
+      this.pagination = val;
 
       this.$router.push({
         path: `/blocks/${this.pagination}`,
@@ -160,10 +169,9 @@ export default {
     watchrouter() {
       //如果路由有变化，执行的对应的动作
       if (this.$route.name === "blocks") {
-        this.pagination = this.$route.params.page
+        this.pagination = this.$route.params.page;
 
-        this.getBlockList((this.pagination-1)*this.resultsPerPage)
-
+        this.getBlockList((this.pagination - 1) * this.resultsPerPage);
       }
     },
     getBlockList(skip) {
@@ -194,7 +202,6 @@ export default {
 };
 </script>
 <style>
-
 input::-webkit-inner-spin-button {
   -webkit-appearance: none !important;
   margin: 0;

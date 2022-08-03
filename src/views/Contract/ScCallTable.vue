@@ -17,8 +17,15 @@
           <th class="tableHeader">{{ $t("contract.txID") }}</th>
           <th class="tableHeader">
             {{ $t("contract.sender") }}
-            <el-button type="info" :plain="true" size="small" style="height: 21px;margin-left: 4px" @click="changeFormat(button)">
-              {{this.button.buttonName}}</el-button>
+            <el-button
+              type="info"
+              :plain="true"
+              size="small"
+              style="height: 21px; margin-left: 4px"
+              @click="changeFormat(button)"
+            >
+              {{ this.button.buttonName }}</el-button
+            >
           </th>
           <th class="tableHeader">{{ $t("contract.method") }}</th>
           <th class="tableHeader">{{ $t("contract.callFlags") }}</th>
@@ -27,20 +34,20 @@
         <template v-slot:default="row">
           <th scope="row">
             <div class="media align-items-center short">
-              <div class="media-body txid ">
+              <div class="media-body txid">
                 <span
                   class="text-muted"
                   v-if="
                     row.item.txid ===
                     '0x0000000000000000000000000000000000000000000000000000000000000000'
                   "
-                  >{{$t('Null Transaction')}}</span
+                  >{{ $t("Null Transaction") }}</span
                 >
                 <router-link
-                  class=" mb-0 table-list-item-blue"
+                  class="mb-0 table-list-item-blue"
                   v-else
-                  style="cursor: pointer;"
-                  :to="'/transactionInfo/'+row.item.txid "
+                  style="cursor: pointer"
+                  :to="'/transactionInfo/' + row.item.txid"
                   >{{ row.item.txid }}</router-link
                 >
               </div>
@@ -49,20 +56,20 @@
           <td class="Sender">
             <div class="short">
               <span class="text-muted" v-if="row.item.originSender === null">
-               {{$t('nullAddress')}}
+                {{ $t("nullAddress") }}
               </span>
               <router-link
                 v-else-if="button.state"
-                class=" mb-0 table-list-item-blue"
-                style="cursor: pointer; "
-                :to="'/accountprofile/'+row.item.originSender"
+                class="mb-0 table-list-item-blue"
+                style="cursor: pointer"
+                :to="'/accountprofile/' + row.item.originSender"
                 >{{ scriptHashToAddress(row.item.originSender) }}</router-link
               >
               <router-link
                 v-else
-                class="  mb-0 table-list-item-blue"
-                style="cursor: pointer; "
-                :to="'/accountprofile/'+row.item.originSender"
+                class="mb-0 table-list-item-blue"
+                style="cursor: pointer"
+                :to="'/accountprofile/' + row.item.originSender"
                 >{{ row.item.originSender }}</router-link
               >
             </div>
@@ -77,30 +84,33 @@
       </base-table>
     </div>
 
-    <div v-if="totalCount>=10"
-            class="card-footer d-flex justify-content-end"
-            :class="type === 'dark' ? 'bg-transparent' : ''"
-            style="height: 70px"
+    <div
+      v-if="totalCount >= 10"
+      class="card-footer d-flex justify-content-end"
+      :class="type === 'dark' ? 'bg-transparent' : ''"
+      style="height: 70px"
     >
       <el-pagination
-          v-if="windowWidth > 552"
-          @current-change="handleCurrentChange"
-          :hide-on-single-page="totalCount<=10"
-          :current-page="parseInt(pagination)"
-          :pager-count= "5"
-          :page-size= "10"
-          layout="jumper, prev, pager, next"
-          :total="totalCount">
+        v-if="windowWidth > 552"
+        @current-change="handleCurrentChange"
+        :hide-on-single-page="totalCount <= 10"
+        :current-page="parseInt(pagination)"
+        :pager-count="5"
+        :page-size="10"
+        layout="jumper, prev, pager, next"
+        :total="totalCount"
+      >
       </el-pagination>
       <el-pagination
-          v-if="windowWidth < 552"
-          small ="true"
-          @current-change="handleCurrentChange"
-          :hide-on-single-page="totalCount<=10"
-          :current-page="parseInt(pagination)"
-          :pager-count= "5"
-          layout="prev,pager,next"
-          :total="totalCount">
+        v-if="windowWidth < 552"
+        small="true"
+        @current-change="handleCurrentChange"
+        :hide-on-single-page="totalCount <= 10"
+        :current-page="parseInt(pagination)"
+        :pager-count="5"
+        layout="prev,pager,next"
+        :total="totalCount"
+      >
       </el-pagination>
     </div>
   </div>
@@ -109,7 +119,7 @@
 import axios from "axios";
 import Loading from "vue-loading-overlay";
 import "vue-loading-overlay/dist/vue-loading.css";
-import {scriptHashToAddress, changeFormat} from "../../store/util";
+import { scriptHashToAddress, changeFormat } from "../../store/util";
 import net from "../../store/store";
 
 export default {
@@ -125,7 +135,6 @@ export default {
   },
   data() {
     return {
-
       network: net.url,
       ScCallList: [],
       totalCount: 0,
@@ -134,7 +143,7 @@ export default {
       isLoading: true,
       countPage: 0,
       button: { state: true, buttonName: "Hash" },
-      windowWidth:window.innerWidth,
+      windowWidth: window.innerWidth,
     };
   },
   created() {

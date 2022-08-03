@@ -4,7 +4,7 @@
       {{ title }}
     </h1>
   </div>
-  <div class="card shadow " :class="type === 'dark' ? 'bg-default' : ''">
+  <div class="card shadow" :class="type === 'dark' ? 'bg-default' : ''">
     <!--div
       class="card-header border-0"
       :class="type === 'dark' ? 'bg-transparent' : ''"
@@ -31,40 +31,52 @@
         :data="tableData"
       >
         <template v-slot:columns>
-          <th class="tableHeader">{{ $t("transactionList.transactionId")}}</th>
-          <th class="tableHeader shortHidden">{{ $t("transactionList.blockHeight") }}</th>
+          <th class="tableHeader">{{ $t("transactionList.transactionId") }}</th>
+          <th class="tableHeader shortHidden">
+            {{ $t("transactionList.blockHeight") }}
+          </th>
           <th class="tableHeader">{{ $t("transactionList.size") }}</th>
           <th class="tableHeader">
             {{ $t("transactionList.time") }}
-            <el-button type="info" :plain="true" size="small" style="height: 19px;margin-left: 4px" @click="switchTime(time)">
-              Format</el-button>
+            <el-button
+              type="info"
+              :plain="true"
+              size="small"
+              style="height: 19px; margin-left: 4px"
+              @click="switchTime(time)"
+            >
+              Format</el-button
+            >
           </th>
           <th class="tableHeader">{{ $t("transactionList.gasConsumed") }}</th>
         </template>
 
         <template v-slot:default="row">
           <td class="id">
-            <div class="short" style="text-align: center;">
-            <router-link
-              class="table-list-item-blue mb-0  "
-              style="cursor: pointer; "
-              :to="'/transactionInfo/'+row.item.hash"
-              >{{ row.item.hash }}</router-link
-            >
+            <div class="short" style="text-align: center">
+              <router-link
+                class="table-list-item-blue mb-0"
+                style="cursor: pointer"
+                :to="'/transactionInfo/' + row.item.hash"
+                >{{ row.item.hash }}</router-link
+              >
             </div>
           </td>
           <td class="id shortHidden">
             <router-link
-              class="table-list-item-blue mb-0 "
-              style="cursor: pointer; "
-              :to="'/blockinfo/'+row.item.blockhash"
+              class="table-list-item-blue mb-0"
+              style="cursor: pointer"
+              :to="'/blockinfo/' + row.item.blockhash"
               >{{ row.item.blockIndex }}</router-link
             >
           </td>
           <td class="table-list-item">{{ row.item.size }} {{ $t("bytes") }}</td>
           <td class="table-list-item">
-            {{time.state? this.convertTime(row.item.blocktime, this.$i18n.locale):this.convertISOTime(row.item.blocktime) }}
-
+            {{
+              time.state
+                ? this.convertTime(row.item.blocktime, this.$i18n.locale)
+                : this.convertISOTime(row.item.blocktime)
+            }}
           </td>
 
           <td class="table-list-item">
@@ -81,26 +93,27 @@
       style="height: 70px"
     >
       <el-pagination
-          v-if="windowWidth > 552"
-          @current-change="handleCurrentChange"
-          :hide-on-single-page="totalCount<=10"
-          :current-page="parseInt(pagination)"
-          :pager-count= "5"
-          :page-size= "10"
-          layout="jumper, prev, pager, next"
-          :total="totalCount">
+        v-if="windowWidth > 552"
+        @current-change="handleCurrentChange"
+        :hide-on-single-page="totalCount <= 10"
+        :current-page="parseInt(pagination)"
+        :pager-count="5"
+        :page-size="10"
+        layout="jumper, prev, pager, next"
+        :total="totalCount"
+      >
       </el-pagination>
       <el-pagination
-          v-if="windowWidth < 552"
-          small
-          @current-change="handleCurrentChange"
-          :hide-on-single-page="totalCount<=10"
-          :current-page="parseInt(pagination)"
-          :pager-count= "5"
-          layout="prev,pager,next"
-          :total="totalCount">
+        v-if="windowWidth < 552"
+        small
+        @current-change="handleCurrentChange"
+        :hide-on-single-page="totalCount <= 10"
+        :current-page="parseInt(pagination)"
+        :pager-count="5"
+        layout="prev,pager,next"
+        :total="totalCount"
+      >
       </el-pagination>
-
     </div>
   </div>
 </template>
@@ -108,7 +121,12 @@
 import axios from "axios";
 import Loading from "vue-loading-overlay";
 import "vue-loading-overlay/dist/vue-loading.css";
-import { convertGas, convertTime,convertISOTime ,switchTime} from "../../store/util";
+import {
+  convertGas,
+  convertTime,
+  convertISOTime,
+  switchTime,
+} from "../../store/util";
 import net from "../../store/store";
 export default {
   name: "transactions-table",
@@ -123,7 +141,7 @@ export default {
   },
   data() {
     return {
-      time: {state: true},
+      time: { state: true },
       network: net.url,
       tableData: [],
       totalCount: 0,
@@ -133,13 +151,13 @@ export default {
       isLoading: true,
       countPage: 0,
       currentPage4: 4,
-      windowWidth:window.innerWidth,
+      windowWidth: window.innerWidth,
     };
   },
 
   created() {
     window.scroll(0, 0);
-    this.getTransactionList((this.pagination-1)*this.resultsPerPage);
+    this.getTransactionList((this.pagination - 1) * this.resultsPerPage);
     // console.log(this.net)
   },
   // computed: {
@@ -164,8 +182,8 @@ export default {
     convertTime,
     switchTime,
     handleCurrentChange(val) {
-        this.isLoading = true;
-        this.pagination = val;
+      this.isLoading = true;
+      this.pagination = val;
       this.$router.push({
         path: `/Transactions/${this.pagination}`,
       });
@@ -174,9 +192,8 @@ export default {
       //如果路由有变化，执行的对应的动作
       // console.log(this.$route.name)
       if (this.$route.name === "transactions") {
-        this.pagination = this.$route.params.page
-        this.getTransactionList((this.pagination-1)*this.resultsPerPage)
-
+        this.pagination = this.$route.params.page;
+        this.getTransactionList((this.pagination - 1) * this.resultsPerPage);
       }
     },
     getTransaction(txhash) {
@@ -184,7 +201,7 @@ export default {
         path: `/transactionInfo/${txhash}`,
       });
     },
-    changeNet(){
+    changeNet() {
       this.getTransactionList(0);
     },
 

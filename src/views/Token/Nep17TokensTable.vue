@@ -4,42 +4,48 @@
       {{ title }}
     </h1>
   </div>
-  <div class="card shadow " :class="type === 'dark' ? 'bg-default' : ''">
-
-      <div class="searchNameContent" style="width:100%;margin-top: 10px;margin-bottom: 10px;height: 45px;">
-        <div  style="width: 30%; height:100%;margin-left:20px;float: left">
-          <div class="searchName" style="height: 45px">
-            <input
-                type="text"
-                class="over-ellipsis-Name"
-                :placeholder="$t('tokensTable.prompt')"
-                v-model="searchVal"
-                autocomplete="off"
-                @keyup.enter="search()"
-            /><button class="buttonName" @click="search()" style="border: white">
+  <div class="card shadow" :class="type === 'dark' ? 'bg-default' : ''">
+    <div
+      class="searchNameContent"
+      style="width: 100%; margin-top: 10px; margin-bottom: 10px; height: 45px"
+    >
+      <div style="width: 30%; height: 100%; margin-left: 20px; float: left">
+        <div class="searchName" style="height: 45px">
+          <input
+            type="text"
+            class="over-ellipsis-Name"
+            :placeholder="$t('tokensTable.prompt')"
+            v-model="searchVal"
+            autocomplete="off"
+            @keyup.enter="search()"
+          /><button class="buttonName" @click="search()" style="border: white">
             <svg
-                width="18"
-                height="18"
-                viewBox="0 0 18 18"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              viewBox="0 0 18 18"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
             >
               <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
-                  d="M2.2141 2.31429C3.61587 0.771429 5.65481 0 7.56631 0C9.47782 0 11.5168 0.771429 13.1734 2.31429C15.8495 5.01429 16.1044 9.25714 13.938 12.2143L17.761 16.0714C18.0159 16.3286 18.0159 16.7143 17.761 16.9714L16.869 17.8714C16.7415 18 16.6141 18 16.3592 18C16.1044 18 15.9769 18 15.8495 17.8714L12.0265 14.0143C10.6247 14.9143 9.09552 15.4286 7.56631 15.4286C5.65481 15.4286 3.61587 14.6571 2.2141 13.2429C-0.716874 10.1571 -0.716874 5.27143 2.2141 2.31429ZM3.99817 11.3143C4.89021 12.3429 6.16454 12.8571 7.56631 12.8571C8.96808 12.8571 10.2424 12.3429 11.1345 11.3143C12.1539 10.4143 12.6637 9.12857 12.6637 7.71429C12.6637 6.3 12.1539 5.01429 11.1345 4.11429C10.2424 3.08571 8.96808 2.57143 7.56631 2.57143C6.16454 2.57143 4.89021 3.08571 3.99817 4.11429C2.9787 5.01429 2.46897 6.3 2.46897 7.71429C2.46897 9.12857 2.9787 10.4143 3.99817 11.3143Z"
-                  fill="#1e90ff"
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M2.2141 2.31429C3.61587 0.771429 5.65481 0 7.56631 0C9.47782 0 11.5168 0.771429 13.1734 2.31429C15.8495 5.01429 16.1044 9.25714 13.938 12.2143L17.761 16.0714C18.0159 16.3286 18.0159 16.7143 17.761 16.9714L16.869 17.8714C16.7415 18 16.6141 18 16.3592 18C16.1044 18 15.9769 18 15.8495 17.8714L12.0265 14.0143C10.6247 14.9143 9.09552 15.4286 7.56631 15.4286C5.65481 15.4286 3.61587 14.6571 2.2141 13.2429C-0.716874 10.1571 -0.716874 5.27143 2.2141 2.31429ZM3.99817 11.3143C4.89021 12.3429 6.16454 12.8571 7.56631 12.8571C8.96808 12.8571 10.2424 12.3429 11.1345 11.3143C12.1539 10.4143 12.6637 9.12857 12.6637 7.71429C12.6637 6.3 12.1539 5.01429 11.1345 4.11429C10.2424 3.08571 8.96808 2.57143 7.56631 2.57143C6.16454 2.57143 4.89021 3.08571 3.99817 4.11429C2.9787 5.01429 2.46897 6.3 2.46897 7.71429C2.46897 9.12857 2.9787 10.4143 3.99817 11.3143Z"
+                fill="#1e90ff"
               />
             </svg>
           </button>
-          </div>
         </div>
-        <div style="margin-right: 2%;float: right ;">
-          <el-button @click="fresh()" title="click to fresh the page" size="small" style="background-color: white"><i class="el-icon-refresh" style="font-size: 20px"></i></el-button>
-
-        </div>
-
       </div>
+      <div style="margin-right: 2%; float: right">
+        <el-button
+          @click="fresh()"
+          title="click to fresh the page"
+          size="small"
+          style="background-color: white"
+          ><i class="el-icon-refresh" style="font-size: 20px"></i
+        ></el-button>
+      </div>
+    </div>
 
     <div class="table-responsive">
       <loading
@@ -57,7 +63,9 @@
         <template v-slot:columns>
           <th class="tableHeader">{{ $t("tokensTable.name") }}</th>
           <th class="tableHeader">{{ $t("tokensTable.symbol") }}</th>
-          <th class="tableHeader shortHidden">{{ $t("tokensTable.standard") }}</th>
+          <th class="tableHeader shortHidden">
+            {{ $t("tokensTable.standard") }}
+          </th>
           <th class="tableHeader">{{ $t("tokensTable.decimal") }}</th>
           <th class="tableHeader">{{ $t("tokensTable.totalSupply") }}</th>
           <th class="tableHeader">{{ $t("tokensTable.holders") }}</th>
@@ -65,34 +73,38 @@
 
         <template v-slot:default="row">
           <td scope="row">
-            <div style="text-align: center;">
-              <div v-if="row.item.type==='NEP17'" class="media-body">
+            <div style="text-align: center">
+              <div v-if="row.item.type === 'NEP17'" class="media-body">
                 <router-link
-                  class="table-list-item-blue mb-0 "
+                  class="table-list-item-blue mb-0"
                   v-if="row.item.ispopular"
-                  style="cursor: pointer;"
-                  :to="'/Nep17tokeninfo/'+row.item.hash"
-                  >{{ row.item.tokenname }}  &#x1F525;</router-link>
+                  style="cursor: pointer"
+                  :to="'/Nep17tokeninfo/' + row.item.hash"
+                  >{{ row.item.tokenname }} &#x1F525;</router-link
+                >
                 <router-link
-                    class="table-list-item-blue mb-0 "
-                    v-else
-                    style="cursor: pointer; "
-                    :to="'/NEP17tokeninfo/'+row.item.hash"
-                >{{ row.item.tokenname }}</router-link>
+                  class="table-list-item-blue mb-0"
+                  v-else
+                  style="cursor: pointer"
+                  :to="'/NEP17tokeninfo/' + row.item.hash"
+                  >{{ row.item.tokenname }}</router-link
+                >
               </div>
-              <div v-if="row.item.type==='NEP11'" class="media-body">
+              <div v-if="row.item.type === 'NEP11'" class="media-body">
                 <router-link
-                    class="table-list-item-blue mb-0 "
-                    v-if="row.item.ispopular"
-                    style="cursor: pointer; "
-                    :to="'/NFTtokeninfo/'+row.item.hash"
-                >{{ row.item.tokenname }}  &#x1F525;</router-link>
+                  class="table-list-item-blue mb-0"
+                  v-if="row.item.ispopular"
+                  style="cursor: pointer"
+                  :to="'/NFTtokeninfo/' + row.item.hash"
+                  >{{ row.item.tokenname }} &#x1F525;</router-link
+                >
                 <router-link
-                    class="table-list-item-blue mb-0 "
-                    v-else
-                    style="cursor: pointer; "
-                    :to="'/NFTtokeninfo/'+row.item.hash"
-                >{{ row.item.tokenname }}</router-link>
+                  class="table-list-item-blue mb-0"
+                  v-else
+                  style="cursor: pointer"
+                  :to="'/NFTtokeninfo/' + row.item.hash"
+                  >{{ row.item.tokenname }}</router-link
+                >
               </div>
             </div>
           </td>
@@ -101,23 +113,23 @@
             {{ row.item.symbol }}
           </td>
           <td class="shortHidden">
-            <el-tag
-              v-if="row.item.type === 'NEP17'"
-            >
+            <el-tag v-if="row.item.type === 'NEP17'">
               <span class="">{{ row.item.type }}</span>
             </el-tag>
-            <el-tag v-else-if="row.item.type === 'NEP11'"  type="success" >
+            <el-tag v-else-if="row.item.type === 'NEP11'" type="success">
               <span class="">{{ row.item.type }}</span>
             </el-tag>
-            <el-tag v-else type="info"  >
-              <span class="">{{ row.item.type==="UNKNOW"? "Unknown":"Unknown" }}</span>
+            <el-tag v-else type="info">
+              <span class="">{{
+                row.item.type === "UNKNOW" ? "Unknown" : "Unknown"
+              }}</span>
             </el-tag>
           </td>
           <td class="table-list-item">
-          {{row.item.decimals}}
+            {{ row.item.decimals }}
           </td>
           <td class="table-list-item">
-            {{convertTotalSupply(row.item.totalsupply,row.item.decimals)}}
+            {{ convertTotalSupply(row.item.totalsupply, row.item.decimals) }}
           </td>
           <td class="table-list-item">
             {{ row.item.holders }}
@@ -126,30 +138,33 @@
       </base-table>
     </div>
 
-    <div v-if="totalCount>=10"
+    <div
+      v-if="totalCount >= 10"
       class="card-footer d-flex justify-content-end"
       :class="type === 'dark' ? 'bg-transparent' : ''"
       style="height: 70px"
     >
       <el-pagination
-          v-if="windowWidth > 552"
-          @current-change="handleCurrentChange"
-          :hide-on-single-page="totalCount<=10"
-          :current-page="parseInt(pagination)"
-          :pager-count= "5"
-          :page-size= "10"
-          layout="jumper, prev, pager, next"
-          :total="totalCount">
+        v-if="windowWidth > 552"
+        @current-change="handleCurrentChange"
+        :hide-on-single-page="totalCount <= 10"
+        :current-page="parseInt(pagination)"
+        :pager-count="5"
+        :page-size="10"
+        layout="jumper, prev, pager, next"
+        :total="totalCount"
+      >
       </el-pagination>
       <el-pagination
-          v-if="windowWidth < 552"
-          small
-          @current-change="handleCurrentChange"
-          :hide-on-single-page="totalCount<=10"
-          :current-page="parseInt(pagination)"
-          :pager-count= "5"
-          layout="prev,pager,next"
-          :total="totalCount">
+        v-if="windowWidth < 552"
+        small
+        @current-change="handleCurrentChange"
+        :hide-on-single-page="totalCount <= 10"
+        :current-page="parseInt(pagination)"
+        :pager-count="5"
+        layout="prev,pager,next"
+        :total="totalCount"
+      >
       </el-pagination>
     </div>
   </div>
@@ -159,7 +174,7 @@ import axios from "axios";
 import Loading from "vue-loading-overlay";
 import "vue-loading-overlay/dist/vue-loading.css";
 import net from "../../store/store";
-import {convertTotalSupply} from "../../store/util";
+import { convertTotalSupply } from "../../store/util";
 
 export default {
   name: "tokens-table",
@@ -182,12 +197,12 @@ export default {
       name: "",
       searchVal: "",
       countPage: 0,
-      windowWidth:window.innerWidth,
+      windowWidth: window.innerWidth,
     };
   },
   created() {
     window.scroll(0, 0);
-    this.getTokenList((this.pagination-1)*this.resultsPerPage,'NEP17');
+    this.getTokenList((this.pagination - 1) * this.resultsPerPage, "NEP17");
   },
 
   watch: {
@@ -200,21 +215,21 @@ export default {
       this.pagination = val;
       const skip = (val - 1) * this.resultsPerPage;
       if (this.name !== "") {
-        this.getTokenListByName(name, skip,'NEP17');
-      }else{
+        this.getTokenListByName(name, skip, "NEP17");
+      } else {
         this.$router.push({
           path: `/tokens/Nep17/${this.pagination}`,
-        });}
-
+        });
+      }
     },
-    getTokenList(skip,type) {
+    getTokenList(skip, type) {
       axios({
         method: "post",
         url: "/api",
         data: {
           jsonrpc: "2.0",
           id: 1,
-          params: { Limit: this.resultsPerPage, Skip: skip ,Standard:type},
+          params: { Limit: this.resultsPerPage, Skip: skip, Standard: type },
           method: "GetAssetInfos",
         },
         headers: {
@@ -230,24 +245,28 @@ export default {
         this.isLoading = false;
       });
     },
-  watchrouter() {
-    //如果路由有变化，执行的对应的动作
-    // console.log(this.$route.name)
-    if (this.$route.name === "tokens") {
-      // console.log(this.pagination)
-      this.pagination = this.$route.params.page
-      this.getTokenList((this.pagination-1)*this.resultsPerPage,'NEP17')
-
-    }
-  },
-    getTokenListByName(name, skip,type) {
+    watchrouter() {
+      //如果路由有变化，执行的对应的动作
+      // console.log(this.$route.name)
+      if (this.$route.name === "tokens") {
+        // console.log(this.pagination)
+        this.pagination = this.$route.params.page;
+        this.getTokenList((this.pagination - 1) * this.resultsPerPage, "NEP17");
+      }
+    },
+    getTokenListByName(name, skip, type) {
       axios({
         method: "post",
         url: "/api",
         data: {
           jsonrpc: "2.0",
           id: 1,
-          params: { Name: this.name, Limit: this.resultsPerPage, Skip: skip ,Standard:type},
+          params: {
+            Name: this.name,
+            Limit: this.resultsPerPage,
+            Skip: skip,
+            Standard: type,
+          },
           method: "GetAssetInfosByName",
         },
         headers: {
@@ -273,19 +292,18 @@ export default {
       }
       this.name = value;
       this.searchVal = "";
-      this.getTokenListByName(value, 0,'NEP17');
+      this.getTokenListByName(value, 0, "NEP17");
     },
-    fresh(){
+    fresh() {
       window.location.replace(window.location.href);
-    }
+    },
   },
 };
 </script>
 <style>
-@media screen and (max-width: 992px ){
-  .searchNameContent{
-    display: none!important;
+@media screen and (max-width: 992px) {
+  .searchNameContent {
+    display: none !important;
   }
-
 }
 </style>

@@ -5,15 +5,17 @@
         <div class="col">
           <div class="top">
             <loading
-                :is-full-page="false"
-                :opacity="0.9"
-                :active="isLoading"
+              :is-full-page="false"
+              :opacity="0.9"
+              :active="isLoading"
             ></loading>
             <div class="bat">
-              <div class=" row mt-3  mb-5  title1 shortTitle" >
+              <div class="row mt-3 mb-5 title1 shortTitle">
                 {{ $t("transactionInfo.txId") }}
               </div>
-              <div class=" row mt-3  mb-3 title2 shortTitle"> {{ $t('overview') }} </div>
+              <div class="row mt-3 mb-3 title2 shortTitle">
+                {{ $t("overview") }}
+              </div>
             </div>
             <card shadow class="card-style list">
               <div class="row info mt-3 mb-1">
@@ -24,11 +26,11 @@
                   <span id="tx">{{ this.tabledata["hash"] }}</span>
                   <span> </span>
                   <i
-                      class="ni ni-single-copy-04"
-                      id="txButton"
-                      title="Copy to Clipboard"
-                      style="padding-left: 5px; color: grey; cursor: pointer"
-                      @click="copyItem('tx', 'txButton', 'txSpan')"
+                    class="ni ni-single-copy-04"
+                    id="txButton"
+                    title="Copy to Clipboard"
+                    style="padding-left: 5px; color: grey; cursor: pointer"
+                    @click="copyItem('tx', 'txButton', 'txSpan')"
                   ></i>
                   <span style="color: #42b983" id="txSpan"></span>
                 </div>
@@ -49,11 +51,11 @@
                 </div>
                 <div class="col-md-9 context-black">
                   <router-link
-                      class="name mb-0 "
-                      style="cursor: pointer; "
-                      :to="'/blockinfo/' + this.blockhash"
+                    class="name mb-0"
+                    style="cursor: pointer"
+                    :to="'/blockinfo/' + this.blockhash"
                   >
-                    {{ this.tabledata["blockIndex"]}}
+                    {{ this.tabledata["blockIndex"] }}
                   </router-link>
                 </div>
               </div>
@@ -81,14 +83,13 @@
                   {{ $t("transactionInfo.blockHash") }}
                 </div>
                 <div class="col-md-9 context-black">
-
-                    <span id="block">{{ this.blockhash }}</span>
+                  <span id="block">{{ this.blockhash }}</span>
                   <i
-                      class="ni ni-single-copy-04"
-                      id="blockButton"
-                      title="Copy to Clipboard"
-                      style="padding-left: 5px; color: grey; cursor: pointer"
-                      @click="copyItem('block', 'blockButton', 'blockSpan')"
+                    class="ni ni-single-copy-04"
+                    id="blockButton"
+                    title="Copy to Clipboard"
+                    style="padding-left: 5px; color: grey; cursor: pointer"
+                    @click="copyItem('block', 'blockButton', 'blockSpan')"
                   ></i>
                   <span style="color: #42b983" id="blockSpan"></span>
                 </div>
@@ -97,33 +98,47 @@
               <div class="row info mt-3 mb-1">
                 <div class="col-md-3 lable-title">
                   {{ $t("transactionInfo.sender") }}
-                  <el-button type="info" :plain="true" size="small" style="height: 21px;margin-left: 6px;" @click="changeFormat(button)"> {{ this.button.buttonName }}</el-button>
+                  <el-button
+                    type="info"
+                    :plain="true"
+                    size="small"
+                    style="height: 21px; margin-left: 6px"
+                    @click="changeFormat(button)"
+                  >
+                    {{ this.button.buttonName }}</el-button
+                  >
                 </div>
 
                 <div class="col-md-9 context-black">
                   <router-link
-                      class="name mb-0 "
-                      id="sender"
-                      style="cursor: pointer;"
-                      :to="'/accountprofile/' + addressToScriptHash(this.address)"
+                    class="name mb-0"
+                    id="sender"
+                    style="cursor: pointer"
+                    :to="'/accountprofile/' + addressToScriptHash(this.address)"
                   >
                     {{
                       this.button.state === true
-                          ? this.address
-                          : addressToScriptHash(this.address)
+                        ? this.address
+                        : addressToScriptHash(this.address)
                     }}
                   </router-link>
-                  <span style="display:-moz-inline-box;display:inline-block;width: 80px!important;vertical-align: center">
-                  <i
+                  <span
+                    style="
+                      display: -moz-inline-box;
+                      display: inline-block;
+                      width: 80px !important;
+                      vertical-align: center;
+                    "
+                  >
+                    <i
                       class="ni ni-single-copy-04"
                       id="senderButton"
                       title="Copy to Clipboard"
                       style="padding-left: 5px; color: grey; cursor: pointer"
                       @click="copyItem('sender', 'senderButton', 'senderSpan')"
-                  ></i>
-                  <span style="color: #42b983" id="senderSpan"></span>
+                    ></i>
+                    <span style="color: #42b983" id="senderSpan"></span>
                   </span>
-
                 </div>
               </div>
 
@@ -132,7 +147,7 @@
                   {{ $t("transactionInfo.netFee") }}
                 </div>
                 <div class="col-md-9 context-black">
-                  {{ convertGas(this.tabledata["netfee"])}} GAS
+                  {{ convertGas(this.tabledata["netfee"]) }} GAS
                 </div>
               </div>
 
@@ -148,8 +163,8 @@
               <div class="row info mt-3 mb-1">
                 <div class="col-md-3 lable-title">
                   {{ $t("transactionInfo.vmState") }}
-                  <el-tooltip  :content="this.vmStateTooltip" placement="right" >
-                    <i class="el-icon-question"/>
+                  <el-tooltip :content="this.vmStateTooltip" placement="right">
+                    <i class="el-icon-question" />
                   </el-tooltip>
                 </div>
                 <div class="col-md-9 context-black">
@@ -166,84 +181,88 @@
                 </div>
               </div>
 
-              <div class="row  info mt-3 mb-4" >
+              <div class="row info mt-3 mb-4">
                 <div class="col-md-3 lable-title">
                   {{ $t("transactionInfo.exception") }}
-                  <el-tooltip  :content="this.exceptionToolTip" placement="right" >
-                    <i class="el-icon-question"/>
+                  <el-tooltip
+                    :content="this.exceptionToolTip"
+                    placement="right"
+                  >
+                    <i class="el-icon-question" />
                   </el-tooltip>
                 </div>
-                <div class="col-md-9 exception context-black" >
-                  <el-tag v-if="this.exception === null" type="success" size="small">
+                <div class="col-md-9 exception context-black">
+                  <el-tag
+                    v-if="this.exception === null"
+                    type="success"
+                    size="small"
+                  >
                     No exception
                   </el-tag>
-                  <div v-else  style="max-width: 95%">
-                    {{this.exception}}
+                  <div v-else style="max-width: 95%">
+                    {{ this.exception }}
                   </div>
-
                 </div>
               </div>
-
-
             </card>
             <div class="row mt-2 mb-2"></div>
 
             <div class="row mt-3 mb-3 title2 list">
-              {{ $t('transactionInfo.nep17') }}
+              {{ $t("transactionInfo.nep17") }}
             </div>
-            <div  class="card-style list" >
+            <div class="card-style list">
               <transfers-list
-                  :title="$t('transactionInfo.nep17')"
-                  :txhash="this.txhash"
+                :title="$t('transactionInfo.nep17')"
+                :txhash="this.txhash"
               ></transfers-list>
             </div>
 
             <div class="row mt-3 mb-3 title2 list">
-              {{ $t('transactionInfo.nep11') }}
+              {{ $t("transactionInfo.nep11") }}
             </div>
-            <div  class="card-style list" >
+            <div class="card-style list">
               <nft-table
-                  :title="$t('transactionInfo.nep11')"
-                  :txhash="this.txhash"
+                :title="$t('transactionInfo.nep11')"
+                :txhash="this.txhash"
               ></nft-table>
             </div>
             <div class="row mt-4 mb-3"></div>
             <el-tabs
-                type="card"
-                class="list"
-                v-model="activeName"
-                style="width: 80%; margin-left: 10%; background-color: #f7f8fa"
+              type="card"
+              class="list"
+              v-model="activeName"
+              style="width: 80%; margin-left: 10%; background-color: #f7f8fa"
             >
-<!--              <el-tab-pane :label="$t('transactionInfo.nep17')" name="first">-->
-<!--                <transfers-list-->
-<!--                    :title="$t('transactionInfo.nep17')"-->
-<!--                    :txhash="this.txhash"-->
-<!--                ></transfers-list>-->
-<!--              </el-tab-pane>-->
-<!--              <el-tab-pane :label="$t('transactionInfo.nep11')" name="second">-->
-<!--                <nft-table-->
-<!--                    :title="$t('transactionInfo.nep11')"-->
-<!--                    :txhash="this.txhash"-->
-<!--                ></nft-table>-->
-<!--              </el-tab-pane>-->
+              <!--              <el-tab-pane :label="$t('transactionInfo.nep17')" name="first">-->
+              <!--                <transfers-list-->
+              <!--                    :title="$t('transactionInfo.nep17')"-->
+              <!--                    :txhash="this.txhash"-->
+              <!--                ></transfers-list>-->
+              <!--              </el-tab-pane>-->
+              <!--              <el-tab-pane :label="$t('transactionInfo.nep11')" name="second">-->
+              <!--                <nft-table-->
+              <!--                    :title="$t('transactionInfo.nep11')"-->
+              <!--                    :txhash="this.txhash"-->
+              <!--                ></nft-table>-->
+              <!--              </el-tab-pane>-->
               <el-tab-pane
-                  :label="$t('transactionInfo.notification')"
-                  name="first"
+                :label="$t('transactionInfo.notification')"
+                name="first"
               >
                 <div
-                    class="notificationDiv"
-                    v-if="
+                  class="notificationDiv"
+                  v-if="
                     this.tabledataApp['notifications'] &&
                     this.tabledataApp['notifications'].length != 0
                   "
                 >
                   <div v-if="this.countApp === 0">
                     <card
-                        shadow
-                        v-for="(item, index) in this.tabledataApp[
+                      shadow
+                      v-for="(item, index) in this.tabledataApp[
                         'notifications'
                       ]"
-                        :key="index"
+                      :key="index"
                     >
                       <div class="row">
                         <div class="col-lg-2">
@@ -263,9 +282,9 @@
                             {{ $t("transactionInfo.contract") }}:
                           </div>
                           <router-link
-                              class="name mb-0 text-sm"
-                              style="cursor: pointer; "
-                              :to="'/contractinfo/' + item['contract']"
+                            class="name mb-0 text-sm"
+                            style="cursor: pointer"
+                            :to="'/contractinfo/' + item['contract']"
                           >
                             {{ item["contract"] }}
                           </router-link>
@@ -277,14 +296,15 @@
                             </div>
                             <div v-if="item['state'].length !== 0">
                               <li
-                                  v-for="(param, ind) in item['state']['value']"
-                                  :key="ind"
+                                v-for="(param, ind) in item['state']['value']"
+                                :key="ind"
                               >
                                 <span
-                                    v-if="
-                                     this.mapTotalApp.get(item['contract']) &&this.mapTotalApp
+                                  v-if="
+                                    this.mapTotalApp.get(item['contract']) &&
+                                    this.mapTotalApp
                                       .get(item['contract'])
-                                      .get(item['eventname'])&&
+                                      .get(item['eventname']) &&
                                     this.mapTotalApp
                                       .get(item['contract'])
                                       .get(item['eventname'])[ind] === 'Hash160'
@@ -293,15 +313,16 @@
                                   {{ param["type"] }}:
                                   {{
                                     param["value"] === null
-                                        ? "Null"
-                                        : base64ToHash(param["value"])
+                                      ? "Null"
+                                      : base64ToHash(param["value"])
                                   }}
                                 </span>
                                 <span
-                                    v-else-if="
-                                    this.mapTotalApp.get(item['contract']) &&this.mapTotalApp
+                                  v-else-if="
+                                    this.mapTotalApp.get(item['contract']) &&
+                                    this.mapTotalApp
                                       .get(item['contract'])
-                                      .get(item['eventname'])&&
+                                      .get(item['eventname']) &&
                                     this.mapTotalApp
                                       .get(item['contract'])
                                       .get(item['eventname'])[ind] === 'String'
@@ -310,33 +331,34 @@
                                   {{ param["type"] }}:
                                   {{
                                     param["value"] === null
-                                        ? "Null"
-                                        : base64ToString(param["value"])
+                                      ? "Null"
+                                      : base64ToString(param["value"])
                                   }}
                                 </span>
                                 <span
-                                    v-else-if="
-
-                                     this.mapTotalApp.get(item['contract']) &&this.mapTotalApp
+                                  v-else-if="
+                                    this.mapTotalApp.get(item['contract']) &&
+                                    this.mapTotalApp
                                       .get(item['contract'])
-                                      .get(item['eventname'])&&
+                                      .get(item['eventname']) &&
                                     this.mapTotalApp
                                       .get(item['contract'])
                                       .get(item['eventname'])[ind] === 'Array'
                                   "
                                 >
                                   {{ param["type"] }}:
-                                   {{
+                                  {{
                                     param["value"] === null
-                                        ? "Null"
-                                        : base64ToByteArray(param["value"])
+                                      ? "Null"
+                                      : base64ToByteArray(param["value"])
                                   }}
                                 </span>
                                 <span
-                                    v-else-if="
-                                    this.mapTotalApp.get(item['contract']) &&this.mapTotalApp
+                                  v-else-if="
+                                    this.mapTotalApp.get(item['contract']) &&
+                                    this.mapTotalApp
                                       .get(item['contract'])
-                                      .get(item['eventname'])&&
+                                      .get(item['eventname']) &&
                                     this.mapTotalApp
                                       .get(item['contract'])
                                       .get(item['eventname'])[ind] ===
@@ -346,8 +368,8 @@
                                   {{ param["type"] }}:
                                   {{
                                     param["value"] === null
-                                        ? "Null"
-                                        : base64ToByteArray(param["value"])
+                                      ? "Null"
+                                      : base64ToByteArray(param["value"])
                                   }}
                                 </span>
                                 <span v-else>
@@ -362,7 +384,7 @@
                   </div>
                   <div v-else>
                     <span
-                    >Some contract does not exist in the database(To do)</span
+                      >Some contract does not exist in the database(To do)</span
                     >
                   </div>
                 </div>
@@ -372,18 +394,18 @@
                 </card>
               </el-tab-pane>
               <el-tab-pane
-                  :label="$t('transactionInfo.systemCall')"
-                  name="second"
+                :label="$t('transactionInfo.systemCall')"
+                name="second"
               >
                 <div
-                    class="systemCallDiv"
-                    v-if="this.tabledataCall && this.tabledataCall.length !==0"
+                  class="systemCallDiv"
+                  v-if="this.tabledataCall && this.tabledataCall.length !== 0"
                 >
                   <div v-if="this.countSys === 0">
                     <card
-                        shadow
-                        v-for="(item, index) in this.tabledataCall['result']"
-                        :key="index"
+                      shadow
+                      v-for="(item, index) in this.tabledataCall['result']"
+                      :key="index"
                     >
                       <div class="row">
                         <div class="col-lg-2">
@@ -397,9 +419,9 @@
                             {{ $t("transactionInfo.originSender") }}:
                           </div>
                           <router-link
-                              class="name mb-0 text-sm"
-                              style="cursor: pointer;"
-                              :to="'/accountprofile/' + item['originSender']"
+                            class="name mb-0 text-sm"
+                            style="cursor: pointer"
+                            :to="'/accountprofile/' + item['originSender']"
                           >
                             {{ item["originSender"] }}
                           </router-link>
@@ -409,9 +431,9 @@
                             {{ $t("transactionInfo.contract") }}:
                           </div>
                           <router-link
-                              class="name mb-0 text-sm"
-                              style="cursor: pointer; "
-                              :to="'/contractinfo/' + item['contractHash']"
+                            class="name mb-0 text-sm"
+                            style="cursor: pointer"
+                            :to="'/contractinfo/' + item['contractHash']"
                           >
                             {{ item["contractHash"] }}
                           </router-link>
@@ -431,13 +453,13 @@
                           </div>
                           <div v-if="List[index] && List[index]['key']">
                             <li
-                                class="col-12"
-                                v-for="(param, ind) in item['hexStringParams']"
-                                :key="ind"
+                              class="col-12"
+                              v-for="(param, ind) in item['hexStringParams']"
+                              :key="ind"
                             >
                               <span
-                                  v-if="
-                                  List[index]['key'][ind]&&
+                                v-if="
+                                  List[index]['key'][ind] &&
                                   List[index]['key'][ind]['type'] === 'Hash160'
                                 "
                               >
@@ -447,38 +469,44 @@
                                 }}
                               </span>
                               <span
-                                  v-else-if="
+                                v-else-if="
                                   List[index] &&
                                   List[index]['key'] &&
-                                  List[index]['key'][ind]&&
+                                  List[index]['key'][ind] &&
                                   List[index]['key'][ind]['type'] === 'String'
                                 "
                               >
                                 {{ List[index]["key"][ind]["name"] }}:
                                 {{
                                   param === ""
-                                      ? "null"
-                                      : this.hexToString(param)
+                                    ? "null"
+                                    : this.hexToString(param)
                                 }}
                               </span>
                               <span
-                                  v-else-if="
+                                v-else-if="
                                   List[index] &&
                                   List[index]['key'] &&
-                                  List[index]['key'][ind]&&
+                                  List[index]['key'][ind] &&
                                   List[index]['key'][ind]['type'] === 'Integer'
                                 "
                               >
                                 {{ List[index]["key"][ind]["name"] }}:
                                 {{
                                   param === ""
-                                      ? "null"
-                                      : this.hexToInteger(param)
+                                    ? "null"
+                                    : this.hexToInteger(param)
                                 }}
                               </span>
                               <span v-else>
-                                <span v-if=" List[index] &&
-                                  List[index]['key'] &&List[index]['key'][ind]">{{ List[index]["key"][ind]["name"] }}:</span>
+                                <span
+                                  v-if="
+                                    List[index] &&
+                                    List[index]['key'] &&
+                                    List[index]['key'][ind]
+                                  "
+                                  >{{ List[index]["key"][ind]["name"] }}:</span
+                                >
                                 {{ param === "" ? "null" : param }}
                               </span>
                             </li>
@@ -500,26 +528,26 @@
             <card shadow class="card-style list" v-if="this.tabledata.signers">
               <el-collapse v-model="activeSignersNames" style="border: white">
                 <el-collapse-item
-                    :title="$t('transactionInfo.account')"
-                    name="0"
-                    class="text-title3"
+                  :title="$t('transactionInfo.account')"
+                  name="0"
+                  class="text-title3"
                 >
                   <div
-                      class="ml-4"
-                      v-for="(item, index) in this.tabledata['signers']"
-                      :key="index"
+                    class="ml-4"
+                    v-for="(item, index) in this.tabledata['signers']"
+                    :key="index"
                   >
                     {{ item["account"] }}
                   </div>
                 </el-collapse-item>
                 <el-collapse-item
-                    :title="$t('transactionInfo.scopes')"
-                    name="1"
+                  :title="$t('transactionInfo.scopes')"
+                  name="1"
                 >
                   <div
-                      class="ml-4"
-                      v-for="(item, index) in this.tabledata['signers']"
-                      :key="index"
+                    class="ml-4"
+                    v-for="(item, index) in this.tabledata['signers']"
+                    :key="index"
                   >
                     {{ item["scopes"] }}
                   </div>
@@ -533,26 +561,26 @@
             <card shadow class="card-style list" v-if="tabledata.witnesses">
               <el-collapse v-model="activeWitnessesNames" style="border: white">
                 <el-collapse-item
-                    :title="$t('transactionInfo.invocation')"
-                    name="0"
-                    class="itemCollapse"
+                  :title="$t('transactionInfo.invocation')"
+                  name="0"
+                  class="itemCollapse"
                 >
                   <div
-                      class="ml-4"
-                      v-for="(item, index) in this.tabledata['witnesses']"
-                      :key="index"
+                    class="ml-4"
+                    v-for="(item, index) in this.tabledata['witnesses']"
+                    :key="index"
                   >
                     <span v-html="item['invocation']"> </span>
                   </div>
                 </el-collapse-item>
                 <el-collapse-item
-                    :title="$t('transactionInfo.verification')"
-                    name="1"
+                  :title="$t('transactionInfo.verification')"
+                  name="1"
                 >
                   <div
-                      class="ml-4"
-                      v-for="(item, index) in this.tabledata['witnesses']"
-                      :key="index"
+                    class="ml-4"
+                    v-for="(item, index) in this.tabledata['witnesses']"
+                    :key="index"
                   >
                     <span v-html="item['verification']"></span>
                   </div>
@@ -565,16 +593,15 @@
             <card shadow class="card-style list">
               <el-collapse v-model="activeScriptsNames" style="border: white">
                 <el-collapse-item
-                    :title="$t('transactionInfo.script')"
-                    name="0"
-                    class="item-collapse"
+                  :title="$t('transactionInfo.script')"
+                  name="0"
+                  class="item-collapse"
                 >
                   <div class="ml-4" v-html="this.tabledata['script']"></div>
                 </el-collapse-item>
               </el-collapse>
             </card>
           </div>
-
 
           <div style="margin-top: 30px; margin-bottom: 20px"></div>
         </div>
@@ -637,11 +664,10 @@ export default {
       List: [],
       activeIndex: "1",
       whichIndex: 1,
-      activeSignersNames: ["0","1"],
-      activeWitnessesNames: ["0","1"],
+      activeSignersNames: ["0", "1"],
+      activeWitnessesNames: ["0", "1"],
       activeScriptsNames: ["0"],
       activeName: "first",
-
     };
   },
   created() {
@@ -651,26 +677,25 @@ export default {
     this.getScCallByTransactionHash(this.$route.params.txhash);
     this.getApplicationLogByTransactionHash(this.$route.params.txhash);
   },
-  computed:{
-    vmStateTooltip:function (){
-      if(this.$i18n.locale==="en"){
-        return "HALT means this transaction has no error, FAULT means this transcation has errors."
-      }else if (this.$i18n.locale==="cn") {
-        return "HALT 表示这笔交易没有错误，FAULT表示这笔交易有错误"
+  computed: {
+    vmStateTooltip: function () {
+      if (this.$i18n.locale === "en") {
+        return "HALT means this transaction has no error, FAULT means this transcation has errors.";
+      } else if (this.$i18n.locale === "cn") {
+        return "HALT 表示这笔交易没有错误，FAULT表示这笔交易有错误";
       } else {
-        return "HALT signifie que cette transaction n'a pas d'erreur, FAULT signifie que cette transaction a des erreurs."
+        return "HALT signifie que cette transaction n'a pas d'erreur, FAULT signifie que cette transaction a des erreurs.";
       }
     },
-    exceptionToolTip:function (){
-      if(this.$i18n.locale==="en"){
-        return "NeoVm throws an exception when this transcation has errors."
-      }else if (this.$i18n.locale==="cn") {
-        return "当这笔交易出现出现错误时，NeoVm虚拟机会抛出异常"
+    exceptionToolTip: function () {
+      if (this.$i18n.locale === "en") {
+        return "NeoVm throws an exception when this transcation has errors.";
+      } else if (this.$i18n.locale === "cn") {
+        return "当这笔交易出现出现错误时，NeoVm虚拟机会抛出异常";
       } else {
-        return "NeoVm lève une exception en cas d'erreur"
+        return "NeoVm lève une exception en cas d'erreur";
       }
     },
-
   },
   watch: {
     $route: "watchrouter",
@@ -694,7 +719,7 @@ export default {
         // this.getApplicationLogByTransactionHash(this.$route.params.txhash);
         // this.getTransactionByTransactionHash(this.$route.params.txhash);
         // this.getScCallByTransactionHash(this.$route.params.txhash);
-        location.reload()
+        location.reload();
       }
     },
     convertTime(time) {
@@ -897,17 +922,15 @@ export default {
         },
       }).then((res) => {
         this.isLoading = false;
-        if (res["data"]["result"]["totalCount"]!==0) {
+        if (res["data"]["result"]["totalCount"] !== 0) {
           this.tabledataCall = res["data"]["result"];
           for (var i = 0; i < this.tabledataCall["totalCount"]; i++) {
             this.getContractsSys(
-                this.tabledataCall["result"][i]["contractHash"],
-                this.tabledataCall["result"][i]["method"]
+              this.tabledataCall["result"][i]["contractHash"],
+              this.tabledataCall["result"][i]["method"]
             );
           }
-
         }
-
       });
     },
     getContractsSys(ctr_hash, method) {
@@ -951,18 +974,17 @@ export default {
 </script>
 
 <style>
-.exception{
+.exception {
   word-break: break-all;
   word-wrap: break-word;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 10;
 }
-@media screen and (max-width: 790px ){
-  .info{
-    margin-top:1.5rem!important;
-    margin-bottom:1.5rem!important; ;
+@media screen and (max-width: 790px) {
+  .info {
+    margin-top: 1.5rem !important;
+    margin-bottom: 1.5rem !important;
   }
-
 }
 </style>

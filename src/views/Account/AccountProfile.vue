@@ -1,31 +1,30 @@
 <template>
   <div>
-    <div
-      class="container-fluid mt--8"
-      style="background-color: #f7f8fa"
-    >
+    <div class="container-fluid mt--8" style="background-color: #f7f8fa">
       <div class="row">
         <div class="col">
           <div class="top">
             <loading
-                :is-full-page="false"
-                :opacity="0.9"
-                :active="isLoading"
+              :is-full-page="false"
+              :opacity="0.9"
+              :active="isLoading"
             ></loading>
             <div class="bat">
-              <div class=" row mt-3  mb-5  title1 shortTitle" >
-              <span
+              <div class="row mt-3 mb-5 title1 shortTitle">
+                <span
                   v-if="this.type === 'normal' || this.type === 'candidate'"
                   class="mb-0"
-              >
-                {{ $t("addressPage.addressProfile.title") }}
-              </span>
+                >
+                  {{ $t("addressPage.addressProfile.title") }}
+                </span>
                 <span v-else-if="this.type === 'committee'" class="mb-0">
-                {{ $t("addressPage.addressProfile.title") }}
-                <i class="ni ni-badge"></i>
-              </span>
+                  {{ $t("addressPage.addressProfile.title") }}
+                  <i class="ni ni-badge"></i>
+                </span>
               </div>
-              <div class=" row mt-3  mb-3 title2 shortTitle"> {{ $t('overview') }} </div>
+              <div class="row mt-3 mb-3 title2 shortTitle">
+                {{ $t("overview") }}
+              </div>
             </div>
 
             <card shadow class="card-style list">
@@ -36,20 +35,23 @@
                 <div class="col-md-9 context-black">
                   <span id="address">
                     {{ this.scriptHashToAddress(this.accountAddress) }}
-
                   </span>
-                  <span v-if="this.accountAddress==='0x0000000000000000000000000000000000000000'">
+                  <span
+                    v-if="
+                      this.accountAddress ===
+                      '0x0000000000000000000000000000000000000000'
+                    "
+                  >
                     (Null Address:0x0000000000000000000000000000000000000000)
                   </span>
                   <i
-                      class="ni ni-single-copy-04"
-                      id="addressButton"
-                      style="padding-left: 5px; color: grey; cursor: pointer"
-                      title="Copy to Clipboard"
-                      @click="copyItem('address', 'addressButton', 'addressSpan')"
+                    class="ni ni-single-copy-04"
+                    id="addressButton"
+                    style="padding-left: 5px; color: grey; cursor: pointer"
+                    title="Copy to Clipboard"
+                    @click="copyItem('address', 'addressButton', 'addressSpan')"
                   ></i>
                   <span style="color: #42b983" id="addressSpan"></span>
-
                 </div>
               </div>
               <div class="row info mt-3 mb-1">
@@ -63,8 +65,8 @@
               <div class="row info mt-3 mb-1">
                 <div class="col-md-3 lable-title">
                   {{ $t("addressPage.addressProfile.type") }}
-                  <el-tooltip  :content=this.content placement="top" >
-                    <i class="el-icon-question"/>
+                  <el-tooltip :content="this.content" placement="top">
+                    <i class="el-icon-question" />
                   </el-tooltip>
                 </div>
                 <div class="col-md-9 context-black">
@@ -84,7 +86,7 @@
                   {{ $t("addressPage.neoBalance") }}
                 </div>
                 <div class="col-md-9 context-black">
-                  {{ numFormat(this.neoBalance )}}
+                  {{ numFormat(this.neoBalance) }}
                 </div>
               </div>
               <div class="row info mt-3 mb-1">
@@ -104,7 +106,6 @@
                 </div>
               </div>
 
-
               <div class="row info mt-3 mb-1">
                 <div class="col-md-3 lable-title">
                   {{ $t("addressPage.addressProfile.nep17Transfers") }}
@@ -113,7 +114,7 @@
                   {{ this.numOfnep17Transfers }}
                 </div>
               </div>
-              <div class="row info  mt-3 mb-1">
+              <div class="row info mt-3 mb-1">
                 <div class="col-md-3 lable-title">
                   {{ $t("addressPage.addressProfile.nep11Transfers") }}
                 </div>
@@ -127,47 +128,42 @@
           </div>
 
           <el-tabs
-              type="card"
-              class="list"
-              v-model="activeName"
-              style="
-                width: 80%;
-                margin-left: 10%;
-
-              "
+            type="card"
+            class="list"
+            v-model="activeName"
+            style="width: 80%; margin-left: 10%"
+          >
+            <el-tab-pane
+              :label="$t('addressPage.addressProfile.tokenBalance')"
+              name="first"
             >
-
-              <el-tab-pane
-                :label="$t('addressPage.addressProfile.tokenBalance')"
-                name="first"
-              >
-                <address-tokens-table
-                  :account_address="accountAddress"
-                ></address-tokens-table>
-              </el-tab-pane>
-              <el-tab-pane
-                :label="$t('addressPage.addressProfile.tx')"
-                name="second"
-              >
-                <address-transactions-table
-                  :account_address="accountAddress"
-                ></address-transactions-table>
-              </el-tab-pane>
-              <el-tab-pane
-                :label="$t('addressPage.addressProfile.nep17title')"
-                name="third"
-              >
-                <address17-ts-table :account_address="accountAddress">
-                </address17-ts-table>
-              </el-tab-pane>
-              <el-tab-pane
-                :label="$t('addressPage.addressProfile.nep11title')"
-                name="forth"
-              >
-                <address11-ts-table :account_address="accountAddress">
-                </address11-ts-table>
-              </el-tab-pane>
-            </el-tabs>
+              <address-tokens-table
+                :account_address="accountAddress"
+              ></address-tokens-table>
+            </el-tab-pane>
+            <el-tab-pane
+              :label="$t('addressPage.addressProfile.tx')"
+              name="second"
+            >
+              <address-transactions-table
+                :account_address="accountAddress"
+              ></address-transactions-table>
+            </el-tab-pane>
+            <el-tab-pane
+              :label="$t('addressPage.addressProfile.nep17title')"
+              name="third"
+            >
+              <address17-ts-table :account_address="accountAddress">
+              </address17-ts-table>
+            </el-tab-pane>
+            <el-tab-pane
+              :label="$t('addressPage.addressProfile.nep11title')"
+              name="forth"
+            >
+              <address11-ts-table :account_address="accountAddress">
+              </address11-ts-table>
+            </el-tab-pane>
+          </el-tabs>
 
           <div style="margin-top: 30px; margin-bottom: 20px"></div>
         </div>
@@ -209,7 +205,7 @@ export default {
       numOfnep11Transfers: 0,
       type: "normal",
       activeName: "first",
-      net:window.URL,
+      net: window.URL,
     };
   },
   components: {
@@ -232,17 +228,16 @@ export default {
   watch: {
     $route: "watchrouter",
   },
-  computed:{
-    content:function (){
-      if(this.$i18n.locale==='en'){
-        return "Account includes consensus, committee, candidate, normal, 4 types."
-      } else if (this.$i18n.locale==='cn'){
-        return "账户包括 共识结点，委员会结点，候选人结点，普通结点四种类型"
+  computed: {
+    content: function () {
+      if (this.$i18n.locale === "en") {
+        return "Account includes consensus, committee, candidate, normal, 4 types.";
+      } else if (this.$i18n.locale === "cn") {
+        return "账户包括 共识结点，委员会结点，候选人结点，普通结点四种类型";
       } else {
-        return "Le compte contiens 4 types: consensus, comité, candidature, normal"
+        return "Le compte contiens 4 types: consensus, comité, candidature, normal";
       }
-
-    }
+    },
   },
   methods: {
     scriptHashToAddress,
@@ -251,7 +246,6 @@ export default {
     copyItem,
     numFormat,
     watchrouter() {
-
       this.isLoading = true;
 
       if (this.$route.name === "AccountProfile") {
@@ -263,7 +257,7 @@ export default {
         // this.getTransactions();
         // this.getCreatedTime();
         // this.getCandidateByAddress();
-        location.reload()
+        location.reload();
       }
     },
     getNeoBalance() {
@@ -463,10 +457,10 @@ export default {
 };
 </script>
 <style>
-@media screen and (max-width: 790px ) {
+@media screen and (max-width: 790px) {
   .info {
     margin-top: 1.5rem !important;
-    margin-bottom: 1.5rem !important;;
+    margin-bottom: 1.5rem !important;
   }
 }
 </style>

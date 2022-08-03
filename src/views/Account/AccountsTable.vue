@@ -31,57 +31,74 @@
         :data="tableData"
       >
         <template v-slot:columns>
-
           <th class="tableHeader">
-            {{ $t("addressPage.accountsTable")
-            }}
-            <el-button type="info" :plain="true" size="small" style="height: 19px;margin-left: 4px" @click="changeFormat(button)">
-              {{this.button.buttonName}}</el-button>
-
+            {{ $t("addressPage.accountsTable") }}
+            <el-button
+              type="info"
+              :plain="true"
+              size="small"
+              style="height: 19px; margin-left: 4px"
+              @click="changeFormat(button)"
+            >
+              {{ this.button.buttonName }}</el-button
+            >
           </th>
           <th class="tableHeader">
             {{ $t("addressPage.createdTime") }}
-            <el-button type="info" :plain="true" size="small" style="height: 19px;margin-left: 4px" @click="switchTime(time)">
-              Format</el-button>
+            <el-button
+              type="info"
+              :plain="true"
+              size="small"
+              style="height: 19px; margin-left: 4px"
+              @click="switchTime(time)"
+            >
+              Format</el-button
+            >
           </th>
           <th class="tableHeader">{{ $t("addressPage.neoBalance") }}</th>
           <th class="tableHeader">{{ $t("addressPage.gasBalance") }}</th>
-          <th class="tableHeader">{{$t('addressPage.Nep17Transfers')}}</th>
-          <th class="tableHeader">{{$t('addressPage.Nep11Transfers')}}</th>
-
+          <th class="tableHeader">{{ $t("addressPage.Nep17Transfers") }}</th>
+          <th class="tableHeader">{{ $t("addressPage.Nep11Transfers") }}</th>
         </template>
         <template v-slot:default="row">
-
           <td class="address">
             <div class="short">
               <router-link
-                  class="mb-0 table-list-item-blue"
-                  v-if="this.button.state"
-                  style="cursor: pointer;"
-                  :to="'/accountprofile/' + row.item.address"
+                class="mb-0 table-list-item-blue"
+                v-if="this.button.state"
+                style="cursor: pointer"
+                :to="'/accountprofile/' + row.item.address"
               >
                 {{ scriptHashToAddress(row.item.address) }}
               </router-link>
               <router-link
-                  class="mb-0 table-list-item-blue"
-                  v-else
-                  style="cursor: pointer;"
-                  :to="'/accountprofile/' + row.item.address"
+                class="mb-0 table-list-item-blue"
+                v-else
+                style="cursor: pointer"
+                :to="'/accountprofile/' + row.item.address"
               >
                 {{ row.item.address }}
               </router-link>
               <span
-                  v-if="row.item.address === '0x0000000000000000000000000000000000000000'"
-              >（Null Address) </span>
+                v-if="
+                  row.item.address ===
+                  '0x0000000000000000000000000000000000000000'
+                "
+                >（Null Address)
+              </span>
             </div>
 
             <!--a class="name mb-0 text-sm" style="cursor: pointer" @click="getAddress(row.item.address)">{{ row.item.address }}</a-->
           </td>
           <td class="table-list-item">
-            {{time.state?this.convertTime(row.item.firstusetime,this.$i18n.locale):this.convertISOTime(row.item.firstusetime) }}
+            {{
+              time.state
+                ? this.convertTime(row.item.firstusetime, this.$i18n.locale)
+                : this.convertISOTime(row.item.firstusetime)
+            }}
           </td>
           <td class="table-list-item">
-            {{numFormat( row.item.neoBalance )}}
+            {{ numFormat(row.item.neoBalance) }}
           </td>
           <td class="table-list-item">
             {{ row.item.gasBalance }}
@@ -92,35 +109,37 @@
           <td class="table-list-item">
             {{ row.item.Nep11Transfers }}
           </td>
-
         </template>
       </base-table>
     </div>
 
-    <div   v-if="totalAccount>=10"
-            class="card-footer d-flex justify-content-end"
-            :class="type === 'dark' ? 'bg-transparent' : ''"
-            style="height: 70px"
+    <div
+      v-if="totalAccount >= 10"
+      class="card-footer d-flex justify-content-end"
+      :class="type === 'dark' ? 'bg-transparent' : ''"
+      style="height: 70px"
     >
       <el-pagination
-              v-if="windowWidth > 552"
-              @current-change="handleCurrentChange"
-              :hide-on-single-page="totalAccount<=10"
-              :current-page="parseInt(pagination)"
-              :pager-count= "5"
-              :page-size= "10"
-              layout="jumper, prev, pager, next"
-              :total="totalAccount">
+        v-if="windowWidth > 552"
+        @current-change="handleCurrentChange"
+        :hide-on-single-page="totalAccount <= 10"
+        :current-page="parseInt(pagination)"
+        :pager-count="5"
+        :page-size="10"
+        layout="jumper, prev, pager, next"
+        :total="totalAccount"
+      >
       </el-pagination>
       <el-pagination
-          v-if="windowWidth < 552"
-          small
-          @current-change="handleCurrentChange"
-          :hide-on-single-page="totalAccount<=10"
-          :current-page="parseInt(pagination)"
-          :pager-count= "5"
-          layout="prev,pager,next"
-          :total="totalAccount">
+        v-if="windowWidth < 552"
+        small
+        @current-change="handleCurrentChange"
+        :hide-on-single-page="totalAccount <= 10"
+        :current-page="parseInt(pagination)"
+        :pager-count="5"
+        layout="prev,pager,next"
+        :total="totalAccount"
+      >
       </el-pagination>
     </div>
   </div>
@@ -155,7 +174,7 @@ export default {
   },
   data() {
     return {
-      time:{state:true},
+      time: { state: true },
       network: net.url,
       tableData: [],
       totalAccount: 0,
@@ -164,14 +183,14 @@ export default {
       neoBalance: 0,
       isLoading: true,
       countPage: 0,
-      windowWidth:window.innerWidth,
+      windowWidth: window.innerWidth,
       button: { state: true, buttonName: "Hash" },
     };
   },
 
   created() {
     window.scroll(0, 0);
-    this.getAccoutsList((this.pagination-1)*this.resultsPerPage);
+    this.getAccoutsList((this.pagination - 1) * this.resultsPerPage);
   },
   updated() {
     const nodes = document.getElementsByClassName("timeago");
@@ -204,16 +223,15 @@ export default {
       });
     },
 
-  watchrouter() {
-    //如果路由有变化，执行的对应的动作
-    // console.log(this.$route.name)
-    if (this.$route.name === "Accounts") {
-      this.pagination = this.$route.params.page
-      // console.log(this.pagination)
-      this.getAccoutsList((this.pagination-1)*this.resultsPerPage)
-
-    }
-  },
+    watchrouter() {
+      //如果路由有变化，执行的对应的动作
+      // console.log(this.$route.name)
+      if (this.$route.name === "Accounts") {
+        this.pagination = this.$route.params.page;
+        // console.log(this.pagination)
+        this.getAccoutsList((this.pagination - 1) * this.resultsPerPage);
+      }
+    },
     getAccoutsList(skip) {
       axios({
         method: "post",
@@ -233,7 +251,6 @@ export default {
         .then((res) => {
           let temp = res["data"]["result"]["result"];
           for (let k = 0; k < temp.length; k++) {
-
             temp[k]["neoBalance"] = "";
             temp[k]["gasBalance"] = "";
             temp[k]["number"] =
@@ -246,7 +263,6 @@ export default {
           this.getNep17Transfers();
           this.getBalance();
           this.isLoading = false;
-
         })
         .catch((err) => {
           console.log("Error", err);
@@ -340,12 +356,12 @@ export default {
             crossDomain: "true",
           },
         })
-            .then((res) => {
-              this.tableData[k]["Nep17Transfers"] = res["data"]["result"];
-            })
-            .catch((err) => {
-              console.log("Get nep 17 transfers error: ", err);
-            });
+          .then((res) => {
+            this.tableData[k]["Nep17Transfers"] = res["data"]["result"];
+          })
+          .catch((err) => {
+            console.log("Get nep 17 transfers error: ", err);
+          });
       }
     },
     getNep11Transfers() {
@@ -368,12 +384,12 @@ export default {
             crossDomain: "true",
           },
         })
-            .then((res) => {
-              this.tableData[k]["Nep11Transfers"] = res["data"]["result"];
-            })
-            .catch((err) => {
-              console.log("Get nep 11 transfers error: ", err);
-            });
+          .then((res) => {
+            this.tableData[k]["Nep11Transfers"] = res["data"]["result"];
+          })
+          .catch((err) => {
+            console.log("Get nep 11 transfers error: ", err);
+          });
       }
     },
     getNeoBalance(accountAddress) {
