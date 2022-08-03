@@ -1,70 +1,72 @@
 <template>
-  <div
-    class="card-header border-0"
-    :class="type === 'dark' ? 'bg-transparent' : ''"
-  >
-    <div class="row align-items-center">
-      <div class="col">
-        <h3
-          class="mb-0 hometxtitle"
-          :class="type === 'dark' ? 'text-white' : ''"
-        >
-          {{ title }}
-        </h3>
-      </div>
-      <div class="col text-right">
-        <span class="seeMoreButton" @click="toTransactionsTable()"
-          >{{ $t("homePage.more") }}
-        </span>
+  <div>
+    <div
+      class="card-header border-0"
+      :class="type === 'dark' ? 'bg-transparent' : ''"
+    >
+      <div class="row align-items-center">
+        <div class="col">
+          <h3
+            class="mb-0 hometxtitle"
+            :class="type === 'dark' ? 'text-white' : ''"
+          >
+            {{ title }}
+          </h3>
+        </div>
+        <div class="col text-right">
+          <span class="seeMoreButton" @click="toTransactionsTable()"
+            >{{ $t("homePage.more") }}
+          </span>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="card border-0" :class="type === 'dark' ? 'bg-default' : ''">
-    <div class="table-responsive">
-      <base-table
-        class="table align-items-center table-hover hometablelist"
-        :class="type === 'dark' ? 'table-dark' : ''"
-        :thead-classes="type === 'dark' ? 'thead-dark' : 'thead-light'"
-        tbody-classes="list"
-        :data="tableData"
-      >
-        <template v-slot:columns>
-          <th class="hometabletx">{{ $t("homePage.txTable.txID") }}</th>
-          <th class="hometabletx">{{ $t("homePage.txTable.gas") }}</th>
-          <th class="hometabletx hometableright">
-            {{ $t("homePage.txTable.size") }}
-          </th>
-          <th class="hometabletx hometableright">
-            {{ $t("homePage.txTable.time") }}
-          </th>
-        </template>
-        <template v-slot:default="row">
-          <td class="hometxcontent">
-            <div class="txidhomepage">
-              <router-link
-                class="name mb-0"
-                style="cursor: pointer"
-                :to="'/transactionInfo/' + row.item.hash"
-                >{{ row.item.hash }}</router-link
-              >
-            </div>
-          </td>
-          <td class="hometxcontent">
-            <div class="">
-              {{ this.convertGas(row.item.netfee + row.item.sysfee) }} gas
-            </div>
-          </td>
-          <td class="hometxcontent hometxcontentright">
-            <div>{{ row.item.size }} {{ $t("bytes") }}</div>
-          </td>
-          <td class="hometxcontent hometxcontentright">
-            <div
-              class="timeago"
-              :datetime="convertISOTime(row.item.blocktime).toString()"
-            ></div>
-          </td>
-        </template>
-      </base-table>
+    <div class="card border-0" :class="type === 'dark' ? 'bg-default' : ''">
+      <div class="table-responsive">
+        <base-table
+          class="table align-items-center table-hover hometablelist"
+          :class="type === 'dark' ? 'table-dark' : ''"
+          :thead-classes="type === 'dark' ? 'thead-dark' : 'thead-light'"
+          tbody-classes="list"
+          :data="tableData"
+        >
+          <template v-slot:columns>
+            <th class="hometabletx">{{ $t("homePage.txTable.txID") }}</th>
+            <th class="hometabletx">{{ $t("homePage.txTable.gas") }}</th>
+            <th class="hometabletx hometableright">
+              {{ $t("homePage.txTable.size") }}
+            </th>
+            <th class="hometabletx hometableright">
+              {{ $t("homePage.txTable.time") }}
+            </th>
+          </template>
+          <template v-slot:default="row">
+            <td class="hometxcontent">
+              <div class="txidhomepage">
+                <router-link
+                  class="name mb-0"
+                  style="cursor: pointer"
+                  :to="'/transactionInfo/' + row.item.hash"
+                  >{{ row.item.hash }}</router-link
+                >
+              </div>
+            </td>
+            <td class="hometxcontent">
+              <div class="">
+                {{ this.convertGas(row.item.netfee + row.item.sysfee) }} gas
+              </div>
+            </td>
+            <td class="hometxcontent hometxcontentright">
+              <div>{{ row.item.size }} {{ $t("bytes") }}</div>
+            </td>
+            <td class="hometxcontent hometxcontentright">
+              <div
+                class="timeago"
+                :datetime="convertISOTime(row.item.blocktime).toString()"
+              ></div>
+            </td>
+          </template>
+        </base-table>
+      </div>
     </div>
   </div>
 </template>

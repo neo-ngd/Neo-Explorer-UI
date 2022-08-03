@@ -1,68 +1,70 @@
 <template>
-  <div
-    class="card-header border-0"
-    :class="type === 'dark' ? 'bg-transparent' : ''"
-  >
-    <div class="row align-items-center">
-      <div class="col">
-        <h3
-          class="mb-0 homeblocktitle"
-          :class="type === 'dark' ? 'text-white' : ''"
-        >
-          {{ title }}
-        </h3>
-      </div>
-      <div class="col text-right">
-        <span class="seeMoreButton" @click="toBlocksTable()"
-          >{{ $t("homePage.more") }}
-        </span>
+  <div>
+    <div
+      class="card-header border-0"
+      :class="type === 'dark' ? 'bg-transparent' : ''"
+    >
+      <div class="row align-items-center">
+        <div class="col">
+          <h3
+            class="mb-0 homeblocktitle"
+            :class="type === 'dark' ? 'text-white' : ''"
+          >
+            {{ title }}
+          </h3>
+        </div>
+        <div class="col text-right">
+          <span class="seeMoreButton" @click="toBlocksTable()"
+            >{{ $t("homePage.more") }}
+          </span>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="card border-0" :class="type === 'dark' ? 'bg-default' : ''">
-    <div class="table-responsive">
-      <base-table
-        class="table align-items-center table-hover hometablelist"
-        :class="type === 'dark' ? 'table-dark' : ''"
-        :thead-classes="type === 'dark' ? 'thead-dark' : 'thead-light'"
-        tbody-classes="list"
-        :data="tableData"
-      >
-        <template v-slot:columns>
-          <th class="hometable">{{ $t("blockinfo.height") }}</th>
-          <th class="hometable">{{ $t("blockinfo.txns") }}</th>
-          <th class="hometable hometableRight">{{ $t("blockinfo.size") }}</th>
-          <th class="hometable hometableRight">{{ $t("blockinfo.time") }}</th>
-        </template>
-        <template v-slot:default="row">
-          <td class="homeblockcontent">
-            <div class="homeblockcontent-word">
-              <router-link
-                class="name mb-0"
-                style="cursor: pointer"
-                :to="'/blockinfo/' + row.item.hash"
-                >{{ row.item.index }}</router-link
-              >
-            </div>
-          </td>
-          <td class="homeblockcontent">
-            <div class="homeblockcontent-word">
-              {{ row.item.transactioncount }} txns
-            </div>
-          </td>
-          <td class="homeblockcontent homeblockcontentright">
-            <div class="homeblockcontent-word">
-              {{ row.item.size }} {{ $t("bytes") }}
-            </div>
-          </td>
-          <td class="homeblockcontent homeblockcontentright">
-            <div
-              class="timeago"
-              :datetime="convertISOTime(row.item.timestamp).toString()"
-            ></div>
-          </td>
-        </template>
-      </base-table>
+    <div class="card border-0" :class="type === 'dark' ? 'bg-default' : ''">
+      <div class="table-responsive">
+        <base-table
+          class="table align-items-center table-hover hometablelist"
+          :class="type === 'dark' ? 'table-dark' : ''"
+          :thead-classes="type === 'dark' ? 'thead-dark' : 'thead-light'"
+          tbody-classes="list"
+          :data="tableData"
+        >
+          <template v-slot:columns>
+            <th class="hometable">{{ $t("blockinfo.height") }}</th>
+            <th class="hometable">{{ $t("blockinfo.txns") }}</th>
+            <th class="hometable hometableRight">{{ $t("blockinfo.size") }}</th>
+            <th class="hometable hometableRight">{{ $t("blockinfo.time") }}</th>
+          </template>
+          <template v-slot:default="row">
+            <td class="homeblockcontent">
+              <div class="homeblockcontent-word">
+                <router-link
+                  class="name mb-0"
+                  style="cursor: pointer"
+                  :to="'/blockinfo/' + row.item.hash"
+                  >{{ row.item.index }}</router-link
+                >
+              </div>
+            </td>
+            <td class="homeblockcontent">
+              <div class="homeblockcontent-word">
+                {{ row.item.transactioncount }} txns
+              </div>
+            </td>
+            <td class="homeblockcontent homeblockcontentright">
+              <div class="homeblockcontent-word">
+                {{ row.item.size }} {{ $t("bytes") }}
+              </div>
+            </td>
+            <td class="homeblockcontent homeblockcontentright">
+              <div
+                class="timeago"
+                :datetime="convertISOTime(row.item.timestamp).toString()"
+              ></div>
+            </td>
+          </template>
+        </base-table>
+      </div>
     </div>
   </div>
 </template>
