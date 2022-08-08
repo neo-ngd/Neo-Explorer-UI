@@ -5,126 +5,12 @@
       class="card"
       :class="type === 'dark' ? 'bg-default' : ''"
     >
-      <!--      <div class="table-responsive">-->
-      <!--        <base-table-->
-      <!--          class="table align-items-center table-hover"-->
-      <!--          :class="type === 'dark' ? 'table-dark' : ''"-->
-      <!--          :thead-classes="type === 'dark' ? 'thead-dark' : 'thead-light'"-->
-      <!--          tbody-classes="list"-->
-      <!--          :data="tableData"-->
-      <!--        >-->
-      <!--          <template v-slot:columns>-->
-      <!--            <th class="tableHeader">-->
-      <!--              {{ $t("transactionTransfer.contract") }}-->
-      <!--            </th>-->
-      <!--            <th class="tableHeader">{{ $t("transactionTransfer.token") }}</th>-->
-      <!--            <th class="tableHeader" style="text-align: center">-->
-      <!--              {{ $t("transactionTransfer.from") }}-->
-      <!--              <el-button type="info" :plain="true" size="small" style="height: 19px;margin-left: 4px" @click="changeFormat(fromButton)">-->
-      <!--                {{fromButton.buttonName}}</el-button>-->
-
-      <!--            </th>-->
-      <!--            <th class="tableHeader " style="text-align: center">{{ $t("transactionTransfer.amount") }}</th>-->
-      <!--            <th class="tableHeader" style="text-align: center">-->
-      <!--              {{ $t("transactionTransfer.to") }}-->
-      <!--              <el-button type="info" :plain="true" size="small" style="height: 19px;margin-left: 4px" @click="changeFormat(toButton)">-->
-      <!--                {{toButton.buttonName}}</el-button>-->
-
-      <!--            </th>-->
-
-      <!--          </template>-->
-
-      <!--          <template v-slot:default="row">-->
-      <!--            <td class="budget">-->
-      <!--              <div class="contract">-->
-      <!--                <router-link-->
-      <!--                  class="  mb-0 table-list-item-blue"-->
-      <!--                  style="cursor: pointer; "-->
-      <!--                  :to="'/contractinfo/' + row.item.contract"-->
-      <!--                  >{{ row.item.contract }}</router-link-->
-      <!--                >-->
-      <!--              </div>-->
-      <!--            </td>-->
-      <!--            <td class="budget">-->
-      <!--              <div class="table-list-item">-->
-      <!--                {{ row.item.tokenname }}-->
-      <!--              </div>-->
-      <!--            </td>-->
-      <!--            <td class="budget" style="text-align: center">-->
-      <!--              <div class="table-list-item">-->
-      <!--                <span class="text-muted" v-if="row.item.from === null">-->
-      <!--                  {{ $t("nullAddress") }}</span-->
-      <!--                >-->
-      <!--                <router-link-->
-      <!--                  class="  mb-0 table-list-item-blue"-->
-      <!--                  v-else-->
-      <!--                  style="cursor: pointer; "-->
-      <!--                  :to="'/accountprofile/' + row.item.from"-->
-      <!--                  >{{-->
-      <!--                    this.fromButton.state-->
-      <!--                      ? scriptHashToAddress(row.item.from)-->
-      <!--                      : row.item.from-->
-      <!--                  }}</router-link-->
-      <!--                >-->
-      <!--              </div>-->
-      <!--            </td>-->
-      <!--            <td class="pt-4" style="text-align: center">-->
-      <!--              <div class="table-list-item mt-2" style="text-align: center">-->
-      <!--                {{ convertToken(row.item.value, row.item.decimals) }}-->
-      <!--                <span v-if="row.item.tokenname==='NeoToken'">Neo</span>-->
-      <!--                <span v-else-if="row.item.tokenname==='GasToken'">Gas</span>-->
-      <!--              </div>-->
-      <!--              <span style="color: #42b983;font-size: 30px">&#10230;</span>-->
-      <!--              <div class="table-list-item">-->
-      <!--                <span-->
-      <!--                    class="text-success"-->
-      <!--                    v-if="-->
-      <!--                    row.item.from === null && row.item.tokenname === 'GasToken'-->
-      <!--                  "-->
-      <!--                    type="primary"-->
-      <!--                >-->
-      <!--                  {{ $t("transferReward") }}-->
-      <!--                </span>-->
-      <!--                <span-->
-      <!--                    class="text-success"-->
-      <!--                    v-else-if="row.item.from === null"-->
-      <!--                    type="primary"-->
-      <!--                >{{ $t("mint") }}</span-->
-      <!--                >-->
-      <!--                <span class="text-danger" v-else-if="row.item.to === null">-->
-      <!--                  {{ $t("burn") }}</span-->
-      <!--                >-->
-      <!--                <span v-else style="color: seagreen"> {{ $t("transfer") }}</span>-->
-      <!--              </div>-->
-      <!--            </td>-->
-      <!--            <td class="budget" style="text-align: center">-->
-      <!--              <div class="table-list-item">-->
-      <!--                <span class="text-muted" v-if="row.item.to === null">-->
-      <!--                  {{ $t("nullAddress") }}</span-->
-      <!--                >-->
-      <!--                <router-link-->
-      <!--                  v-else-->
-      <!--                  class="  mb-0 table-list-item-blue"-->
-      <!--                  style="cursor: pointer ; "-->
-      <!--                  :to="'/accountprofile/' + row.item.to"-->
-      <!--                  >{{-->
-      <!--                    this.toButton.state-->
-      <!--                      ? scriptHashToAddress(row.item.to)-->
-      <!--                      : row.item.to-->
-      <!--                  }}</router-link-->
-      <!--                >-->
-      <!--              </div>-->
-      <!--            </td>-->
-
-      <!--          </template>-->
-      <!--        </base-table>-->
-      <!--      </div>-->
-
-      <div class="devicelg" style="background-color: #f7f8fa; width: 100%">
+      <!-- long screen -->
+      <div class="devicelg" style="width: 100%">
         <div
-          class="left"
+          class="left-trans"
           style="
-            width: 48.5%;
+            width: 50%;
             background-color: white;
             border-radius: 10px;
             float: left;
@@ -136,7 +22,8 @@
               width: 100%;
               display: block;
               line-height: 60px;
-              text-align: center;
+              text-align: left;
+              padding-left: 5%;
             "
           >
             {{ $t("transactionTransfer.from") }}
@@ -152,10 +39,9 @@
               v-if="item.from !== null"
               style="
                 height: 80px;
-                text-align: center;
+                text-align: left;
                 padding-top: 20px;
-                padding-left: 10%;
-                padding-right: 10%;
+                padding-left: 5%;
               "
             >
               <span class="text-muted" v-if="item.from === null">
@@ -170,84 +56,26 @@
               >
               <router-link
                 class="table-list-item mt-2"
-                style="display: block; text-align: center; cursor: pointer"
+                style="text-align: center; cursor: pointer; color: #f53f3f"
                 :to="'/contractinfo/' + item['contract']"
               >
                 [{{ convertToken(item.value, item.decimals) }}
-                <span v-if="item.symbol === 'NEO'" style="color: #2dce89"
+                <span v-if="item.symbol === 'NEO'" style="color: #f53f3f"
                   >NEO</span
                 >
-                <span
-                  v-else-if="item.symbol === 'GAS'"
-                  style="color: darkorange"
+                <span v-else-if="item.symbol === 'GAS'" style="color: #f53f3f"
                   >GAS</span
                 >
-                <span v-else>{{ item.symbol }}</span
+                <span v-else style="color: #f53f3f">{{ item.symbol }}</span
                 >]
               </router-link>
             </div>
-            <div
-              class="table-list-item padding"
-              v-else
-              style="
-                height: 80px;
-                text-align: center;
-                padding-top: 20px;
-                padding-left: 10%;
-                padding-right: 10%;
-              "
-            ></div>
-          </div>
-        </div>
-        <div class="mid" style="width: 3%; float: left">
-          <div style="height: 60px"></div>
-          <div
-            class="paddingArrow"
-            v-for="index in this.length"
-            :key="index"
-            style="height: 80px; text-align: center"
-          >
-            <svg
-              class="paddingArrow"
-              style="height: 80px"
-              width="30px"
-              height="30px"
-              viewBox="0 0 81 81"
-              xmlns="http://www.w3.org/2000/svg"
-              xmlns:xlink="http://www.w3.org/1999/xlink"
-            >
-              <title>Combined Shape</title>
-              <g
-                id="-1440-desktop-designs"
-                stroke="none"
-                stroke-width="1"
-                fill="none"
-                fill-rule="evenodd"
-                fill-opacity="0.93"
-              >
-                <g
-                  id="Desktop--1440px-Invocation-information"
-                  transform="translate(-736.000000, -377.000000)"
-                  fill="#7D9FB1"
-                >
-                  <g
-                    id="Invocation-expanded"
-                    transform="translate(175.000000, 353.000000)"
-                  >
-                    <path
-                      d="M601.5,24 C623.867532,24 642,42.1324676 642,64.5 C642,86.8675324 623.867532,105 601.5,105 C579.132468,105 561,86.8675324 561,64.5 C561,42.1324676 579.132468,24 601.5,24 Z M601.355881,46.4210802 L598.093181,49.68378 L610.978081,62.6239794 L582.885682,62.6239794 L582.885682,67.1585792 L610.978081,67.1585792 L598.093181,80.0987785 L601.355881,83.3614784 L619.82608,64.8912793 L601.355881,46.4210802 Z"
-                      id="Combined-Shape"
-                    ></path>
-                  </g>
-                </g>
-              </g>
-            </svg>
           </div>
         </div>
         <div
-          class="right"
+          class="right-trans"
           style="
-            width: 48.5%;
+            width: 50%;
             background-color: white;
             border-radius: 10px;
             float: right;
@@ -259,7 +87,8 @@
               width: 100%;
               display: block;
               line-height: 60px;
-              text-align: center;
+              text-align: left;
+              padding-left: 5%;
             "
           >
             {{ $t("transactionTransfer.to") }}
@@ -274,10 +103,9 @@
               v-if="item.to !== null"
               style="
                 height: 80px;
-                text-align: center;
+                text-align: left;
                 padding-top: 20px;
-                padding-left: 10%;
-                padding-right: 10%;
+                padding-left: 5%;
               "
             >
               <span class="text-muted" v-if="item.to === null">
@@ -293,16 +121,14 @@
               </router-link>
               <router-link
                 class="table-list-item mt-2"
-                style="display: block; text-align: center; cursor: pointer"
+                style="text-align: center; cursor: pointer; color: #00b42a"
                 :to="'/contractinfo/' + item['contract']"
               >
                 [{{ convertToken(item.value, item.decimals) }}
-                <span v-if="item.symbol === 'NEO'" style="color: #2dce89"
+                <span v-if="item.symbol === 'NEO'" style="color: #00b42a"
                   >NEO</span
                 >
-                <span
-                  v-else-if="item.symbol === 'GAS'"
-                  style="color: darkorange"
+                <span v-else-if="item.symbol === 'GAS'" style="color: #00b42a"
                   >GAS</span
                 >
                 <span v-else>{{ item.symbol }}</span
@@ -323,13 +149,14 @@
           </div>
         </div>
       </div>
+      <!-- small screen -->
       <div
         class="devicesm"
         style="background-color: #f7f8fa; width: 100%; display: none"
       >
         <div
           style="
-            width: 47%;
+            width: 50%;
             background-color: white;
             border-radius: 10px;
             float: left;
@@ -373,18 +200,21 @@
                 :to="'/accountprofile/' + item.from"
                 >{{ scriptHashToAddress(item.from) }}</router-link
               >
-              <div class="table-list-item mt-2" style="text-align: center">
+              <div
+                class="table-list-item mt-2"
+                style="text-align: center; color: #f53f3f"
+              >
                 [{{ convertToken(item.value, item.decimals) }}]
               </div>
               <router-link
                 v-if="item.symbol === 'NEO'"
-                style="color: #2dce89; cursor: pointer"
+                style="color: #f53f3f; cursor: pointer"
                 :to="'/contractinfo/' + item['contract']"
                 >NEO</router-link
               >
               <router-link
                 v-else-if="item.symbol === 'GAS'"
-                style="color: darkorange; cursor: pointer"
+                style="color: #f53f3f; cursor: pointer"
                 :to="'/contractinfo/' + item['contract']"
                 >GAS</router-link
               >
@@ -407,54 +237,9 @@
             ></div>
           </div>
         </div>
-        <div style="width: 6%; float: left">
-          <p style="height: 60px"></p>
-          <div
-            class=""
-            v-for="index in this.length"
-            :key="index"
-            style="height: 170px; text-align: center"
-          >
-            <svg
-              class=""
-              style="height: 170px"
-              width="17px"
-              height="17px"
-              viewBox="0 0 81 81"
-              xmlns="http://www.w3.org/2000/svg"
-              xmlns:xlink="http://www.w3.org/1999/xlink"
-            >
-              <title>Combined Shape</title>
-              <g
-                id="-1440-desktop-designs"
-                stroke="none"
-                stroke-width="1"
-                fill="none"
-                fill-rule="evenodd"
-                fill-opacity="0.93"
-              >
-                <g
-                  id="Desktop--1440px-Invocation-information"
-                  transform="translate(-736.000000, -377.000000)"
-                  fill="#7D9FB1"
-                >
-                  <g
-                    id="Invocation-expanded"
-                    transform="translate(175.000000, 353.000000)"
-                  >
-                    <path
-                      d="M601.5,24 C623.867532,24 642,42.1324676 642,64.5 C642,86.8675324 623.867532,105 601.5,105 C579.132468,105 561,86.8675324 561,64.5 C561,42.1324676 579.132468,24 601.5,24 Z M601.355881,46.4210802 L598.093181,49.68378 L610.978081,62.6239794 L582.885682,62.6239794 L582.885682,67.1585792 L610.978081,67.1585792 L598.093181,80.0987785 L601.355881,83.3614784 L619.82608,64.8912793 L601.355881,46.4210802 Z"
-                      id="Combined-Shape"
-                    ></path>
-                  </g>
-                </g>
-              </g>
-            </svg>
-          </div>
-        </div>
         <div
           style="
-            width: 47%;
+            width: 50%;
             background-color: white;
             border-radius: 10px;
             float: right;
@@ -500,20 +285,25 @@
               </router-link>
               <router-link
                 class="table-list-item mt-2"
-                style="display: block; text-align: center; cursor: pointer"
+                style="
+                  display: block;
+                  text-align: center;
+                  cursor: pointer;
+                  color: #00b42a;
+                "
                 :to="'/contractinfo/' + item['contract']"
               >
                 [{{ convertToken(item.value, item.decimals) }}]
               </router-link>
               <router-link
                 v-if="item.symbol === 'NEO'"
-                style="color: #2dce89; cursor: pointer"
+                style="color: #00b42a; cursor: pointer"
                 :to="'/contractinfo/' + item['contract']"
                 >NEO</router-link
               >
               <router-link
                 v-else-if="item.symbol === 'GAS'"
-                style="color: darkorange; cursor: pointer"
+                style="color: #00b42a; cursor: pointer"
                 :to="'/contractinfo/' + item['contract']"
                 >GAS</router-link
               >
@@ -657,14 +447,13 @@ export default {
 }
 
 @media screen and (max-width: 1300px) {
-  .left {
-    width: 47% !important;
+  .left-trans {
+    width: 50% !important;
+    border: none;
   }
-  .right {
-    width: 47% !important;
-  }
-  .mid {
-    width: 6% !important;
+  .right-trans {
+    width: 50% !important;
+    border: none;
   }
 }
 @media screen and (max-width: 650px) {
