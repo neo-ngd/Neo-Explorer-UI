@@ -264,38 +264,47 @@
                       ]"
                       :key="index"
                     >
-                      <div class="row">
-                        <div class="col-lg-2">
-                          <div class="text-muted">
-                            {{ $t("transactionInfo.eventName") }}:
+                      <div>
+                        <div>
+                          <div class="text-muted-left">
+                            {{ $t("transactionInfo.eventName") }}
                           </div>
-                          {{ item["eventname"] }}
-                        </div>
-                        <div class="col-lg-1">
-                          <div class="text-muted">
-                            {{ $t("transactionInfo.vmState") }}:
+                          <div class="text-muted-right">
+                            {{ item["eventname"] }}
                           </div>
-                          {{ item["Vmstate"] }}
                         </div>
-                        <div class="col-lg-4">
-                          <div class="text-muted">
-                            {{ $t("transactionInfo.contract") }}:
+                        <div>
+                          <div class="text-muted-left">
+                            {{ $t("transactionInfo.vmState") }}
                           </div>
-                          <router-link
-                            class="name mb-0 text-sm"
-                            style="cursor: pointer"
-                            :to="'/contractinfo/' + item['contract']"
-                          >
-                            {{ item["contract"] }}
-                          </router-link>
+                          <div class="text-muted-right">
+                            {{ item["Vmstate"] }}
+                          </div>
                         </div>
-                        <div class="col-lg-5">
+                        <div>
+                          <div class="text-muted-left">
+                            {{ $t("transactionInfo.contract") }}
+                          </div>
+                          <div class="text-muted-right">
+                            <router-link
+                              class="name mb-0 text-sm"
+                              style="cursor: pointer"
+                              :to="'/contractinfo/' + item['contract']"
+                            >
+                              {{ item["contract"] }}
+                            </router-link>
+                          </div>
+                        </div>
+                        <div>
                           <div class="params">
-                            <div class="text-muted">
-                              {{ $t("transactionInfo.State") }}:
+                            <div class="text-muted-left">
+                              {{ $t("transactionInfo.State") }}
                             </div>
-                            <div v-if="item['state'].length !== 0">
-                              <li
+                            <div
+                              class="text-muted-right"
+                              v-if="item['state'].length !== 0"
+                            >
+                              <span
                                 v-for="(param, ind) in item['state']['value']"
                                 :key="ind"
                               >
@@ -310,12 +319,17 @@
                                       .get(item['eventname'])[ind] === 'Hash160'
                                   "
                                 >
-                                  {{ param["type"] }}:
-                                  {{
-                                    param["value"] === null
-                                      ? "Null"
-                                      : base64ToHash(param["value"])
-                                  }}
+                                  <span class="text-muted"
+                                    >{{ param["type"] }}-</span
+                                  >
+                                  <span>
+                                    {{
+                                      param["value"] === null
+                                        ? "Null"
+                                        : base64ToHash(param["value"])
+                                    }}
+                                  </span>
+                                  <br />
                                 </span>
                                 <span
                                   v-else-if="
@@ -328,12 +342,17 @@
                                       .get(item['eventname'])[ind] === 'String'
                                   "
                                 >
-                                  {{ param["type"] }}:
-                                  {{
-                                    param["value"] === null
-                                      ? "Null"
-                                      : base64ToString(param["value"])
-                                  }}
+                                  <span class="text-muted"
+                                    >{{ param["type"] }}-</span
+                                  >
+                                  <span>
+                                    {{
+                                      param["value"] === null
+                                        ? "Null"
+                                        : base64ToString(param["value"])
+                                    }}</span
+                                  >
+                                  <br />
                                 </span>
                                 <span
                                   v-else-if="
@@ -346,12 +365,17 @@
                                       .get(item['eventname'])[ind] === 'Array'
                                   "
                                 >
-                                  {{ param["type"] }}:
-                                  {{
-                                    param["value"] === null
-                                      ? "Null"
-                                      : base64ToByteArray(param["value"])
-                                  }}
+                                  <span class="v-else-if">
+                                    {{ param["type"] }} -
+                                  </span>
+                                  <span>
+                                    {{
+                                      param["value"] === null
+                                        ? "Null"
+                                        : base64ToByteArray(param["value"])
+                                    }}
+                                  </span>
+                                  <br />
                                 </span>
                                 <span
                                   v-else-if="
@@ -365,17 +389,25 @@
                                       'ByteArray'
                                   "
                                 >
-                                  {{ param["type"] }}:
-                                  {{
-                                    param["value"] === null
-                                      ? "Null"
-                                      : base64ToByteArray(param["value"])
-                                  }}
+                                  <span class="text-muted"
+                                    >{{ param["type"] }}-</span
+                                  >
+                                  <span>
+                                    {{
+                                      param["value"] === null
+                                        ? "Null"
+                                        : base64ToByteArray(param["value"])
+                                    }}</span
+                                  >
+                                  <br />
                                 </span>
                                 <span v-else>
-                                  {{ param["type"] }}: {{ param["value"] }}
+                                  <span class="text-muted"
+                                    >{{ param["type"] }}-</span
+                                  >
+                                  {{ param["value"] }}
                                 </span>
-                              </li>
+                              </span>
                             </div>
                           </div>
                         </div>
@@ -407,53 +439,62 @@
                       v-for="(item, index) in this.tabledataCall['result']"
                       :key="index"
                     >
-                      <div class="row">
-                        <div class="col-lg-2">
-                          <div class="text-muted">
+                      <div>
+                        <div>
+                          <div class="text-muted-left">
                             {{ $t("transactionInfo.method") }}:
                           </div>
-                          {{ item["method"] }}
+                          <div class="text-muted-right">
+                            {{ item["method"] }}
+                          </div>
                         </div>
-                        <div class="col-lg-4">
-                          <div class="text-muted">
+                        <div>
+                          <div class="text-muted-left">
                             {{ $t("transactionInfo.originSender") }}:
                           </div>
-                          <router-link
-                            class="name mb-0 text-sm"
-                            style="cursor: pointer"
-                            :to="'/accountprofile/' + item['originSender']"
-                          >
-                            {{ item["originSender"] }}
-                          </router-link>
+                          <div class="text-muted-right">
+                            <router-link
+                              class="name mb-0 text-sm"
+                              style="cursor: pointer"
+                              :to="'/accountprofile/' + item['originSender']"
+                            >
+                              {{ item["originSender"] }}
+                            </router-link>
+                          </div>
                         </div>
-                        <div class="col-lg-4">
-                          <div class="text-muted">
+                        <div>
+                          <div class="text-muted-left">
                             {{ $t("transactionInfo.contract") }}:
                           </div>
-                          <router-link
-                            class="name mb-0 text-sm"
-                            style="cursor: pointer"
-                            :to="'/contractinfo/' + item['contractHash']"
-                          >
-                            {{ item["contractHash"] }}
-                          </router-link>
+                          <div class="text-muted-right">
+                            <router-link
+                              class="name mb-0 text-sm"
+                              style="cursor: pointer"
+                              :to="'/contractinfo/' + item['contractHash']"
+                            >
+                              {{ item["contractHash"] }}
+                            </router-link>
+                          </div>
                         </div>
-                        <div class="col-lg-2">
-                          <div class="text-muted">
+                        <div>
+                          <div class="text-muted-left">
                             {{ $t("transactionInfo.callFlags") }}:
                           </div>
-                          {{ item["callFlags"] }}
+                          <div class="text-muted-right">
+                            {{ item["callFlags"] }}
+                          </div>
                         </div>
                       </div>
-                      <div class="row mt-3"></div>
-                      <div class="row">
-                        <div class="col">
-                          <div class="text-muted">
+                      <div>
+                        <div>
+                          <div class="text-muted-left">
                             {{ $t("transactionInfo.params") }}:
                           </div>
-                          <div v-if="List[index] && List[index]['key']">
-                            <li
-                              class="col-12"
+                          <div
+                            class="text-muted-right"
+                            v-if="List[index] && List[index]['key']"
+                          >
+                            <span
                               v-for="(param, ind) in item['hexStringParams']"
                               :key="ind"
                             >
@@ -463,10 +504,13 @@
                                   List[index]['key'][ind]['type'] === 'Hash160'
                                 "
                               >
-                                {{ List[index]["key"][ind]["name"] }}:
+                                <span class="text-muted"
+                                  >{{ List[index]["key"][ind]["name"] }}-</span
+                                >
                                 {{
                                   param === "" ? "null" : this.hexToHash(param)
                                 }}
+                                <br />
                               </span>
                               <span
                                 v-else-if="
@@ -476,12 +520,15 @@
                                   List[index]['key'][ind]['type'] === 'String'
                                 "
                               >
-                                {{ List[index]["key"][ind]["name"] }}:
+                                <span class="text-muted"
+                                  >{{ List[index]["key"][ind]["name"] }}-</span
+                                >
                                 {{
                                   param === ""
                                     ? "null"
                                     : this.hexToString(param)
                                 }}
+                                <br />
                               </span>
                               <span
                                 v-else-if="
@@ -491,25 +538,30 @@
                                   List[index]['key'][ind]['type'] === 'Integer'
                                 "
                               >
-                                {{ List[index]["key"][ind]["name"] }}:
+                                <span class="text-muted"
+                                  >{{ List[index]["key"][ind]["name"] }}-</span
+                                >
                                 {{
                                   param === ""
                                     ? "null"
                                     : this.hexToInteger(param)
                                 }}
+                                <br />
                               </span>
                               <span v-else>
                                 <span
+                                  class="text-muted"
                                   v-if="
                                     List[index] &&
                                     List[index]['key'] &&
                                     List[index]['key'][ind]
                                   "
-                                  >{{ List[index]["key"][ind]["name"] }}:</span
+                                  >{{ List[index]["key"][ind]["name"] }}-</span
                                 >
                                 {{ param === "" ? "null" : param }}
+                                <br />
                               </span>
-                            </li>
+                            </span>
                           </div>
                         </div>
                       </div>
@@ -980,6 +1032,34 @@ export default {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 10;
+}
+.text-muted-left {
+  display: inline-block;
+  width: 50%;
+  color: #86909c;
+  vertical-align: top;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+}
+.text-muted-right {
+  width: 50%;
+  display: inline-block;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+}
+.text-muted {
+  color: #86909c;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
 }
 @media screen and (max-width: 790px) {
   .info {
