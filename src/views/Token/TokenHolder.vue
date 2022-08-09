@@ -21,9 +21,15 @@
           <th class="tableHeader">{{ $t("tokenHolder.ranking") }}</th>
           <th class="tableHeader">
             {{ $t("tokenHolder.address") }}
-            <el-button type="info" :plain="true" size="small" style="height: 21px;margin-left: 4px" @click="changeFormat(button)">
-              {{this.button.buttonName}}</el-button>
-
+            <el-button
+              type="info"
+              :plain="true"
+              size="small"
+              style="height: 21px; margin-left: 4px"
+              @click="changeFormat(button)"
+            >
+              {{ this.button.buttonName }}</el-button
+            >
           </th>
           <th class="tableHeader">{{ $t("tokenHolder.balance") }}</th>
           <!--          <th>Last Transferred</th>-->
@@ -34,39 +40,66 @@
           <th scope="row">
             <div class="media align-items-center">
               <div class="media-body">
-                <div v-if="row.index + (pagination - 1) * this.resultsPerPage === 0">
-                  {{ row.index + (this.pagination - 1) * this.resultsPerPage + 1 }} &#129351;
+                <div
+                  v-if="
+                    row.index + (pagination - 1) * this.resultsPerPage === 0
+                  "
+                >
+                  {{
+                    row.index + (this.pagination - 1) * this.resultsPerPage + 1
+                  }}
+                  &#129351;
                 </div>
-                <div v-else-if="row.index + (pagination - 1) * this.resultsPerPage === 1">
-                  {{ row.index + (this.pagination - 1) * this.resultsPerPage + 1 }} &#129352;
+                <div
+                  v-else-if="
+                    row.index + (pagination - 1) * this.resultsPerPage === 1
+                  "
+                >
+                  {{
+                    row.index + (this.pagination - 1) * this.resultsPerPage + 1
+                  }}
+                  &#129352;
                 </div>
-                <div v-else-if="row.index + (pagination - 1) * this.resultsPerPage === 2">
-                  {{ row.index + (this.pagination - 1) * this.resultsPerPage + 1 }} &#129353;
+                <div
+                  v-else-if="
+                    row.index + (pagination - 1) * this.resultsPerPage === 2
+                  "
+                >
+                  {{
+                    row.index + (this.pagination - 1) * this.resultsPerPage + 1
+                  }}
+                  &#129353;
                 </div>
-                <div v-else>{{ row.index + (pagination - 1) * this.resultsPerPage + 1 }}</div>
+                <div v-else>
+                  {{ row.index + (pagination - 1) * this.resultsPerPage + 1 }}
+                </div>
               </div>
             </div>
           </th>
-          <td class="Address ">
+          <td class="Address">
             <div class="short">
               <router-link
-                  v-if="button.state"
-                  class="  mb-0 table-list-item-blue"
-                  style="cursor: pointer;"
-                  :to="'/accountprofile/'+row.item.address"
-              >{{ scriptHashToAddress(row.item.address) }}</router-link>
+                v-if="button.state"
+                class="mb-0 table-list-item-blue"
+                style="cursor: pointer"
+                :to="'/accountprofile/' + row.item.address"
+                >{{ scriptHashToAddress(row.item.address) }}</router-link
+              >
               <router-link
-                  v-else
-                  class="  mb-0 table-list-item-blue"
-                  style="cursor: pointer;"
-                  :to="'/accountprofile/'+row.item.address"
-              >{{ row.item.address }}
+                v-else
+                class="mb-0 table-list-item-blue"
+                style="cursor: pointer"
+                :to="'/accountprofile/' + row.item.address"
+                >{{ row.item.address }}
               </router-link>
               <span
-                  v-if="row.item.address === '0x0000000000000000000000000000000000000000'"
-              >（Null Address) </span>
+                v-if="
+                  row.item.address ===
+                  '0x0000000000000000000000000000000000000000'
+                "
+                >（Null Address)
+              </span>
             </div>
-
           </td>
           <td class="table-list-item">
             {{ convertToken(row.item.balance, this.decimal) }}
@@ -81,30 +114,33 @@
       </base-table>
     </div>
 
-    <div v-if="totalCount>=10"
-            class="card-footer d-flex justify-content-end"
-            :class="type === 'dark' ? 'bg-transparent' : ''"
-            style="height: 70px"
+    <div
+      v-if="totalCount >= 10"
+      class="card-footer d-flex justify-content-end"
+      :class="type === 'dark' ? 'bg-transparent' : ''"
+      style="height: 70px"
     >
       <el-pagination
-          v-if="windowWidth > 552"
-          @current-change="handleCurrentChange"
-          :hide-on-single-page="totalCount<=10"
-          :current-page="parseInt(pagination)"
-          :pager-count= "5"
-          :page-size= "10"
-          layout="jumper, prev, pager, next"
-          :total="totalCount">
+        v-if="windowWidth > 552"
+        @current-change="handleCurrentChange"
+        :hide-on-single-page="totalCount <= 10"
+        :current-page="parseInt(pagination)"
+        :pager-count="5"
+        :page-size="10"
+        layout="jumper, prev, pager, next"
+        :total="totalCount"
+      >
       </el-pagination>
       <el-pagination
-          v-if="windowWidth < 552"
-          small ="true"
-          @current-change="handleCurrentChange"
-          :hide-on-single-page="totalCount<=10"
-          :current-page="parseInt(pagination)"
-          :pager-count= "5"
-          layout="prev,pager,next"
-          :total="totalCount">
+        v-if="windowWidth < 552"
+        small="true"
+        @current-change="handleCurrentChange"
+        :hide-on-single-page="totalCount <= 10"
+        :current-page="parseInt(pagination)"
+        :pager-count="5"
+        layout="prev,pager,next"
+        :total="totalCount"
+      >
       </el-pagination>
     </div>
   </div>
@@ -116,7 +152,11 @@
 import axios from "axios";
 import Loading from "vue-loading-overlay";
 import "vue-loading-overlay/dist/vue-loading.css";
-import { convertToken, scriptHashToAddress, changeFormat} from "../../store/util";
+import {
+  convertToken,
+  scriptHashToAddress,
+  changeFormat,
+} from "../../store/util";
 import net from "../../store/store";
 
 export default {
@@ -141,7 +181,7 @@ export default {
       isLoading: true,
       countPage: 0,
       button: { state: true, buttonName: "Hash" },
-      windowWidth:window.innerWidth,
+      windowWidth: window.innerWidth,
     };
   },
   created() {
@@ -160,7 +200,7 @@ export default {
     handleCurrentChange(val) {
       this.isLoading = true;
       this.pagination = val;
-      this.getTokenList((this.pagination-1)*this.resultsPerPage)
+      this.getTokenList((this.pagination - 1) * this.resultsPerPage);
     },
     toPercentage(num) {
       let s = Number(num * 100).toFixed(2);

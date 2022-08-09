@@ -14,45 +14,69 @@
       >
         <template v-slot:columns>
           <th class="tableHeader" style="text-align: center">
-            {{ $t("tokenTx.from")
-            }}
-            <el-button type="info" :plain="true" size="small" style="height: 21px;margin-left: 4px" @click="changeFormat(fromButton)">
-              {{this.fromButton.buttonName}}</el-button>
-
+            {{ $t("tokenTx.from") }}
+            <el-button
+              type="info"
+              :plain="true"
+              size="small"
+              style="height: 21px; margin-left: 4px"
+              @click="changeFormat(fromButton)"
+            >
+              {{ this.fromButton.buttonName }}</el-button
+            >
           </th>
-          <th class="tableHeader" style="text-align: center">{{ $t("tokenTx.amount") }}</th>
+          <th class="tableHeader" style="text-align: center">
+            {{ $t("tokenTx.amount") }}
+          </th>
           <th class="tableHeader" style="text-align: center">
             {{ $t("tokenTx.to") }}
-            <span>       </span>
-            <el-button type="info" :plain="true" size="small" style="height: 21px;margin-left: 4px" @click="changeFormat(toButton)">
-              {{this.toButton.buttonName}}</el-button>
+            <span> </span>
+            <el-button
+              type="info"
+              :plain="true"
+              size="small"
+              style="height: 21px; margin-left: 4px"
+              @click="changeFormat(toButton)"
+            >
+              {{ this.toButton.buttonName }}</el-button
+            >
           </th>
 
-          <th class="tableHeader">{{ $t("tokenTx.time") }}
-            <el-button type="info" :plain="true" size="small" style="height: 19px;margin-left: 4px" @click="switchTime(time)">
-              Format</el-button>
+          <th class="tableHeader">
+            {{ $t("tokenTx.time") }}
+            <el-button
+              type="info"
+              :plain="true"
+              size="small"
+              style="height: 19px; margin-left: 4px"
+              @click="switchTime(time)"
+            >
+              Format</el-button
+            >
           </th>
         </template>
 
         <template v-slot:default="row">
           <td class="table-list-item" style="text-align: center">
-            <div >
+            <div>
               <div class="text-muted short" v-if="row.item.from === null">
                 {{ $t("nullAddress") }}
               </div>
-              <div class="short" v-else-if="fromButton.state" >
+              <div class="short" v-else-if="fromButton.state">
                 <router-link
-                  class=" mb-0 table-list-item-blue"
-                  style="cursor: pointer;"
-                  :to="'/accountprofile/'+row.item.from"
-                  >{{ scriptHashToAddress(row.item.from) }}</router-link>
+                  class="mb-0 table-list-item-blue"
+                  style="cursor: pointer"
+                  :to="'/accountprofile/' + row.item.from"
+                  >{{ scriptHashToAddress(row.item.from) }}</router-link
+                >
               </div>
-              <div v-else class="short" >
+              <div v-else class="short">
                 <router-link
-                  class=" mb-0 table-list-item-blue"
-                  style="cursor: pointer;"
-                  :to="'/accountprofile/'+row.item.from"
-                  >{{ row.item.from }}</router-link>
+                  class="mb-0 table-list-item-blue"
+                  style="cursor: pointer"
+                  :to="'/accountprofile/' + row.item.from"
+                  >{{ row.item.from }}</router-link
+                >
               </div>
             </div>
           </td>
@@ -60,87 +84,99 @@
             <div class="table-list-item mt-2" style="text-align: center">
               {{ convertToken(row.item.value, 8) }} GAS
             </div>
-            <span style="color: #42b983;font-size: 30px">&#10230;</span>
+            <span style="color: #42b983; font-size: 30px">&#10230;</span>
             <div class="table-list-item">
               <span
-                  class="text-primary"
-                  v-if="row.item.from === null && row.item.value === '50000000'"
-                  type="primary"
-              >{{ $t("blockReward") }}</span
+                class="text-primary"
+                v-if="row.item.from === null && row.item.value === '50000000'"
+                type="primary"
+                >{{ $t("blockReward") }}</span
               >
               <span
-                  class="text-warning"
-                  v-else-if="row.item.from === null"
-                  type="primary"
-              >{{ $t("networkFeeReward") }}</span
+                class="text-warning"
+                v-else-if="row.item.from === null"
+                type="primary"
+                >{{ $t("networkFeeReward") }}</span
               >
               <span class="text-danger" v-else type="primary">{{
-                  $t("feeBurn")
-                }}</span>
+                $t("feeBurn")
+              }}</span>
             </div>
-
           </td>
           <td class="table-list-item" style="text-align: center">
-
-              <div class="short text-muted" v-if="row.item.to === null">
-                {{ $t("nullAddress") }}
-              </div>
-              <div class="short" v-else-if="toButton.state" >
-                <router-link
-                  class=" mb-0 table-list-item-blue"
-                  style="cursor: pointer;"
-                  :to="'/accountprofile/'+row.item.to"
-                  >{{ scriptHashToAddress(row.item.to) }}</router-link
-                >
-              </div>
-              <div  v-else class="short">
-                <router-link
-                  class=" mb-0 table-list-item-blue"
-                  style="cursor: pointer;"
-                  :to="'/accountprofile/'+row.item.to"
-                  >{{ row.item.to }}</router-link>
-              </div>
+            <div class="short text-muted" v-if="row.item.to === null">
+              {{ $t("nullAddress") }}
+            </div>
+            <div class="short" v-else-if="toButton.state">
+              <router-link
+                class="mb-0 table-list-item-blue"
+                style="cursor: pointer"
+                :to="'/accountprofile/' + row.item.to"
+                >{{ scriptHashToAddress(row.item.to) }}</router-link
+              >
+            </div>
+            <div v-else class="short">
+              <router-link
+                class="mb-0 table-list-item-blue"
+                style="cursor: pointer"
+                :to="'/accountprofile/' + row.item.to"
+                >{{ row.item.to }}</router-link
+              >
+            </div>
           </td>
 
           <td class="table-list-item">
-            {{time.state? this.convertTime(row.item.timestamp, this.$i18n.locale):this.convertISOTime(row.item.timestamp) }}
+            {{
+              time.state
+                ? this.convertTime(row.item.timestamp, this.$i18n.locale)
+                : this.convertISOTime(row.item.timestamp)
+            }}
           </td>
         </template>
       </base-table>
     </div>
 
-    <div v-if="totalCount>=10"
-            class="card-footer d-flex justify-content-end"
-            :class="type === 'dark' ? 'bg-transparent' : ''"
-            style="height: 70px"
+    <div
+      v-if="totalCount >= 10"
+      class="card-footer d-flex justify-content-end"
+      :class="type === 'dark' ? 'bg-transparent' : ''"
+      style="height: 70px"
     >
       <el-pagination
-          v-if="windowWidth > 552"
-          @current-change="handleCurrentChange"
-          :hide-on-single-page="totalCount<=10"
-          :current-page="parseInt(pagination)"
-          :pager-count= "5"
-          :page-size= "10"
-          layout="jumper, prev, pager, next"
-          :total="totalCount">
+        v-if="windowWidth > 552"
+        @current-change="handleCurrentChange"
+        :hide-on-single-page="totalCount <= 10"
+        :current-page="parseInt(pagination)"
+        :pager-count="5"
+        :page-size="10"
+        layout="jumper, prev, pager, next"
+        :total="totalCount"
+      >
       </el-pagination>
       <el-pagination
-          v-if="windowWidth < 552"
-          small ="true"
-          @current-change="handleCurrentChange"
-          :hide-on-single-page="totalCount<=10"
-          :current-page="parseInt(pagination)"
-          :pager-count= "5"
-          layout="prev,pager,next"
-          :total="totalCount">
+        v-if="windowWidth < 552"
+        small="true"
+        @current-change="handleCurrentChange"
+        :hide-on-single-page="totalCount <= 10"
+        :current-page="parseInt(pagination)"
+        :pager-count="5"
+        layout="prev,pager,next"
+        :total="totalCount"
+      >
       </el-pagination>
     </div>
   </div>
-
 </template>
 <script>
 import axios from "axios";
-import {changeFormat, convertTime, convertToken, scriptHashToAddress,convertISOTime,switchTime} from "../../store/util";
+import {
+  changeFormat,
+  convertTime,
+  convertToken,
+  scriptHashToAddress,
+  convertISOTime,
+  switchTime,
+} from "../../store/util";
 import net from "../../store/store";
 
 export default {
@@ -155,7 +191,7 @@ export default {
 
   data() {
     return {
-      time: {state: true},
+      time: { state: true },
       network: net.url,
       NEP17TxList: [],
       totalCount: 0,
@@ -163,9 +199,9 @@ export default {
       pagination: 1,
       isLoading: true,
       countPage: 1,
-      fromButton: {state: true, buttonName: "Hash"},
-      toButton: {state: true, buttonName: "Hash"},
-      windowWidth:window.innerWidth,
+      fromButton: { state: true, buttonName: "Hash" },
+      toButton: { state: true, buttonName: "Hash" },
+      windowWidth: window.innerWidth,
     };
   },
   created() {
@@ -223,6 +259,4 @@ export default {
   },
 };
 </script>
-<style>
-
-</style>
+<style></style>

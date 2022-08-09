@@ -19,17 +19,26 @@
             </th>
             <th class="tableHeader">{{ $t("transactionList.blockHeight") }}</th>
             <th class="tableHeader">{{ $t("transactionList.size") }}</th>
-            <th class="tableHeader">{{ $t("transactionList.time") }}
-              <el-button type="info" :plain="true" size="small" style="height: 19px;margin-left: 4px" @click="switchTime(time)">
-                Format</el-button></th>
+            <th class="tableHeader">
+              {{ $t("transactionList.time") }}
+              <el-button
+                type="info"
+                :plain="true"
+                size="small"
+                style="height: 19px; margin-left: 4px"
+                @click="switchTime(time)"
+              >
+                Format</el-button
+              >
+            </th>
             <th class="tableHeader">{{ $t("transactionList.gasConsumed") }}</th>
           </template>
           <template v-slot:default="row">
             <td>
               <div class="txid">
                 <router-link
-                  class=" mb-0 table-list-item-blue"
-                  style="cursor: pointer; "
+                  class="mb-0 table-list-item-blue"
+                  style="cursor: pointer"
                   :to="'/transactionInfo/' + row.item.hash"
                   >{{ row.item.hash }}</router-link
                 >
@@ -37,15 +46,19 @@
             </td>
             <td class="table-list-item">
               <router-link
-                  class=" mb-0 table-list-item-blue"
-                  style="cursor: pointer; "
-                  :to="'/blockinfo/' + row.item.blockhash"
-              >{{ row.item.blockIndex }}</router-link
+                class="mb-0 table-list-item-blue"
+                style="cursor: pointer"
+                :to="'/blockinfo/' + row.item.blockhash"
+                >{{ row.item.blockIndex }}</router-link
               >
             </td>
             <td class="table-list-item">{{ row.item.size }} bytes</td>
             <td class="table-list-item">
-              {{ time.state?this.convertTime(row.item.blocktime, this.$i18n.locale):this.convertISOTime(row.item.blocktime) }}
+              {{
+                time.state
+                  ? this.convertTime(row.item.blocktime, this.$i18n.locale)
+                  : this.convertISOTime(row.item.blocktime)
+              }}
             </td>
 
             <td class="table-list-item">
@@ -53,30 +66,33 @@
             </td>
           </template>
         </base-table>
-        <div v-if="totalCount>=10"
-                class="card-footer d-flex justify-content-end"
-                :class="type === 'dark' ? 'bg-transparent' : ''"
-                style="height: 70px"
+        <div
+          v-if="totalCount >= 10"
+          class="card-footer d-flex justify-content-end"
+          :class="type === 'dark' ? 'bg-transparent' : ''"
+          style="height: 70px"
         >
           <el-pagination
-              v-if="windowWidth > 552"
-              @current-change="handleCurrentChange"
-              :hide-on-single-page="totalCount<=10"
-              :current-page="parseInt(pagination)"
-              :pager-count= "5"
-              :page-size= "10"
-              layout="jumper, prev, pager, next"
-              :total="totalCount">
+            v-if="windowWidth > 552"
+            @current-change="handleCurrentChange"
+            :hide-on-single-page="totalCount <= 10"
+            :current-page="parseInt(pagination)"
+            :pager-count="5"
+            :page-size="10"
+            layout="jumper, prev, pager, next"
+            :total="totalCount"
+          >
           </el-pagination>
           <el-pagination
-              v-if="windowWidth < 552"
-              small ="true"
-              @current-change="handleCurrentChange"
-              :hide-on-single-page="totalCount<=10"
-              :current-page="parseInt(pagination)"
-              :pager-count= "5"
-              layout="prev,pager,next"
-              :total="totalCount">
+            v-if="windowWidth < 552"
+            small="true"
+            @current-change="handleCurrentChange"
+            :hide-on-single-page="totalCount <= 10"
+            :current-page="parseInt(pagination)"
+            :pager-count="5"
+            layout="prev,pager,next"
+            :total="totalCount"
+          >
           </el-pagination>
         </div>
       </div>
@@ -88,7 +104,12 @@
 </template>
 <script>
 import axios from "axios";
-import { convertTime, convertGas,convertISOTime,switchTime } from "../../store/util";
+import {
+  convertTime,
+  convertGas,
+  convertISOTime,
+  switchTime,
+} from "../../store/util";
 import net from "../../store/store";
 
 export default {
@@ -102,14 +123,14 @@ export default {
 
   data() {
     return {
-      time:{state:true},
+      time: { state: true },
       network: net.url,
       tableData: [],
       totalCount: 0,
       resultsPerPage: 10,
       pagination: 1,
       countPage: 0,
-      windowWidth:window.innerWidth,
+      windowWidth: window.innerWidth,
     };
   },
 
@@ -194,5 +215,4 @@ export default {
   overflow: hidden;
   text-overflow: ellipsis;
 }
-
 </style>

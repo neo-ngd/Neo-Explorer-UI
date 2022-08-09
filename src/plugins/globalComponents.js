@@ -1,4 +1,3 @@
-
 import BaseButton from "../components/BaseButton";
 import BaseDropdown from "../components/BaseDropdown";
 import BaseNav from "../components/BaseNav";
@@ -7,7 +6,6 @@ import BaseTable from "../components/BaseTable";
 import Card from "../components/Card";
 import TabPane from "../components/Tabs/TabPane";
 import Tabs from "../components/Tabs/Tabs";
-
 
 const GlobalComponents = {
   install(app) {
@@ -19,7 +17,6 @@ const GlobalComponents = {
     app.component("card", Card);
     app.component("tab-pane", TabPane);
     app.component("tabs", Tabs);
-
   },
 };
 

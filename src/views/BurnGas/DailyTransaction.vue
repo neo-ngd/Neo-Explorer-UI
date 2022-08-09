@@ -1,80 +1,104 @@
 <template>
-    <div class="map">
-        <div id="main" style="width: 100%; height: 400px; background: white">
-        </div>
-    </div>
+  <div class="map">
+    <div id="main" style="width: 100%; height: 400px; background: white"></div>
+  </div>
 </template>
 
 <script>
-import * as echarts from 'echarts'
+import * as echarts from "echarts";
 import { onMounted } from "vue";
 import axios from "axios";
 
 export default {
-
   created() {
-    this.setup()
+    this.setup();
   },
-
 
   methods: {
     setup() {
       //methods
-      const echartInit = () =>{
-        var myTransactionChart = echarts.init(document.getElementById('main'));
+      const echartInit = () => {
+        var myTransactionChart = echarts.init(document.getElementById("main"));
 
-        var xdata14 =[]
+        var xdata14 = [];
 
-        var xdata30 =[]
+        var xdata30 = [];
 
-        var sdata14 =[0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+        var sdata14 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
-        var sdata30=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+        var sdata30 = [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+        ];
 
+        getDailyTransactions(14);
 
-        getDailyTransactions(14)
+        getDailyTransactions(30);
 
-        getDailyTransactions(30)
-
-
-
-        for (var k = -13; k <= 0 ; k ++) {
-          xdata14.push(getDay(k))
+        for (var k = -13; k <= 0; k++) {
+          xdata14.push(getDay(k));
         }
-        for (var n = - 29; n <=0; n ++) {
-          xdata30.push(getDay(n))
+        for (var n = -29; n <= 0; n++) {
+          xdata30.push(getDay(n));
         }
-        function getDay(day){
+        function getDay(day) {
           var today = new Date();
-          var todayMilliseconds = today.getTime() + 1000 * 60 * 60 *24 * day;
+          var todayMilliseconds = today.getTime() + 1000 * 60 * 60 * 24 * day;
           today.setTime(todayMilliseconds);
-          var tMonth = today.toDateString().split(" ")[1]
-          var tDate = today.toDateString().split(" ")[2]
+          var tMonth = today.toDateString().split(" ")[1];
+          var tDate = today.toDateString().split(" ")[2];
           tMonth = doHandleMonth(tMonth);
           tDate = doHandleMonth(tDate);
-          return tMonth+" " +tDate;
+          return tMonth + " " + tDate;
         }
 
-        function doHandleMonth(month){
+        function doHandleMonth(month) {
           var m = month;
-          if(month.toString().length ==1) {
-            m = "0" +month
+          if (month.toString().length == 1) {
+            m = "0" + month;
           }
           return m;
         }
-        function refreshData(Data,index){
-            var option =myTransactionChart.getOption()
-            option.series[index].data = Data
-            myTransactionChart.setOption(option)
+        function refreshData(Data, index) {
+          var option = myTransactionChart.getOption();
+          option.series[index].data = Data;
+          myTransactionChart.setOption(option);
         }
 
-
-        function getDailyTransactions(day){
+        function getDailyTransactions(day) {
           axios({
             method: "post",
             url: "/api",
             data: {
-              params: {days:day},
+              params: { days: day },
               jsonrpc: "2.0",
               id: 1,
               method: "GetDailyTransactions",
@@ -83,19 +107,18 @@ export default {
               "Content-Type": "application/json",
             },
           }).then((res) => {
-            if(day === 14) {
-              for (var j = 0; j < res["data"]["result"].length; j ++) {
-                sdata14[13-j]= res["data"]["result"][j]["DailyTransactions"]
+            if (day === 14) {
+              for (var j = 0; j < res["data"]["result"].length; j++) {
+                sdata14[13 - j] = res["data"]["result"][j]["DailyTransactions"];
               }
-              refreshData(sdata14,0)
+              refreshData(sdata14, 0);
               //console.log("this is 14 days ")
               // console.log(sdata14)
-            }
-            else {
-              for (var m = 0; m < res["data"]["result"].length; m ++) {
-                sdata30[29-m] = res["data"]["result"][m]["DailyTransactions"]
+            } else {
+              for (var m = 0; m < res["data"]["result"].length; m++) {
+                sdata30[29 - m] = res["data"]["result"][m]["DailyTransactions"];
               }
-              refreshData(sdata30,1)
+              refreshData(sdata30, 1);
               // console.log("this is 30 days")
               // console.log(sdata30)
             }
@@ -104,308 +127,311 @@ export default {
 
         // 指定图表的配置项和数据
         var option = {
-          color:['#0060FF99','#0060FF99'],
-          title: [{
-            left: '6%',
-            text: 'Daily Transaction',
-            top:'4%',
-            textStyle:{
-              color: '#1D2129',
-              fontSize:18
-            }
-          }],
+          color: ["#0060FF99", "#0060FF99"],
+          title: [
+            {
+              left: "6%",
+              text: "Daily Transaction",
+              top: "4%",
+              textStyle: {
+                color: "#1D2129",
+                fontSize: 18,
+              },
+            },
+          ],
           tooltip: {
-            trigger: 'axis'
+            trigger: "axis",
           },
           legend: {
-            icon:'circle',
-            data: ['Recent 14 days', 'Recent 30 days'],
-            selected:{'Recent 30 days':false,'Recent 14 days':true},
-            top:'4%',
-            right:'2%',
-            orient: 'vertical',
-            textStyle:{
-              color: '#4E5969',
-              fontSize:14
-            }
+            icon: "circle",
+            data: ["Recent 14 days", "Recent 30 days"],
+            selected: { "Recent 30 days": false, "Recent 14 days": true },
+            top: "4%",
+            right: "2%",
+            orient: "vertical",
+            textStyle: {
+              color: "#4E5969",
+              fontSize: 14,
+            },
           },
           xAxis: {
-            type: 'category',
+            type: "category",
             data: xdata14,
-            axisLabel:{
-
-                color: '#86909C',
-                fontSize : 12
-
+            axisLabel: {
+              color: "#86909C",
+              fontSize: 12,
             },
-            axisLine:{
-              lineStyle:{
-                color:'#E5E6EB' //更改坐标轴颜色
-              }
+            axisLine: {
+              lineStyle: {
+                color: "#E5E6EB", //更改坐标轴颜色
+              },
             },
             splitLine: {
-              show: false
+              show: false,
             },
-            axisTick:{
-              show:false
+            axisTick: {
+              show: false,
             },
-
           },
           yAxis: {
-            type: 'value',
+            type: "value",
             splitLine: {
-              show: false
+              show: false,
             },
-            axisLabel:{
-
-                color: '#86909C',
-                fontSize : 12
-
+            axisLabel: {
+              color: "#86909C",
+              fontSize: 12,
             },
           },
-          grid : {
-            left:'6%',
+          grid: {
+            left: "6%",
             containLabel: true,
-            bottom:'6%',
+            bottom: "6%",
           },
-          series: [{
-            name: 'Recent 14 days',
-            type: 'line',
-            data: sdata14,
-            smooth: true,
-            areaStyle: {
-                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                  offset: 0,
-                  color: '#e6effe'
-                }, {
-                  offset: 1,
-                  color: 'rgb(255,255,255)'
-
-                }]),
-              }
-          },
+          series: [
             {
-              name: 'Recent 30 days',
-              type: 'line',
+              name: "Recent 14 days",
+              type: "line",
+              data: sdata14,
+              smooth: true,
+              areaStyle: {
+                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                  {
+                    offset: 0,
+                    color: "#e6effe",
+                  },
+                  {
+                    offset: 1,
+                    color: "rgb(255,255,255)",
+                  },
+                ]),
+              },
+            },
+            {
+              name: "Recent 30 days",
+              type: "line",
               data: sdata30,
               smooth: true,
               areaStyle: {
-                  color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                  {
                     offset: 0,
-                    color: '#e6effe'
-                  }, {
+                    color: "#e6effe",
+                  },
+                  {
                     offset: 1,
-                    color: 'rgb(255,255,255)'
-
-                  }]),
-                }
-            }
-          ]
+                    color: "rgb(255,255,255)",
+                  },
+                ]),
+              },
+            },
+          ],
         };
         var option2 = {
-          color:['#0060FF99','#0060FF99'],
-          title: [{
-            left: 'center',
-            text: 'Daily Transaction',
-            top:'4%',
-            textStyle:{
-              color: '#1D2129',
-              fontSize:18
-            }
-          }],
+          color: ["#0060FF99", "#0060FF99"],
+          title: [
+            {
+              left: "center",
+              text: "Daily Transaction",
+              top: "4%",
+              textStyle: {
+                color: "#1D2129",
+                fontSize: 18,
+              },
+            },
+          ],
           tooltip: {
-            trigger: 'axis'
+            trigger: "axis",
           },
           legend: {
-            icon:'circle',
-            data: ['Recent 14 days', 'Recent 30 days'],
-            selected:{'Recent 30 days':false,'Recent 14 days':true},
-            top:'12%',
-            left:'center',
-            orient: 'vertical',
-            textStyle:{
-              color: '#4E5969',
-              fontSize:14
-            }
+            icon: "circle",
+            data: ["Recent 14 days", "Recent 30 days"],
+            selected: { "Recent 30 days": false, "Recent 14 days": true },
+            top: "12%",
+            left: "center",
+            orient: "vertical",
+            textStyle: {
+              color: "#4E5969",
+              fontSize: 14,
+            },
           },
           xAxis: {
-            type: 'category',
+            type: "category",
             data: xdata14,
-            axisLabel:{
-              show:true,
+            axisLabel: {
+              show: true,
 
-                color: '#86909C',
-                fontSize : 12
-
+              color: "#86909C",
+              fontSize: 12,
             },
-            axisLine:{
-              lineStyle:{
-                color:'#E5E6EB' //更改坐标轴颜色
-              }
+            axisLine: {
+              lineStyle: {
+                color: "#E5E6EB", //更改坐标轴颜色
+              },
             },
             splitLine: {
-              show: false
+              show: false,
             },
-            axisTick:{
-              show:false
-            }
+            axisTick: {
+              show: false,
+            },
           },
           yAxis: {
-            type: 'value',
+            type: "value",
             splitLine: {
-              show: false
+              show: false,
             },
-            axisLabel:{
-
-                color: '#86909C',
-                fontSize : 12
-
+            axisLabel: {
+              color: "#86909C",
+              fontSize: 12,
             },
-
           },
-          grid : {
-            left:'6%',
+          grid: {
+            left: "6%",
             containLabel: true,
-            bottom:'6%',
-            top:'25%'
+            bottom: "6%",
+            top: "25%",
           },
-          series: [{
-            name: 'Recent 14 days',
-            type: 'line',
-            data: sdata14,
-            smooth: true,
-            areaStyle: {
-                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                  offset: 0,
-                  color: '#e6effe'
-                }, {
-                  offset: 1,
-                  color: 'rgb(255,255,255)'
-
-                }]),
-              }
-          },
+          series: [
             {
-              name: 'Recent 30 days',
-              type: 'line',
+              name: "Recent 14 days",
+              type: "line",
+              data: sdata14,
+              smooth: true,
+              areaStyle: {
+                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                  {
+                    offset: 0,
+                    color: "#e6effe",
+                  },
+                  {
+                    offset: 1,
+                    color: "rgb(255,255,255)",
+                  },
+                ]),
+              },
+            },
+            {
+              name: "Recent 30 days",
+              type: "line",
               data: sdata30,
               smooth: true,
               areaStyle: {
-                  color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                  {
                     offset: 0,
-                    color: '#e6effe'
-                  }, {
+                    color: "#e6effe",
+                  },
+                  {
                     offset: 1,
-                    color: 'rgb(255,255,255)'
-
-                  }]),
-                }
-            }
-          ]
+                    color: "rgb(255,255,255)",
+                  },
+                ]),
+              },
+            },
+          ],
         };
         // 使用刚指定的配置项和数据显示图表。
-        if(window.innerWidth > 552) {
+        if (window.innerWidth > 552) {
           myTransactionChart.setOption(option);
         } else {
-          myTransactionChart.setOption(option2)
+          myTransactionChart.setOption(option2);
         }
         window.addEventListener("resize", function () {
-
-          myTransactionChart.resize()
+          myTransactionChart.resize();
           var windowWidth = window.innerWidth;
-          if(windowWidth < 552) {
-            myTransactionChart.setOption(option2)
+          if (windowWidth < 552) {
+            myTransactionChart.setOption(option2);
           }
-          if(windowWidth > 552) {
-            myTransactionChart.setOption(option)
+          if (windowWidth > 552) {
+            myTransactionChart.setOption(option);
           }
         });
-        myTransactionChart.on('legendselectchanged', function (params){
-
+        myTransactionChart.on("legendselectchanged", function (params) {
           let legend = params.name;
           let selected = params.selected;
           if (selected !== undefined) {
-            if(legend ==="Recent 14 days") {
-
-              if(selected["Recent 14 days"]===true && selected["Recent 30 days"]===true) {
+            if (legend === "Recent 14 days") {
+              if (
+                selected["Recent 14 days"] === true &&
+                selected["Recent 30 days"] === true
+              ) {
                 myTransactionChart.setOption({
-
-                  legend:{
-                    selected:{
+                  legend: {
+                    selected: {
                       [legend]: true,
-                      ["Recent 30 days"]: false
-                    }},
-                  xAxis:{
-                    data:xdata14
+                      ["Recent 30 days"]: false,
+                    },
                   },
-
-                })
+                  xAxis: {
+                    data: xdata14,
+                  },
+                });
               }
-              if(selected["Recent 14 days"]===false && selected["Recent 30 days"]===false){
+              if (
+                selected["Recent 14 days"] === false &&
+                selected["Recent 30 days"] === false
+              ) {
                 myTransactionChart.setOption({
-
-                  legend:{
-                    selected:{
+                  legend: {
+                    selected: {
                       [legend]: false,
-                      ["Recent 30 days"]: true
-                    }},
-                  xAxis:{
-                    data:xdata30
+                      ["Recent 30 days"]: true,
+                    },
                   },
-                })
+                  xAxis: {
+                    data: xdata30,
+                  },
+                });
               }
-            }else {
-
-              if(selected["Recent 30 days"]==false && selected["Recent 14 days"]==false) {
-
+            } else {
+              if (
+                selected["Recent 30 days"] == false &&
+                selected["Recent 14 days"] == false
+              ) {
                 myTransactionChart.setOption({
-
-                  legend:{
-                    selected:{
+                  legend: {
+                    selected: {
                       [legend]: false,
-                      ["Recent 14 days"] :true
-                    }},
-                  xAxis:{
-                    data:xdata14
+                      ["Recent 14 days"]: true,
+                    },
                   },
-                })
+                  xAxis: {
+                    data: xdata14,
+                  },
+                });
               }
-              if(selected["Recent 30 days"]==true && selected["Recent 14 days"]==true) {
+              if (
+                selected["Recent 30 days"] == true &&
+                selected["Recent 14 days"] == true
+              ) {
                 myTransactionChart.setOption({
-
-                  legend:{
-                    selected:{
-                      [legend]: true ,
-                      ["Recent 14 days"] :false
-                    }},
-                  xAxis:{
-                    data:xdata30
+                  legend: {
+                    selected: {
+                      [legend]: true,
+                      ["Recent 14 days"]: false,
+                    },
                   },
-                })
-
+                  xAxis: {
+                    data: xdata30,
+                  },
+                });
               }
             }
           }
         });
-      }
+      };
       //onMounted
-      onMounted(()=>{
-        echartInit()
-      })
+      onMounted(() => {
+        echartInit();
+      });
       //return
       return {
-        echartInit
+        echartInit,
       };
     },
   },
-
-
-
-}
-
-
+};
 </script>
 
-<style>
-
-</style>
+<style></style>

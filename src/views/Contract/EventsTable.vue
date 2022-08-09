@@ -1,5 +1,9 @@
 <template>
-  <div v-if="totalCount!= 0" class="card shadow" :class="type === 'dark' ? 'bg-default' : ''">
+  <div
+    v-if="totalCount != 0"
+    class="card shadow"
+    :class="type === 'dark' ? 'bg-default' : ''"
+  >
     <div class="table-responsive">
       <loading
         :is-full-page="false"
@@ -18,15 +22,23 @@
           <th class="tableHeader">{{ $t("contract.eventName") }}</th>
           <th class="tableHeader">{{ $t("contract.vmState") }}</th>
           <th class="tableHeader">{{ $t("contract.index") }}</th>
-          <th class="tableHeader">{{ $t("contract.time") }}
-            <el-button type="info" :plain="true" size="small" style="height: 19px;margin-left: 4px" @click="switchTime(time)">
-              Format</el-button>
+          <th class="tableHeader">
+            {{ $t("contract.time") }}
+            <el-button
+              type="info"
+              :plain="true"
+              size="small"
+              style="height: 19px; margin-left: 4px"
+              @click="switchTime(time)"
+            >
+              Format</el-button
+            >
           </th>
         </template>
 
         <template v-slot:default="row">
           <th scope="row">
-            <div class="media align-items-center ">
+            <div class="media align-items-center">
               <div class="media-body short">
                 <span
                   class="text-muted"
@@ -37,10 +49,10 @@
                   >{{ $t("na") }}
                 </span>
                 <router-link
-                  class="  mb-0 table-list-item-blue"
+                  class="mb-0 table-list-item-blue"
                   v-else
-                  style="cursor: pointer;"
-                  :to="'/transactionInfo/'+row.item.txid"
+                  style="cursor: pointer"
+                  :to="'/transactionInfo/' + row.item.txid"
                   >{{ row.item.txid }}</router-link
                 >
               </div>
@@ -56,48 +68,53 @@
             {{ row.item.index }}
           </td>
           <td class="table-list-item">
-            {{time.state? this.convertTime(row.item.timestamp, this.$i18n.locale):this.convertISOTime(row.item.timestamp) }}
+            {{
+              time.state
+                ? this.convertTime(row.item.timestamp, this.$i18n.locale)
+                : this.convertISOTime(row.item.timestamp)
+            }}
           </td>
         </template>
       </base-table>
     </div>
 
-    <div v-if="totalCount>=10"
-            class="card-footer d-flex justify-content-end"
-            :class="type === 'dark' ? 'bg-transparent' : ''"
-            style="height: 70px"
+    <div
+      v-if="totalCount >= 10"
+      class="card-footer d-flex justify-content-end"
+      :class="type === 'dark' ? 'bg-transparent' : ''"
+      style="height: 70px"
     >
       <el-pagination
-          v-if="windowWidth > 552"
-          @current-change="handleCurrentChange"
-          :hide-on-single-page="totalCount<=10"
-          :current-page="parseInt(pagination)"
-          :pager-count= "5"
-          :page-size= "10"
-          layout="jumper, prev, pager, next"
-          :total="totalCount">
+        v-if="windowWidth > 552"
+        @current-change="handleCurrentChange"
+        :hide-on-single-page="totalCount <= 10"
+        :current-page="parseInt(pagination)"
+        :pager-count="5"
+        :page-size="10"
+        layout="jumper, prev, pager, next"
+        :total="totalCount"
+      >
       </el-pagination>
       <el-pagination
-          v-if="windowWidth < 552"
-          small ="true"
-          @current-change="handleCurrentChange"
-          :hide-on-single-page="totalCount<=10"
-          :current-page="parseInt(pagination)"
-          :pager-count= "5"
-          layout="prev,pager,next"
-          :total="totalCount">
+        v-if="windowWidth < 552"
+        small="true"
+        @current-change="handleCurrentChange"
+        :hide-on-single-page="totalCount <= 10"
+        :current-page="parseInt(pagination)"
+        :pager-count="5"
+        layout="prev,pager,next"
+        :total="totalCount"
+      >
       </el-pagination>
     </div>
   </div>
-  <card shadow v-else class="text-center">{{
-      $t("contract.noEvent")
-    }}</card>
+  <card shadow v-else class="text-center">{{ $t("contract.noEvent") }}</card>
 </template>
 <script>
 import axios from "axios";
 import Loading from "vue-loading-overlay";
 import "vue-loading-overlay/dist/vue-loading.css";
-import {convertTime,convertISOTime,switchTime} from "../../store/util";
+import { convertTime, convertISOTime, switchTime } from "../../store/util";
 import net from "../../store/store";
 
 export default {
@@ -113,7 +130,7 @@ export default {
   },
   data() {
     return {
-      time:{state:true},
+      time: { state: true },
       network: net.url,
       contractList: [],
       totalCount: 0,
@@ -121,7 +138,7 @@ export default {
       pagination: 1,
       isLoading: true,
       countPage: 0,
-      windowWidth:window.innerWidth,
+      windowWidth: window.innerWidth,
     };
   },
   created() {

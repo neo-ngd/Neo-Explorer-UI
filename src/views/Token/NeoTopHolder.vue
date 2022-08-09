@@ -1,9 +1,47 @@
 <template>
-  <div
-
-    class="card shadow"
-    :class="type === 'dark' ? 'bg-default' : ''"
-  >
+  <div class="card shadow" :class="type === 'dark' ? 'bg-default' : ''">
+    <div
+      class="searchNameContent"
+      style="width: 100%; margin-top: 10px; margin-bottom: 10px; height: 45px"
+    >
+      <div style="width: 30%; height: 100%; margin-left: 20px; float: left">
+        <div class="searchName" style="height: 45px">
+          <button class="buttonName" @click="search()" style="border: white">
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 18 18"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M2.2141 2.31429C3.61587 0.771429 5.65481 0 7.56631 0C9.47782 0 11.5168 0.771429 13.1734 2.31429C15.8495 5.01429 16.1044 9.25714 13.938 12.2143L17.761 16.0714C18.0159 16.3286 18.0159 16.7143 17.761 16.9714L16.869 17.8714C16.7415 18 16.6141 18 16.3592 18C16.1044 18 15.9769 18 15.8495 17.8714L12.0265 14.0143C10.6247 14.9143 9.09552 15.4286 7.56631 15.4286C5.65481 15.4286 3.61587 14.6571 2.2141 13.2429C-0.716874 10.1571 -0.716874 5.27143 2.2141 2.31429ZM3.99817 11.3143C4.89021 12.3429 6.16454 12.8571 7.56631 12.8571C8.96808 12.8571 10.2424 12.3429 11.1345 11.3143C12.1539 10.4143 12.6637 9.12857 12.6637 7.71429C12.6637 6.3 12.1539 5.01429 11.1345 4.11429C10.2424 3.08571 8.96808 2.57143 7.56631 2.57143C6.16454 2.57143 4.89021 3.08571 3.99817 4.11429C2.9787 5.01429 2.46897 6.3 2.46897 7.71429C2.46897 9.12857 2.9787 10.4143 3.99817 11.3143Z"
+                fill="#1e90ff"
+              />
+            </svg>
+          </button>
+          <input
+            type="text"
+            class="over-ellipsis-Name"
+            :placeholder="$t('tokensTable.prompt')"
+            v-model="searchVal"
+            autocomplete="off"
+            @keyup.enter="search()"
+          />
+        </div>
+      </div>
+      <div style="margin-right: 2%; float: right">
+        <el-button
+          @click="fresh()"
+          title="click to fresh the page"
+          size="small"
+          style="background-color: white"
+          ><i class="el-icon-refresh" style="font-size: 20px"></i
+        ></el-button>
+      </div>
+    </div>
     <div class="table-responsive">
       <loading
         :is-full-page="false"
@@ -21,9 +59,15 @@
           <th class="tableHeader">{{ $t("tokenHolder.ranking") }}</th>
           <th class="tableHeader">
             {{ $t("tokenHolder.address") }}
-            <el-button type="info" :plain="true" size="small" style="height: 21px;margin-left: 4px" @click="changeFormat(button)">
-              {{this.button.buttonName}}</el-button>
-
+            <el-button
+              type="info"
+              :plain="true"
+              size="small"
+              style="height: 21px; margin-left: 4px"
+              @click="changeFormat(button)"
+            >
+              {{ this.button.buttonName }}</el-button
+            >
           </th>
           <th class="tableHeader">{{ $t("tokenHolder.balance") }}</th>
           <!--          <th>Last Transferred</th>-->
@@ -34,31 +78,55 @@
           <th scope="row">
             <div class="media align-items-center">
               <div class="media-body">
-                <div v-if="row.index + (pagination - 1) * this.resultsPerPage === 0">
-                  {{ row.index + (this.pagination - 1) * this.resultsPerPage + 1 }} &#129351;
+                <div
+                  v-if="
+                    row.index + (pagination - 1) * this.resultsPerPage === 0
+                  "
+                >
+                  {{
+                    row.index + (this.pagination - 1) * this.resultsPerPage + 1
+                  }}
+                  &#129351;
                 </div>
-                <div v-else-if="row.index + (pagination - 1) * this.resultsPerPage === 1">
-                  {{ row.index + (this.pagination - 1) * this.resultsPerPage + 1 }} &#129352;
+                <div
+                  v-else-if="
+                    row.index + (pagination - 1) * this.resultsPerPage === 1
+                  "
+                >
+                  {{
+                    row.index + (this.pagination - 1) * this.resultsPerPage + 1
+                  }}
+                  &#129352;
                 </div>
-                <div v-else-if="row.index + (pagination - 1) * this.resultsPerPage === 2">
-                  {{ row.index + (this.pagination - 1) * this.resultsPerPage + 1 }} &#129353;
+                <div
+                  v-else-if="
+                    row.index + (pagination - 1) * this.resultsPerPage === 2
+                  "
+                >
+                  {{
+                    row.index + (this.pagination - 1) * this.resultsPerPage + 1
+                  }}
+                  &#129353;
                 </div>
-                <div v-else>{{ row.index + (pagination - 1) * this.resultsPerPage + 1 }}</div>
+                <div v-else>
+                  {{ row.index + (pagination - 1) * this.resultsPerPage + 1 }}
+                </div>
               </div>
             </div>
           </th>
           <td class="Address">
             <router-link
               v-if="button.state"
-              class="  mb-0 table-list-item-blue"
-              style="cursor: pointer;"
-              :to="'/accountprofile/'+row.item.address"
-              >{{ scriptHashToAddress(row.item.address) }}</router-link>
+              class="mb-0 table-list-item-blue"
+              style="cursor: pointer"
+              :to="'/accountprofile/' + row.item.address"
+              >{{ scriptHashToAddress(row.item.address) }}</router-link
+            >
             <router-link
               v-else
-              class="  mb-0 table-list-item-blue"
-              style="cursor: pointer;"
-              :to="'/accountprofile/'+row.item.address"
+              class="mb-0 table-list-item-blue"
+              style="cursor: pointer"
+              :to="'/accountprofile/' + row.item.address"
               >{{ row.item.address }}
             </router-link>
           </td>
@@ -75,30 +143,33 @@
       </base-table>
     </div>
 
-    <div v-if="totalCount>=10"
-            class="card-footer d-flex justify-content-end"
-            :class="type === 'dark' ? 'bg-transparent' : ''"
-            style="height: 70px"
+    <div
+      v-if="totalCount >= 10"
+      class="card-footer d-flex justify-content-end"
+      :class="type === 'dark' ? 'bg-transparent' : ''"
+      style="height: 70px"
     >
       <el-pagination
-          v-if="windowWidth > 552"
-          @current-change="handleCurrentChange"
-          :hide-on-single-page="totalCount<=10"
-          :current-page="parseInt(pagination)"
-          :pager-count= "5"
-          :page-size= "10"
-          layout="jumper, prev, pager, next"
-          :total="totalCount">
+        v-if="windowWidth > 552"
+        @current-change="handleCurrentChange"
+        :hide-on-single-page="totalCount <= 10"
+        :current-page="parseInt(pagination)"
+        :pager-count="5"
+        :page-size="10"
+        layout="jumper, prev, pager, next"
+        :total="totalCount"
+      >
       </el-pagination>
       <el-pagination
-          v-if="windowWidth < 552"
-          small
-          @current-change="handleCurrentChange"
-          :hide-on-single-page="totalCount<=10"
-          :current-page="parseInt(pagination)"
-          :pager-count= "5"
-          layout="prev,pager,next"
-          :total="totalCount">
+        v-if="windowWidth < 552"
+        small
+        @current-change="handleCurrentChange"
+        :hide-on-single-page="totalCount <= 10"
+        :current-page="parseInt(pagination)"
+        :pager-count="5"
+        layout="prev,pager,next"
+        :total="totalCount"
+      >
       </el-pagination>
     </div>
   </div>
@@ -107,7 +178,11 @@
 import axios from "axios";
 import Loading from "vue-loading-overlay";
 import "vue-loading-overlay/dist/vue-loading.css";
-import { convertToken, scriptHashToAddress, changeFormat} from "../../store/util";
+import {
+  convertToken,
+  scriptHashToAddress,
+  changeFormat,
+} from "../../store/util";
 import net from "../../store/store";
 
 export default {
@@ -132,11 +207,11 @@ export default {
       isLoading: true,
       countPage: 0,
       button: { state: true, buttonName: "Hash" },
-      windowWidth:window.innerWidth,
+      windowWidth: window.innerWidth,
     };
   },
   created() {
-    this.getTokenList((this.pagination-1)*this.resultsPerPage);
+    this.getTokenList((this.pagination - 1) * this.resultsPerPage);
   },
   watch: {
     contractHash: "watchcontract",
@@ -166,10 +241,52 @@ export default {
       // console.log(this.$route.name)
       if (this.$route.name === "tokens") {
         // console.log(this.pagination)
-        this.pagination = this.$route.params.page
-        this.getTokenList((this.pagination-1)*this.resultsPerPage)
-
+        this.pagination = this.$route.params.page;
+        this.getTokenList((this.pagination - 1) * this.resultsPerPage);
       }
+    },
+    getTokenListByName(name, skip, type) {
+      axios({
+        method: "post",
+        url: "/api",
+        data: {
+          jsonrpc: "2.0",
+          id: 1,
+          params: {
+            Name: this.name,
+            Limit: this.resultsPerPage,
+            Skip: skip,
+            Standard: type,
+          },
+          method: "GetAssetInfosByName",
+        },
+        headers: {
+          "Content-Type": "application/json",
+          withCredentials: " true",
+          crossDomain: "true",
+        },
+      }).then((res) => {
+        this.tokenList = res["data"]["result"]["result"];
+        // console.log(this.tokenList)
+        this.totalCount = res["data"]["result"]["totalCount"];
+        this.countPage = Math.ceil(this.totalCount / this.resultsPerPage);
+        this.isLoading = false;
+      });
+    },
+    search() {
+      this.isLoading = true;
+      let value = this.searchVal;
+      value = value.trim();
+      if (value === "") {
+        this.isLoading = false;
+        return;
+      }
+      this.name = value;
+      this.searchVal = "";
+      this.getTokenListByName(value, 0, "NEO");
+    },
+    fresh() {
+      window.location.replace(window.location.href);
     },
     getAddress(accountAddress) {
       this.$router.push({

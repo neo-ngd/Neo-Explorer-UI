@@ -5,7 +5,7 @@ import messages from "./index.js";
 // const LOCALE_KEY = 'localeLanguage'
 // const DEFAULT_LANG = 'en'
 const i18n = createI18n({
-  locale: localStorage.getItem('lang') || "en",
+  locale: localStorage.getItem("lang") || "en",
   messages,
 });
 

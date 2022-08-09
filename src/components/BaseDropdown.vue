@@ -83,12 +83,11 @@ export default {
   emits: ["change"],
 
   mounted() {
-    document.body.addEventListener('click', () => {
-      this.isOpen = false
-    }, );
+    document.body.addEventListener("click", () => {
+      this.isOpen = false;
+    });
   },
   methods: {
-
     toggleDropDown() {
       this.isOpen = !this.isOpen;
       this.$emit("change", this.isOpen);

@@ -14,7 +14,7 @@
           :data="tokenList"
         >
           <template v-slot:columns>
-            <th class="tableHeader"> # </th>
+            <th class="tableHeader">#</th>
             <th class="tableHeader">{{ $t("tokensTable.name") }}</th>
             <th class="tableHeader">{{ $t("hash") }}</th>
             <th class="tableHeader">{{ $t("tokensTable.tokenId") }}</th>
@@ -25,16 +25,16 @@
           </template>
 
           <template v-slot:default="row">
-            <td >
+            <td>
               <el-image
-                  style="width: 100px"
-                  :src="row.item.image"
-                  :preview-src-list="row.item.imageList"
-                  :hide-on-click-modal="true">
+                style="width: 100px"
+                :src="row.item.image"
+                :preview-src-list="row.item.imageList"
+                :hide-on-click-modal="true"
+              >
                 <template #error>
                   <div class="image-slot">
-                    <i class="ni ni-image">
-                    </i>
+                    <i class="ni ni-image"> </i>
                   </div>
                 </template>
               </el-image>
@@ -43,39 +43,45 @@
               {{ row.item.tokenname }}
             </td>
             <th scope="row">
-              <div class="media align-items-center ">
-                <div v-if="row.item.standard==='NEP11'" class="media-body short">
+              <div class="media align-items-center">
+                <div
+                  v-if="row.item.standard === 'NEP11'"
+                  class="media-body short"
+                >
                   <router-link
-                      class="  mb-0 table-list-item-blue"
-                      style="cursor: pointer; "
-                      :to="'/NFTtokeninfo/' + row.item.asset"
-                  >{{ row.item.asset }}</router-link
+                    class="mb-0 table-list-item-blue"
+                    style="cursor: pointer"
+                    :to="'/NFTtokeninfo/' + row.item.asset"
+                    >{{ row.item.asset }}</router-link
                   >
-
                 </div>
                 <div v-else class="media-body short">
                   <router-link
-                      class="  mb-0 table-list-item-blue"
-                      style="cursor: pointer;"
-                      :to="'/NEP17tokeninfo/' + row.item.asset"
-                  >{{ row.item.asset }}</router-link
+                    class="mb-0 table-list-item-blue"
+                    style="cursor: pointer"
+                    :to="'/NEP17tokeninfo/' + row.item.asset"
+                    >{{ row.item.asset }}</router-link
                   >
                 </div>
-
               </div>
             </th>
-            <td v-if="row.item.tokenid===''" class="table-list-item">
-
-            </td>
+            <td v-if="row.item.tokenid === ''" class="table-list-item"></td>
             <td v-else class="table-list-item">
               <div class="short">
                 <router-link
-                    class="  mb-0 table-list-item-blue"
-                    style="cursor: pointer;"
-                    :to="'/NFTinfo/' + row.item.asset+'/'+this.account_address+'/'+base64ToHash(row.item.tokenid)"
-                >{{ row.item.tokenid }}</router-link>
+                  class="mb-0 table-list-item-blue"
+                  style="cursor: pointer"
+                  :to="
+                    '/NFTinfo/' +
+                    row.item.asset +
+                    '/' +
+                    this.account_address +
+                    '/' +
+                    base64ToHash(row.item.tokenid)
+                  "
+                  >{{ row.item.tokenid }}</router-link
+                >
               </div>
-
             </td>
             <td class="table-list-item">
               {{ row.item.nftName }}
@@ -84,9 +90,7 @@
               {{ row.item.symbol }}
             </td>
             <td>
-              <el-tag
-                v-if="row.item.standard === 'NEP17'"
-              >
+              <el-tag v-if="row.item.standard === 'NEP17'">
                 <span class="">{{ row.item.standard }}</span>
               </el-tag>
               <el-tag v-else class="badge-dot mr-4" type="success">
@@ -98,30 +102,33 @@
             </td>
           </template>
         </base-table>
-        <div v-if="totalCount>=10"
-                class="card-footer d-flex justify-content-end"
-                :class="type === 'dark' ? 'bg-transparent' : ''"
-                style="height: 70px"
+        <div
+          v-if="totalCount >= 10"
+          class="card-footer d-flex justify-content-end"
+          :class="type === 'dark' ? 'bg-transparent' : ''"
+          style="height: 70px"
         >
           <el-pagination
             v-if="windowWidth > 552"
             @current-change="handleCurrentChange"
-            :hide-on-single-page="totalCount<=10"
+            :hide-on-single-page="totalCount <= 10"
             :current-page="parseInt(pagination)"
-            :pager-count= "5"
-            :page-size= "10"
+            :pager-count="5"
+            :page-size="10"
             layout="jumper, prev, pager, next"
-            :total="totalCount">
-        </el-pagination>
+            :total="totalCount"
+          >
+          </el-pagination>
           <el-pagination
-              v-if="windowWidth < 552"
-              small ="true"
-              @current-change="handleCurrentChange"
-              :hide-on-single-page="totalCount<=10"
-              :current-page="parseInt(pagination)"
-              :pager-count= "5"
-              layout="prev,pager,next"
-              :total="totalCount">
+            v-if="windowWidth < 552"
+            small="true"
+            @current-change="handleCurrentChange"
+            :hide-on-single-page="totalCount <= 10"
+            :current-page="parseInt(pagination)"
+            :pager-count="5"
+            layout="prev,pager,next"
+            :total="totalCount"
+          >
           </el-pagination>
         </div>
       </div>
@@ -152,7 +159,7 @@ export default {
       resultsPerPage: 10,
       pagination: 1,
       address_list: [],
-      windowWidth:window.innerWidth,
+      windowWidth: window.innerWidth,
     };
   },
   created() {
@@ -203,7 +210,7 @@ export default {
         },
       }).then((res) => {
         let temp = res["data"]["result"]["result"];
-        console.log(temp)
+        console.log(temp);
         this.totalCount = res["data"]["result"]["totalCount"];
         this.countPage =
           this.totalCount === 0
@@ -216,8 +223,8 @@ export default {
         // console.log("address_list", address_list)
         this.tokenList = temp;
         for (let k = 0; k < temp.length; k++) {
-          if (this.tokenList[k]['tokenid'] === ""){
-            continue
+          if (this.tokenList[k]["tokenid"] === "") {
+            continue;
           }
           axios({
             method: "post",
@@ -225,7 +232,10 @@ export default {
             data: {
               jsonrpc: "2.0",
               id: 1,
-              params: { ContractHash:this.tokenList[k]["asset"],tokenIds:[this.tokenList[k]["tokenid"]] },
+              params: {
+                ContractHash: this.tokenList[k]["asset"],
+                tokenIds: [this.tokenList[k]["tokenid"]],
+              },
               method: "GetNep11PropertiesByContractHashTokenId",
             },
             headers: {
@@ -234,17 +244,21 @@ export default {
               crossDomain: "true",
             },
           }).then((res) => {
-            console.log(res)
+            console.log(res);
             // console.log(this.tableData)
             this.isLoading = false;
-            var value = res["data"]["result"]["result"][0]
+            var value = res["data"]["result"]["result"][0];
             // console.log(value["asset"])
             // console.log(value["properties"])
-            this.tokenList[k]['nftName'] = value["name"]
-            this.tokenList[k]["image"] = value["image"].startsWith('ipfs') ? value['image'].replace(/^(ipfs:\/\/)|^(ipfs-video:\/\/)/, 'https://ipfs.infura.io/ipfs/'):value["image"]
-            this.tokenList[k]["imageList"] = [this.tokenList[k]["image"]]
-
-          })
+            this.tokenList[k]["nftName"] = value["name"];
+            this.tokenList[k]["image"] = value["image"].startsWith("ipfs")
+              ? value["image"].replace(
+                  /^(ipfs:\/\/)|^(ipfs-video:\/\/)/,
+                  "https://ipfs.infura.io/ipfs/"
+                )
+              : value["image"];
+            this.tokenList[k]["imageList"] = [this.tokenList[k]["image"]];
+          });
         }
         this.getTokenInfo(address_list);
       });
