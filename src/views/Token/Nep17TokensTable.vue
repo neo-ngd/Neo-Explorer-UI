@@ -11,14 +11,7 @@
     >
       <div style="width: 30%; height: 100%; margin-left: 20px; float: left">
         <div class="searchName" style="height: 45px">
-          <input
-            type="text"
-            class="over-ellipsis-Name"
-            :placeholder="$t('tokensTable.prompt')"
-            v-model="searchVal"
-            autocomplete="off"
-            @keyup.enter="search()"
-          /><button class="buttonName" @click="search()" style="border: white">
+          <button class="buttonName" @click="search()" style="border: white">
             <svg
               width="18"
               height="18"
@@ -34,6 +27,14 @@
               />
             </svg>
           </button>
+          <input
+            type="text"
+            class="over-ellipsis-Name"
+            :placeholder="$t('tokensTable.prompt')"
+            v-model="searchVal"
+            autocomplete="off"
+            @keyup.enter="search()"
+          />
         </div>
       </div>
       <div style="margin-right: 2%; float: right">

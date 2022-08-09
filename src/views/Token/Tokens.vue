@@ -2,12 +2,13 @@
   <div style="padding-bottom: 10% !important; background: #f7f8fa">
     <div
       class="container-fluid mt--8 list"
-      style="background: #f7f8fa; width: 85%;"
+      style="background: #f7f8fa; width: 85%"
     >
-      <div class="row">
+      <div class="tokenTab row">
         <div class="col">
           <el-tabs
             type="card"
+            stretch="true"
             v-model="activeTokenName"
             @tab-click="handleLoad"
           >
@@ -122,4 +123,14 @@ export default {
   },
 };
 </script>
-<style></style>
+<style>
+.tokenTab .el-tabs__item {
+  color: #86909C;
+}
+.tokenTab .el-tabs__item:hover {
+  color: black;
+}
+.tokenTab .is-active {
+  color: black;
+}
+</style>
