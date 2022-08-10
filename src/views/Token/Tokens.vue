@@ -124,6 +124,9 @@ export default {
 };
 </script>
 <style>
+.tokenTab {
+  padding-top: 50px;
+}
 .tokenTab .el-tabs__item {
   color: #86909C;
 }

@@ -62,7 +62,11 @@
                 <div class="col-md-3 lable-title">
                   {{ $t("hash") }}
                 </div>
-                <div class="col-md-9 context-black" id="token">
+                <div
+                  class="col-md-9 context-black"
+                  id="token"
+                  style="color: #165dff"
+                >
                   {{ this.token_info["hash"] }}
 
                   <i

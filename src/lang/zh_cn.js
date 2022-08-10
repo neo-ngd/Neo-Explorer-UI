@@ -255,6 +255,7 @@ const zh = {
     holder: "持有人",
   },
   tokenTx: {
+    instruction: "指令",
     txid: "交易哈希",
     type: "交易类型",
     from: "转出地址",

@@ -646,6 +646,7 @@
           />
         </g>
       </svg>
+      <!-- Search -->
       <div class="searchDiv" v-if="$route.meta.showSearch">
         <input
           type="text"
@@ -676,60 +677,15 @@
         v-if="!$route.meta.showSearch"
         style="margin-left: auto; margin-right: 0"
       ></div>
+      <!-- Home -->
       <ul class="navbar-nav mr-4 menu homeTag">
         <li class="nav-item-1">
           <router-link class="nav-link" to="/homepage">
             {{ $t("authLayout.home") }}
           </router-link>
         </li>
-        <!--        <li class="nav-item-1">-->
-        <!--          <el-dropdown class="nav-link">-->
-        <!--          <span class=" el-dropdown-link">-->
-        <!--            Blockchain-->
-        <!--            <i class="custom-icon el-icon-arrow-down" size="1px"></i>-->
-        <!--          </span>-->
-        <!--            <template #dropdown>-->
-        <!--              <el-dropdown-menu>-->
-        <!--                <el-dropdown-item >-->
-        <!--                  <router-link  to="/blocks/1">-->
-        <!--                    {{ $t("authLayout.blocks") }}-->
-        <!--                  </router-link>-->
-        <!--                </el-dropdown-item>-->
-        <!--                <el-dropdown-item>-->
-        <!--                  <router-link  to="/transactions/1">-->
-        <!--                    {{ $t("authLayout.txs") }}-->
-        <!--                  </router-link>-->
-        <!--                </el-dropdown-item>-->
-        <!--              </el-dropdown-menu>-->
-        <!--            </template>-->
-        <!--          </el-dropdown>-->
-        <!--        </li>-->
-        <!--        <li class="nav-item-1">-->
-        <!--          <router-link class="nav-link" to="/transactions/1">-->
-        <!--            {{ $t("authLayout.txs") }}-->
-        <!--          </router-link>-->
-        <!--        </li>-->
-        <!--        <li class="nav-item-1">-->
-        <!--          <router-link class="nav-link" to="/tokens/Nep17/1">-->
-        <!--            {{ $t("authLayout.tokens") }}-->
-        <!--          </router-link>-->
-        <!--        </li>-->
-        <!--        <li class="nav-item-1">-->
-        <!--          <router-link class="nav-link" to="/contracts/1">-->
-        <!--            {{ $t("authLayout.contracts") }}-->
-        <!--          </router-link>-->
-        <!--        </li>-->
-        <!--        <li class="nav-item-1">-->
-        <!--          <router-link class="nav-link" to="/account/1">-->
-        <!--            {{ $t("authLayout.address") }}-->
-        <!--          </router-link>-->
-        <!--        </li>-->
-        <!--        <li class="nav-item-1">-->
-        <!--          <router-link class="nav-link" to="/candidates/1">-->
-        <!--            {{ $t("authLayout.committee") }}-->
-        <!--          </router-link>-->
-        <!--        </li>-->
       </ul>
+      <!-- Blockchain -->
       <el-dropdown class="mr-4">
         <span
           class="el-dropdown-link droptitle drophide"
@@ -762,6 +718,7 @@
           </el-dropdown-menu>
         </template>
       </el-dropdown>
+      <!-- Token -->
       <el-dropdown class="mr-4">
         <span
           class="el-dropdown-link droptitle drophide"
@@ -794,6 +751,7 @@
           </el-dropdown-menu>
         </template>
       </el-dropdown>
+      <!-- Address -->
       <el-dropdown class="mr-3">
         <span
           class="el-dropdown-link droptitle drophide"
@@ -857,9 +815,44 @@
         </el-dropdown>
       </div>
       <el-divider class="mr-3 drophide" direction="vertical"></el-divider>
-
+      <!-- Languages -->
+      <div class="mr-2 mb-1 drophide">
+        <el-dropdown>
+          <span class="el-dropdown-link droptitle">
+            {{ this.lang }}
+            <svg
+              width="12"
+              height="12"
+              viewBox="0 0 12 12"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M8.93387 4.03915C8.73861 3.84388 8.42202 3.84388 8.22676 4.03915L6.04662 6.21929L3.92899 4.10165C3.73372 3.90638 3.41714 3.90638 3.22188 4.10165L2.86833 4.4552C2.67306 4.65046 2.67306 4.96705 2.86833 5.16231L5.69675 7.99074C5.89201 8.186 6.2086 8.186 6.40386 7.99074L6.75741 7.63718C6.77481 7.61979 6.79065 7.60143 6.80495 7.58228L9.28742 5.09981C9.48268 4.90454 9.48268 4.58796 9.28742 4.3927L8.93387 4.03915Z"
+                fill="#4E5969"
+              />
+            </svg>
+          </span>
+          <template #dropdown>
+            <el-dropdown-menu>
+              <el-dropdown-item @click="switch_the_language('en')"
+                >English 🇬🇧</el-dropdown-item
+              >
+              <el-dropdown-item @click="switch_the_language('cn')"
+                >中文 🇨🇳</el-dropdown-item
+              >
+              <el-dropdown-item @click="switch_the_language('fr')"
+                >Français 🇫🇷</el-dropdown-item
+              >
+            </el-dropdown-menu>
+          </template>
+        </el-dropdown>
+      </div>
+      <!-- Net -->
       <div
-        class="mr-2 mb-1 drophide"
+        class="mb-1 drophide dropTag"
         v-if="$route.meta.showNet"
         style="width: 100px"
       >
@@ -891,40 +884,6 @@
               >
               <el-dropdown-item @click="switchNet('testmagnet')"
                 >TestMagnet</el-dropdown-item
-              >
-            </el-dropdown-menu>
-          </template>
-        </el-dropdown>
-      </div>
-      <div class="mb-1 drophide dropTag">
-        <el-dropdown>
-          <span class="el-dropdown-link droptitle">
-            {{ this.lang }}
-            <svg
-              width="12"
-              height="12"
-              viewBox="0 0 12 12"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
-                d="M8.93387 4.03915C8.73861 3.84388 8.42202 3.84388 8.22676 4.03915L6.04662 6.21929L3.92899 4.10165C3.73372 3.90638 3.41714 3.90638 3.22188 4.10165L2.86833 4.4552C2.67306 4.65046 2.67306 4.96705 2.86833 5.16231L5.69675 7.99074C5.89201 8.186 6.2086 8.186 6.40386 7.99074L6.75741 7.63718C6.77481 7.61979 6.79065 7.60143 6.80495 7.58228L9.28742 5.09981C9.48268 4.90454 9.48268 4.58796 9.28742 4.3927L8.93387 4.03915Z"
-                fill="#4E5969"
-              />
-            </svg>
-          </span>
-          <template #dropdown>
-            <el-dropdown-menu>
-              <el-dropdown-item @click="switch_the_language('en')"
-                >English 🇬🇧</el-dropdown-item
-              >
-              <el-dropdown-item @click="switch_the_language('cn')"
-                >中文 🇨🇳</el-dropdown-item
-              >
-              <el-dropdown-item @click="switch_the_language('fr')"
-                >Français 🇫🇷</el-dropdown-item
               >
             </el-dropdown-menu>
           </template>
@@ -1599,6 +1558,48 @@
 
           <div class="col-lg-7">
             <div class="row">
+              <!-- Languages -->
+              <div class="col-lg-3 mb-2 mt-2">
+                <div class="dropbot" style="display: none">
+                  <el-dropdown>
+                    <el-button
+                      size="mini"
+                      plain
+                      class="el-dropdown-link droptitle"
+                    >
+                      {{ this.lang }}
+                      <svg
+                        width="12"
+                        height="12"
+                        viewBox="0 0 12 12"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          clip-rule="evenodd"
+                          d="M8.93387 4.03915C8.73861 3.84388 8.42202 3.84388 8.22676 4.03915L6.04662 6.21929L3.92899 4.10165C3.73372 3.90638 3.41714 3.90638 3.22188 4.10165L2.86833 4.4552C2.67306 4.65046 2.67306 4.96705 2.86833 5.16231L5.69675 7.99074C5.89201 8.186 6.2086 8.186 6.40386 7.99074L6.75741 7.63718C6.77481 7.61979 6.79065 7.60143 6.80495 7.58228L9.28742 5.09981C9.48268 4.90454 9.48268 4.58796 9.28742 4.3927L8.93387 4.03915Z"
+                          fill="#4E5969"
+                        />
+                      </svg>
+                    </el-button>
+                    <template #dropdown>
+                      <el-dropdown-menu>
+                        <el-dropdown-item @click="switch_the_language('en')"
+                          >English 🇬🇧</el-dropdown-item
+                        >
+                        <el-dropdown-item @click="switch_the_language('cn')"
+                          >中文 🇨🇳</el-dropdown-item
+                        >
+                        <el-dropdown-item @click="switch_the_language('fr')"
+                          >Français 🇫🇷</el-dropdown-item
+                        >
+                      </el-dropdown-menu>
+                    </template>
+                  </el-dropdown>
+                </div>
+              </div>
+              <!-- Net -->
               <div
                 class="dropbot ml-3"
                 style="display: none"
@@ -1640,46 +1641,6 @@
                     </el-dropdown-menu>
                   </template>
                 </el-dropdown>
-              </div>
-              <div class="col-lg-3 mb-2 mt-2">
-                <div class="dropbot" style="display: none">
-                  <el-dropdown>
-                    <el-button
-                      size="mini"
-                      plain
-                      class="el-dropdown-link droptitle"
-                    >
-                      {{ this.lang }}
-                      <svg
-                        width="12"
-                        height="12"
-                        viewBox="0 0 12 12"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          fill-rule="evenodd"
-                          clip-rule="evenodd"
-                          d="M8.93387 4.03915C8.73861 3.84388 8.42202 3.84388 8.22676 4.03915L6.04662 6.21929L3.92899 4.10165C3.73372 3.90638 3.41714 3.90638 3.22188 4.10165L2.86833 4.4552C2.67306 4.65046 2.67306 4.96705 2.86833 5.16231L5.69675 7.99074C5.89201 8.186 6.2086 8.186 6.40386 7.99074L6.75741 7.63718C6.77481 7.61979 6.79065 7.60143 6.80495 7.58228L9.28742 5.09981C9.48268 4.90454 9.48268 4.58796 9.28742 4.3927L8.93387 4.03915Z"
-                          fill="#4E5969"
-                        />
-                      </svg>
-                    </el-button>
-                    <template #dropdown>
-                      <el-dropdown-menu>
-                        <el-dropdown-item @click="switch_the_language('en')"
-                          >English 🇬🇧</el-dropdown-item
-                        >
-                        <el-dropdown-item @click="switch_the_language('cn')"
-                          >中文 🇨🇳</el-dropdown-item
-                        >
-                        <el-dropdown-item @click="switch_the_language('fr')"
-                          >Français 🇫🇷</el-dropdown-item
-                        >
-                      </el-dropdown-menu>
-                    </template>
-                  </el-dropdown>
-                </div>
               </div>
               <div class="col-lg-3">
                 <div class="mb-3">

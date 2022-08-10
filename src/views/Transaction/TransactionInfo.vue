@@ -193,11 +193,12 @@
                 </div>
                 <div class="col-md-9 exception context-black">
                   <el-tag
+                    color="#00B42A"
                     v-if="this.exception === null"
                     type="success"
                     size="small"
                   >
-                    No exception
+                    <span style="color: white">No exception</span>
                   </el-tag>
                   <div v-else style="max-width: 95%">
                     {{ this.exception }}
@@ -264,7 +265,7 @@
                       ]"
                       :key="index"
                     >
-                      <div>
+                      <div style="line-height: 28px">
                         <div>
                           <div class="text-muted-left">
                             {{ $t("transactionInfo.eventName") }}
@@ -305,6 +306,7 @@
                               v-if="item['state'].length !== 0"
                             >
                               <span
+                                style="line-height: 28px"
                                 v-for="(param, ind) in item['state']['value']"
                                 :key="ind"
                               >
@@ -406,6 +408,7 @@
                                     >{{ param["type"] }}-</span
                                   >
                                   {{ param["value"] }}
+                                  <br />
                                 </span>
                               </span>
                             </div>
@@ -439,10 +442,10 @@
                       v-for="(item, index) in this.tabledataCall['result']"
                       :key="index"
                     >
-                      <div>
+                      <div style="line-height: 28px">
                         <div>
                           <div class="text-muted-left">
-                            {{ $t("transactionInfo.method") }}:
+                            {{ $t("transactionInfo.method") }}
                           </div>
                           <div class="text-muted-right">
                             {{ item["method"] }}
@@ -450,7 +453,7 @@
                         </div>
                         <div>
                           <div class="text-muted-left">
-                            {{ $t("transactionInfo.originSender") }}:
+                            {{ $t("transactionInfo.originSender") }}
                           </div>
                           <div class="text-muted-right">
                             <router-link
@@ -464,7 +467,7 @@
                         </div>
                         <div>
                           <div class="text-muted-left">
-                            {{ $t("transactionInfo.contract") }}:
+                            {{ $t("transactionInfo.contract") }}
                           </div>
                           <div class="text-muted-right">
                             <router-link
@@ -478,7 +481,7 @@
                         </div>
                         <div>
                           <div class="text-muted-left">
-                            {{ $t("transactionInfo.callFlags") }}:
+                            {{ $t("transactionInfo.callFlags") }}
                           </div>
                           <div class="text-muted-right">
                             {{ item["callFlags"] }}
@@ -488,13 +491,14 @@
                       <div>
                         <div>
                           <div class="text-muted-left">
-                            {{ $t("transactionInfo.params") }}:
+                            {{ $t("transactionInfo.params") }}
                           </div>
                           <div
                             class="text-muted-right"
                             v-if="List[index] && List[index]['key']"
                           >
                             <span
+                              style="line-height: 28px"
                               v-for="(param, ind) in item['hexStringParams']"
                               :key="ind"
                             >

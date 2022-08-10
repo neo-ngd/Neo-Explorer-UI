@@ -14,6 +14,9 @@
       >
         <template v-slot:columns>
           <th class="tableHeader" style="text-align: center">
+            {{ $t("tokenTx.instruction") }}
+          </th>
+          <th class="tableHeader" style="text-align: center">
             {{ $t("tokenTx.from") }}
             <el-button
               type="info"
@@ -41,7 +44,6 @@
               {{ this.toButton.buttonName }}</el-button
             >
           </th>
-
           <th class="tableHeader">
             {{ $t("tokenTx.time") }}
             <el-button
@@ -57,6 +59,25 @@
         </template>
 
         <template v-slot:default="row">
+          <td class="table-list-item" style="text-align: center">
+            <div class="table-list-item">
+              <span
+                class="text-primary"
+                v-if="row.item.from === null && row.item.value === '50000000'"
+                type="primary"
+                >{{ $t("blockReward") }}</span
+              >
+              <span
+                class="text-warning"
+                v-else-if="row.item.from === null"
+                type="primary"
+                >{{ $t("networkFeeReward") }}</span
+              >
+              <span class="text-danger" v-else type="primary">{{
+                $t("feeBurn")
+              }}</span>
+            </div>
+          </td>
           <td class="table-list-item" style="text-align: center">
             <div>
               <div class="text-muted short" v-if="row.item.from === null">
@@ -80,27 +101,9 @@
               </div>
             </div>
           </td>
-          <td class="pt-4" style="text-align: center">
+          <td class="table-list-item" style="text-align: center">
             <div class="table-list-item mt-2" style="text-align: center">
               {{ convertToken(row.item.value, 8) }} GAS
-            </div>
-            <span style="color: #42b983; font-size: 30px">&#10230;</span>
-            <div class="table-list-item">
-              <span
-                class="text-primary"
-                v-if="row.item.from === null && row.item.value === '50000000'"
-                type="primary"
-                >{{ $t("blockReward") }}</span
-              >
-              <span
-                class="text-warning"
-                v-else-if="row.item.from === null"
-                type="primary"
-                >{{ $t("networkFeeReward") }}</span
-              >
-              <span class="text-danger" v-else type="primary">{{
-                $t("feeBurn")
-              }}</span>
             </div>
           </td>
           <td class="table-list-item" style="text-align: center">

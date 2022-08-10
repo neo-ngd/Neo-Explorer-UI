@@ -18,6 +18,7 @@
         :data="NEP17TxList"
       >
         <template v-slot:columns>
+          <th class="tableHeader">{{ $t("tokenTx.instruction") }}</th>
           <th class="tableHeader">{{ $t("tokenTx.txid") }}</th>
           <th class="tableHeader" style="text-align: center">
             {{ $t("tokenTx.from") }}
@@ -62,57 +63,7 @@
         </template>
 
         <template v-slot:default="row">
-          <th scope="row">
-            <div class="media align-items-center">
-              <div class="table-list-item">
-                <div
-                  class="text-muted"
-                  v-if="
-                    row.item.txid ===
-                    '0x0000000000000000000000000000000000000000000000000000000000000000'
-                  "
-                >
-                  {{ $t("na") }}
-                </div>
-                <div class="txid" v-else>
-                  <router-link
-                    class="mb-0 table-list-item-blue"
-                    style="cursor: pointer"
-                    :to="'/transactionInfo/' + row.item.txid"
-                    >{{ row.item.txid }}</router-link
-                  >
-                </div>
-              </div>
-            </div>
-          </th>
           <td class="table-list-item" style="text-align: center">
-            <div>
-              <div class="text-muted short" v-if="row.item.from === null">
-                {{ $t("nullAddress") }}
-              </div>
-              <div v-else-if="fromButton.state" class="short">
-                <router-link
-                  class="mb-0 table-list-item-blue"
-                  style="cursor: pointer"
-                  :to="'/accountprofile/' + row.item.from"
-                  >{{ scriptHashToAddress(row.item.from) }}</router-link
-                >
-              </div>
-              <div v-else class="short">
-                <router-link
-                  class="mb-0 table-list-item-blue"
-                  style="cursor: pointer"
-                  :to="'/accountprofile/' + row.item.from"
-                  >{{ row.item.from }}</router-link
-                >
-              </div>
-            </div>
-          </td>
-          <td class="pt-4" style="text-align: center">
-            <div class="table-list-item mt-2" style="text-align: center">
-              {{ convertToken(row.item.value, this.decimal) }} {{ this.symbol }}
-            </div>
-            <span style="color: #42b983; font-size: 30px">&#10230;</span>
             <div>
               <span
                 class="text-primary"
@@ -166,6 +117,60 @@
                 {{ $t("burn") }}</span
               >
               <span v-else style="color: seagreen"> {{ $t("transfer") }}</span>
+            </div>
+          </td>
+          <td scope="row">
+            <div class="media align-items-center">
+              <div class="table-list-item">
+                <div
+                  class="text-muted"
+                  v-if="
+                    row.item.txid ===
+                    '0x0000000000000000000000000000000000000000000000000000000000000000'
+                  "
+                >
+                  {{ $t("na") }}
+                </div>
+                <div class="txid" v-else>
+                  <router-link
+                    class="mb-0 table-list-item-blue"
+                    style="cursor: pointer"
+                    :to="'/transactionInfo/' + row.item.txid"
+                    >{{ row.item.txid }}</router-link
+                  >
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="table-list-item" style="text-align: center">
+            <div>
+              <div class="text-muted short" v-if="row.item.from === null">
+                {{ $t("nullAddress") }}
+              </div>
+              <div v-else-if="fromButton.state" class="short">
+                <router-link
+                  class="mb-0 table-list-item-blue"
+                  style="cursor: pointer"
+                  :to="'/accountprofile/' + row.item.from"
+                  >{{ scriptHashToAddress(row.item.from) }}</router-link
+                >
+              </div>
+              <div v-else class="short">
+                <router-link
+                  class="mb-0 table-list-item-blue"
+                  style="cursor: pointer"
+                  :to="'/accountprofile/' + row.item.from"
+                  >{{ row.item.from }}</router-link
+                >
+              </div>
+            </div>
+          </td>
+          <td class="table-list-item" style="text-align: center">
+            <div
+              class="table-list-item mt-2"
+              style="text-align: center; color: #42b983"
+            >
+              {{ convertToken(row.item.value, this.decimal) }} {{ this.symbol }}
             </div>
           </td>
           <td class="table-list-item" style="text-align: center">
@@ -321,6 +326,7 @@ export default {
         },
       }).then((res) => {
         this.NEP17TxList = res["data"]["result"]["result"];
+        console.log(this.NEP17TxList);
         this.totalCount = res["data"]["result"]["totalCount"];
         this.countPage =
           this.totalCount === 0
