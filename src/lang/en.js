@@ -82,7 +82,7 @@ const en = {
     time: "Time",
     bytes: "Bytes",
     size: "Size",
-    height: " Index",
+    height: "Block Index",
     version: "Version Number",
     hash: "BlockHash",
     preHash: "PreHash",
@@ -252,6 +252,7 @@ const en = {
     noParam: "No Parameters",
   },
   tokenTx: {
+    instruction: "Instruction",
     txid: "Txid",
     type: "Transaction Type",
     from: "From",

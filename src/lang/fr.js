@@ -257,6 +257,7 @@ const fr = {
     holder: "Porteur",
   },
   tokenTx: {
+    instruction: "Instruction",
     txid: "Txid",
     type: "Genre",
     from: "Envoyé de",

@@ -24,6 +24,7 @@
               line-height: 60px;
               text-align: left;
               padding-left: 5%;
+              color: #86909c;
             "
           >
             {{ $t("transactionTransfer.from") }}
@@ -89,6 +90,7 @@
               line-height: 60px;
               text-align: left;
               padding-left: 5%;
+              color: #86909c;
             "
           >
             {{ $t("transactionTransfer.to") }}
@@ -169,6 +171,7 @@
               display: block;
               line-height: 60px;
               text-align: center;
+              color: #86909c;
             "
           >
             {{ $t("transactionTransfer.from") }}
@@ -252,6 +255,7 @@
               display: block;
               line-height: 60px;
               text-align: center;
+              color: #86909c;
             "
           >
             {{ $t("transactionTransfer.to") }}
