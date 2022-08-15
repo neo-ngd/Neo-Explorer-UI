@@ -58,7 +58,7 @@
             </td>
             <td class="homeblockcontent hometableRight">
               <div
-                class="timeago "
+                class="timeago"
                 :datetime="convertISOTime(row.item.timestamp).toString()"
               ></div>
             </td>

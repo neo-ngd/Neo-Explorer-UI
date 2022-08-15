@@ -35,6 +35,7 @@
             </th>
             <th
               class="tableHeader tableHeader-AddressToken tableHeader-AddressToken-right"
+              style="text-align: right"
             >
               {{ $t("tokenHolder.balance") }}
             </th>

@@ -37,6 +37,7 @@
             </th>
             <th
               class="tableHeader tableHeader-transition tableHeader-transition-right"
+              style="text-align: right"
             >
               {{ $t("transactionList.gasConsumed") }}
             </th>

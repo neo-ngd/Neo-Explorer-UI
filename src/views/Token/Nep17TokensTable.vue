@@ -74,7 +74,10 @@
           <th class="tableHeader tableHeader-token17">
             {{ $t("tokensTable.totalSupply") }}
           </th>
-          <th class="tableHeader tableHeader-token17-right">
+          <th
+            class="tableHeader tableHeader-token17-right"
+            style="text-align: right"
+          >
             {{ $t("tokensTable.holders") }}
           </th>
         </template>
@@ -140,6 +143,7 @@
             {{ convertTotalSupply(row.item.totalsupply, row.item.decimals) }}
           </td>
           <td
+            style="text-align: right"
             class="table-list-item tableContent-token17 tableContent-token17-right"
           >
             {{ row.item.holders }}

@@ -624,11 +624,9 @@ export default {
     if (nodes.length != 0) {
       if (this.$i18n.locale === "cn") {
         render(nodes, "zh_CN");
-      } else if (this.$i18n.locale === "en"){
+      } else if (this.$i18n.locale === "en") {
         render(nodes, "en_US");
-      }
-      else
-      {
+      } else {
         render(nodes, "fr");
       }
     }

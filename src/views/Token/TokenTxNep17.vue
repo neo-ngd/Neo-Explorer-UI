@@ -20,7 +20,7 @@
         <template v-slot:columns>
           <th class="tableHeader">{{ $t("tokenTx.instruction") }}</th>
           <th class="tableHeader">{{ $t("tokenTx.txid") }}</th>
-          <th class="tableHeader" style="text-align: center">
+          <th class="tableHeader">
             {{ $t("tokenTx.from") }}
             <el-button
               type="info"
@@ -32,10 +32,10 @@
               {{ fromButton.buttonName }}</el-button
             >
           </th>
-          <th class="tableHeader" style="text-align: center">
+          <th class="tableHeader">
             {{ $t("tokenTx.amount") }}
           </th>
-          <th class="tableHeader" style="text-align: center">
+          <th class="tableHeader">
             {{ $t("tokenTx.to") }}
             <el-button
               type="info"
@@ -48,7 +48,7 @@
             >
           </th>
 
-          <th class="tableHeader">
+          <th class="tableHeader" style="text-align: right">
             {{ $t("tokenTx.time") }}
             <el-button
               type="info"
@@ -63,7 +63,7 @@
         </template>
 
         <template v-slot:default="row">
-          <td class="table-list-item" style="text-align: center">
+          <td class="table-list-item">
             <div>
               <span
                 class="text-primary"
@@ -142,7 +142,7 @@
               </div>
             </div>
           </td>
-          <td class="table-list-item" style="text-align: center">
+          <td class="table-list-item">
             <div>
               <div class="text-muted short" v-if="row.item.from === null">
                 {{ $t("nullAddress") }}
@@ -165,15 +165,12 @@
               </div>
             </div>
           </td>
-          <td class="table-list-item" style="text-align: center">
-            <div
-              class="table-list-item mt-2"
-              style="text-align: center; color: #42b983"
-            >
+          <td class="table-list-item">
+            <div class="table-list-item mt-2" style="color: #42b983">
               {{ convertToken(row.item.value, this.decimal) }} {{ this.symbol }}
             </div>
           </td>
-          <td class="table-list-item" style="text-align: center">
+          <td class="table-list-item">
             <div>
               <div class="text-muted short" v-if="row.item.to === null">
                 {{ $t("nullAddress") }}
@@ -197,7 +194,7 @@
             </div>
           </td>
 
-          <td class="table-list-item">
+          <td class="table-list-item" style="text-align: right">
             {{
               time.state
                 ? this.convertTime(row.item.timestamp, this.$i18n.locale)

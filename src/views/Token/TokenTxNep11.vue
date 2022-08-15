@@ -19,9 +19,13 @@
         :data="NEP11TxList"
       >
         <template v-slot:columns>
-          <th class="tableHeader">{{ $t("tokenTx.txid") }}</th>
-          <th class="tableHeader">{{ $t("tokenTx.tokenID") }}</th>
-          <th class="tableHeader">
+          <th class="tableHeader tableHeader-transfers">
+            {{ $t("tokenTx.txid") }}
+          </th>
+          <th class="tableHeader tableHeader-transfers">
+            {{ $t("tokenTx.tokenID") }}
+          </th>
+          <th class="tableHeader tableHeader-transfers">
             {{ $t("tokenTx.from") }}
             <el-button
               type="info"
@@ -33,10 +37,10 @@
               {{ fromButton.buttonName }}</el-button
             >
           </th>
-          <th class="tableHeader" style="text-align: center">
+          <th class="tableHeader tableHeader-transfers">
             {{ $t("tokenTx.amount") }}
           </th>
-          <th class="tableHeader">
+          <th class="tableHeader tableHeader-transfers">
             {{ $t("tokenTx.to") }}
             <el-button
               type="info"
@@ -49,7 +53,10 @@
             >
           </th>
 
-          <th class="tableHeader">
+          <th
+            class="tableHeader tableHeader-transfers"
+            style="text-align: right"
+          >
             {{ $t("tokenTx.time") }}
             <el-button
               type="info"
@@ -87,12 +94,12 @@
               </div>
             </div>
           </th>
-          <td class="TokenID">
+          <td class="TokenID tableContent-transfers">
             <div class="table-list-item">
               {{ row.item.tokenId }}
             </div>
           </td>
-          <td class="From">
+          <td class="From tableContent-transfers">
             <div>
               <div class="text-muted" v-if="row.item.from === null">
                 {{ $t("nullAddress") }}
@@ -116,7 +123,7 @@
               </div>
             </div>
           </td>
-          <td class="pt-4" style="text-align: center">
+          <td class="pt-4 tableContent-transfers">
             <div class="table-list-item mt-2" style="text-align: center">
               {{ convertToken(row.item.value, this.decimal) }}
             </div>
@@ -134,7 +141,7 @@
               <span v-else style="color: seagreen"> {{ $t("transfer") }}</span>
             </div>
           </td>
-          <td class="To">
+          <td class="To tableContent-transfers">
             <div>
               <div class="text-muted" v-if="row.item.to === null">
                 {{ $t("nullAddress") }}
@@ -157,7 +164,10 @@
               </div>
             </div>
           </td>
-          <td class="table-list-item">
+          <td
+            class="table-list-item tableContent-transfers"
+            style="text-align: right"
+          >
             {{
               time.state
                 ? this.convertTime(row.item.timestamp, this.$i18n.locale)
@@ -319,5 +329,9 @@ export default {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+.tableHeader-transfers,
+.tableContent-transfers {
+  text-align: left;
 }
 </style>

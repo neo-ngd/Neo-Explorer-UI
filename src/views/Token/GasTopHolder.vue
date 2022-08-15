@@ -77,7 +77,9 @@
           </th>
           <th class="tableHeader">{{ $t("tokenHolder.balance") }}</th>
           <!--          <th>Last Transferred</th>-->
-          <th class="tableHeader" style="text-align: right">{{ $t("tokenHolder.percentage") }}</th>
+          <th class="tableHeader" style="text-align: right">
+            {{ $t("tokenHolder.percentage") }}
+          </th>
         </template>
 
         <template v-slot:default="row">

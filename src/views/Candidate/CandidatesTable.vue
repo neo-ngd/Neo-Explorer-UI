@@ -40,6 +40,7 @@
           </th>
           <th
             class="tableHeader tableHeader-candidate tableHeader-candidate-right"
+            style="text-align: right"
           >
             {{ $t("candidate.percentage") }}
           </th>
@@ -81,7 +82,10 @@
           <td class="table-list-item tableContent">
             {{ row.item.votesOfCandidate }}
           </td>
-          <td class="table-list-item tableContent tableContent-right">
+          <td
+            class="table-list-item tableContent tableContent-right"
+            style="text-align: right"
+          >
             {{ getVotePercentage(row.item.votesOfCandidate) }}
           </td>
         </template>

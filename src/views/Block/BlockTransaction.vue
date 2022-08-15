@@ -29,7 +29,9 @@
               Format</el-button
             >
           </th>
-          <th class="tableHeader">{{ $t("blockinfo.txTable.gas") }}</th>
+          <th class="tableHeader" style="text-align: right">
+            {{ $t("blockinfo.txTable.gas") }}
+          </th>
         </template>
 
         <template v-slot:default="row">
@@ -55,7 +57,7 @@
             }}
           </td>
 
-          <td class="table-list-item">
+          <td class="table-list-item" style="text-align: right">
             {{ convertGas(row.item.netfee + row.item.sysfee) }}
           </td>
         </template>

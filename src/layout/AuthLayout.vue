@@ -1656,7 +1656,7 @@
                     rel="noopener noreferrer"
                     >{{ $t("authLayout.wallet") }}</a
                   >
-                <!--nft-->
+                  <!--nft-->
                 </div>
                 <div>
                   <a

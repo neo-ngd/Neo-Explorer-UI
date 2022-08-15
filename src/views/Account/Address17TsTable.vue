@@ -128,6 +128,7 @@
 
             <th
               class="tableHeader tableHeader-address tableHeader-address-right"
+              style="text-align: right"
             >
               {{ $t("tokenTx.time") }}
               <el-button

@@ -64,8 +64,12 @@
         :data="contractList"
       >
         <template v-slot:columns>
-          <th class="tableHeader tableHeader-contract">{{ $t("contract.name") }}</th>
-          <th class="tableHeader tableHeader-contract">{{ $t("contract.hash") }}</th>
+          <th class="tableHeader tableHeader-contract">
+            {{ $t("contract.name") }}
+          </th>
+          <th class="tableHeader tableHeader-contract">
+            {{ $t("contract.hash") }}
+          </th>
           <th class="tableHeader tableHeader-contract">
             {{ $t("contract.creator") }}
             <el-button
@@ -78,8 +82,12 @@
               {{ this.button.buttonName }}</el-button
             >
           </th>
-          <th class="tableHeader tableHeader-contract">{{ $t("contract.updates") }}</th>
-          <th class="tableHeader tableHeader-contract tableHeader-contract-right">
+          <th class="tableHeader tableHeader-contract">
+            {{ $t("contract.updates") }}
+          </th>
+          <th
+            class="tableHeader tableHeader-contract tableHeader-contract-right"
+          >
             {{ $t("contract.time") }}
             <el-button
               type="info"
@@ -144,7 +152,9 @@
           <td class="table-list-item tableContent-contract">
             {{ row.item.updatecounter }}
           </td>
-          <td class="table-list-item tableContent-contract tableContent-contract-right">
+          <td
+            class="table-list-item tableContent-contract tableContent-contract-right"
+          >
             {{
               time.state
                 ? this.convertTime(row.item.createtime, this.$i18n.locale)
@@ -381,5 +391,4 @@ export default {
   padding-left: 0.5rem !important;
   padding-right: 0.5rem !important;
 }
-
 </style>

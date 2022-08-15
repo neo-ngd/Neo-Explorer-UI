@@ -46,10 +46,21 @@
               Format</el-button
             >
           </th>
-          <th class="tableHeader tableHeader-address">{{ $t("addressPage.neoBalance") }}</th>
-          <th class="tableHeader tableHeader-address">{{ $t("addressPage.gasBalance") }}</th>
-          <th class="tableHeader tableHeader-address">{{ $t("addressPage.Nep17Transfers") }}</th>
-          <th class="tableHeader tableHeader-address tableHeader-right">{{ $t("addressPage.Nep11Transfers") }}</th>
+          <th class="tableHeader tableHeader-address">
+            {{ $t("addressPage.neoBalance") }}
+          </th>
+          <th class="tableHeader tableHeader-address">
+            {{ $t("addressPage.gasBalance") }}
+          </th>
+          <th class="tableHeader tableHeader-address">
+            {{ $t("addressPage.Nep17Transfers") }}
+          </th>
+          <th
+            class="tableHeader tableHeader-address tableHeader-right"
+            style="text-align: right"
+          >
+            {{ $t("addressPage.Nep11Transfers") }}
+          </th>
         </template>
         <template v-slot:default="row">
           <td class="address table-content">
