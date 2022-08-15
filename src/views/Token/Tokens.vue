@@ -128,7 +128,7 @@ export default {
   padding-top: 50px;
 }
 .tokenTab .el-tabs__item {
-  color: #86909C;
+  color: #86909c;
 }
 .tokenTab .el-tabs__item:hover {
   color: black;

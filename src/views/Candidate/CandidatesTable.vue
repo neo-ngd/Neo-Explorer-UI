@@ -1,22 +1,10 @@
 <template>
-  <div class="col list-title">
-    <h1 class="mb-0" :class="type === 'dark' ? 'text-white' : ''">
+  <div class="col list-title list-style">
+    <h1 class="mb-0 candidate-table-title" :class="type === 'dark' ? 'text-white' : ''">
       {{ title }}
     </h1>
   </div>
   <div class="card shadow" :class="type === 'dark' ? 'bg-default' : ''">
-    <!--div
-      class="card-header border-0"
-      :class="type === 'dark' ? 'bg-transparent' : ''"
-    >
-      <div class="row align-items-center">
-        <div class="col">
-          <h3 class="mb-0" :class="type === 'dark' ? 'text-white' : ''">
-            {{ title }}
-          </h3>
-        </div>
-      </div>
-    </div-->
     <div class="table-responsive list-card">
       <loading
         :is-full-page="false"
@@ -45,8 +33,8 @@
         </template>
 
         <template v-slot:default="row">
-          <td class="budget">
-            <div class="short" style="text-align: center">
+          <td class="budget tableContent">
+            <div class="short tableContent" style="text-align: center">
               <router-link
                 class="table-list-item-blue mb-0"
                 style="cursor: pointer"
@@ -56,7 +44,7 @@
               </router-link>
             </div>
           </td>
-          <td>
+          <td class="tableContent">
             <span
               v-if="
                 row.item.isCommittee &&
@@ -74,13 +62,13 @@
             </span>
             <span v-else> {{ $t("candidate.candidate") }}</span>
           </td>
-          <td class="table-list-item">
+          <td class="table-list-item tableContent">
             {{ row.index + 1 + (this.pagination - 1) * this.resultsPerPage }}
           </td>
-          <td class="table-list-item">
+          <td class="table-list-item tableContent">
             {{ row.item.votesOfCandidate }}
           </td>
-          <td class="table-list-item">
+          <td class="table-list-item tableContent">
             {{ getVotePercentage(row.item.votesOfCandidate) }}
           </td>
         </template>
@@ -262,5 +250,32 @@ export default {
   white-space: nowrap;
   /*overflow: hidden;*/
   text-overflow: ellipsis;
+}
+.list-style {
+    width: 85%;
+    margin: 0 auto;
+    background: #f7f8fa;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: -3rem;
+}
+.candidate-table-title {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: bold !important;
+  font-size: 45px !important;
+  line-height: 58px;
+  text-align: center;
+  /* identical to box height */
+  color: black;
+}
+.tableHeader {
+  text-align: left;
+}
+.tableContent {
+  text-align: left;
 }
 </style>

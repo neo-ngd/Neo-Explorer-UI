@@ -85,6 +85,8 @@ function convertTime(ts, locale) { // this.$i18n.locale
     switch (locale) {
         case "cn":
             return format(ts, "zh_CN");
+        case "en":
+            return format(ts, "en_short");
         default:
             return format(ts);
     }

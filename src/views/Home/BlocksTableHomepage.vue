@@ -23,7 +23,7 @@
     <div class="card border-0" :class="type === 'dark' ? 'bg-default' : ''">
       <div class="table-responsive">
         <base-table
-          class="table align-items-center table-hover hometablelist"
+          class="table table-sm table-hover hometablelist"
           :class="type === 'dark' ? 'table-dark' : ''"
           :thead-classes="type === 'dark' ? 'thead-dark' : 'thead-light'"
           tbody-classes="list"
@@ -51,14 +51,14 @@
                 {{ row.item.transactioncount }} txns
               </div>
             </td>
-            <td class="homeblockcontent homeblockcontentright">
-              <div class="homeblockcontent-word">
+            <td class="homeblockcontent">
+              <div class="hometableRight">
                 {{ row.item.size }} {{ $t("bytes") }}
               </div>
             </td>
-            <td class="homeblockcontent homeblockcontentright">
+            <td class="homeblockcontent hometableRight">
               <div
-                class="timeago"
+                class="timeago "
                 :datetime="convertISOTime(row.item.timestamp).toString()"
               ></div>
             </td>
@@ -130,6 +130,10 @@ export default {
   text-transform: none !important;
   border-top: none !important;
   color: #86909c !important;
+  padding-top: 1.5em !important;
+  padding-bottom: 1.5em !important;
+  padding-right: 0.5em !important;
+  padding-left: 0.5em !important;
 }
 .hometableRight {
   text-align: right;
@@ -140,6 +144,10 @@ export default {
   font-weight: normal;
   font-size: 14px;
   line-height: 30px;
+  padding-top: 1.5em !important;
+  padding-bottom: 1.5em !important;
+  padding-right: 0.5em !important;
+  padding-left: 0.5em !important;
   /* identical to box height, or 129% */
 
   /* grey900 */

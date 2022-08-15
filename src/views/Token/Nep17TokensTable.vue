@@ -12,13 +12,13 @@
     <div style="width: 100%; height: 100%; float: left">
       <div class="searchName" style="height: 80px">
         <button
-          class="buttonName"
+          class="buttonName searchButtonName"
           @click="search()"
-          style="border: white; margin: 20px"
+          style="border: white"
         >
           <svg
-            width="28"
-            height="28"
+            width="18"
+            height="18"
             viewBox="0 0 18 18"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -33,15 +33,12 @@
         </button>
         <input
           type="text"
-          class="over-ellipsis-Name"
+          class="over-ellipsis-input"
           :placeholder="$t('tokensTable.prompt')"
           v-model="searchVal"
           autocomplete="off"
           @keyup.enter="search()"
-          style="
-            box-shadow: 5px 10px 20px rgba(72, 98, 190, 0.1);
-            border-radius: 4px;
-          "
+          style="border-radius: 4px"
         />
       </div>
     </div>
@@ -315,5 +312,31 @@ export default {
   .searchNameContent {
     display: none !important;
   }
+}
+.searchButtonName {
+  cursor: pointer;
+  position: absolute;
+  left: 1px;
+  bottom: 1px;
+  top: 1px;
+  width: 70px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff !important;
+  border-radius: 4px;
+  border: white;
+}
+.over-ellipsis-input {
+  width: 100%;
+  height: 100%;
+  padding-right: 71px;
+  padding-left: 71px;
+  font-size: 18px;
+  background: white;
+  border: 0px !important;
+  border-radius: 4px;
+  color: black;
+  outline: none;
 }
 </style>

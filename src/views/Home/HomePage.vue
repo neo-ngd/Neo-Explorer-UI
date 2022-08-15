@@ -519,13 +519,13 @@
           </div>
         </div>
         <div class="row mt-6 screenxl">
-          <div class="col-xl-4">
+          <div class="col-xl-5">
             <blocks-table-homepage
               :title="$t('homePage.recentBlocks')"
               :table-data="blockList"
             ></blocks-table-homepage>
           </div>
-          <div class="col-xl-8">
+          <div class="col-xl-7">
             <transaction-table-homepage
               :title="$t('homePage.recentTxs')"
               :table-data="transactionList"
@@ -624,8 +624,12 @@ export default {
     if (nodes.length != 0) {
       if (this.$i18n.locale === "cn") {
         render(nodes, "zh_CN");
-      } else {
-        render(nodes, this.$i18n.locale);
+      } else if (this.$i18n.locale === "en"){
+        render(nodes, "en_US");
+      }
+      else
+      {
+        render(nodes, "fr");
       }
     }
   },

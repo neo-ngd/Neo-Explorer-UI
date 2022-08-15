@@ -1,23 +1,14 @@
 <template>
   <div>
-    <div class="col list-title">
-      <h1 class="mb-0" :class="type === 'dark' ? 'text-white' : ''">
+    <div class="col list-title list-style">
+      <h1
+        class="mb-0 block-table-title"
+        :class="type === 'dark' ? 'text-white' : ''"
+      >
         {{ title }}
       </h1>
     </div>
-    <div class="card shadow" :class="type === 'd  ark' ? 'bg-default' : ''">
-      <!--div
-      class="card-header border-0"
-      :class="type === 'dark' ? 'bg-transparent' : ''"
-    >
-      <div class="row align-items-center" >
-        <div class="col">
-          <h3 class="mb-0" :class="type === 'dark' ? 'text-white' : ''">
-            {{ title }}
-          </h3>
-        </div>
-      </div>
-    </div-->
+    <div class="card shadow" :class="type === 'dark' ? 'bg-default' : ''">
       <div class="table-responsive">
         <loading
           :is-full-page="false"
@@ -34,7 +25,7 @@
           <template v-slot:columns>
             <th class="tableHeader">{{ $t("blockinfo.height") }}</th>
             <th class="tableHeader shortHidden">{{ $t("blockinfo.hash") }}</th>
-            <th class="tableHeader tableHeader-Center">
+            <th class="tableHeader">
               {{ $t("blockinfo.time") }}
               <el-button
                 type="info"
@@ -46,7 +37,7 @@
                 Format</el-button
               >
             </th>
-            <th class="tableHeader tableHeader-Center">
+            <th class="tableHeader">
               {{ $t("blockinfo.txns") }}
             </th>
             <th class="tableHeader tableHeader-Right">
@@ -70,14 +61,14 @@
                 {{ row.item.hash }}
               </div>
             </td>
-            <td class="table-list-item tableContent-Center">
+            <td class="table-list-item tableContent">
               {{
                 time.state
                   ? this.convertTime(row.item.timestamp, this.$i18n.locale)
                   : this.convertISOTime(row.item.timestamp)
               }}
             </td>
-            <td class="table-list-item tableContent-Center">
+            <td class="table-list-item tableContent">
               {{ row.item.transactioncount }}
             </td>
             <td class="table-list-item tableContent-Right">
@@ -214,6 +205,27 @@ input::-webkit-inner-spin-button {
   -webkit-appearance: none !important;
   margin: 0;
   -moz-appearance: textfield;
+}
+.list-style {
+  width: 85%;
+  margin: 0 auto;
+  background: #f7f8fa;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: -3rem;
+}
+.block-table-title {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: bold !important;
+  font-size: 45px !important;
+  line-height: 58px;
+  text-align: center;
+  /* identical to box height */
+  color: black;
 }
 
 .text {

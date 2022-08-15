@@ -23,7 +23,7 @@
     <div class="card border-0" :class="type === 'dark' ? 'bg-default' : ''">
       <div class="table-responsive">
         <base-table
-          class="table align-items-center table-hover hometablelist"
+          class="table table-sm align-items-center table-hover hometablelist"
           :class="type === 'dark' ? 'table-dark' : ''"
           :thead-classes="type === 'dark' ? 'thead-dark' : 'thead-light'"
           tbody-classes="list"
@@ -114,10 +114,10 @@ export default {
   line-height: 18px !important;
   text-transform: none !important;
   border-top: none !important;
-  /* identical to box height, or 129% */
-
-  /* grey500 */
-
+  padding-top: 1.5em !important;
+  padding-bottom: 1.5em !important;
+  padding-right: 0.5em !important;
+  padding-left: 0.5em !important;
   color: #86909c;
 }
 .hometableright {
@@ -143,6 +143,10 @@ export default {
   font-weight: normal;
   font-size: 14px;
   line-height: 30px;
+  padding-top: 1.5em !important;
+  padding-bottom: 1.5em !important;
+  padding-right: 0.5em !important;
+  padding-left: 0.5em !important;
   /* identical to box height, or 129% */
 
   /* grey900 */

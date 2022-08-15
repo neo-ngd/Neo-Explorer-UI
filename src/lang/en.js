@@ -82,7 +82,7 @@ const en = {
     time: "Time",
     bytes: "Bytes",
     size: "Size",
-    height: "Block Index",
+    height: "Index",
     version: "Version Number",
     hash: "BlockHash",
     preHash: "PreHash",

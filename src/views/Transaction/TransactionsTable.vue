@@ -1,22 +1,13 @@
 <template>
-  <div class="col list-title">
-    <h1 class="mb-0" :class="type === 'dark' ? 'text-white' : ''">
+  <div class="col list-title list-style">
+    <h1
+      class="mb-0 transaction-table-title"
+      :class="type === 'dark' ? 'text-white' : ''"
+    >
       {{ title }}
     </h1>
   </div>
   <div class="card shadow" :class="type === 'dark' ? 'bg-default' : ''">
-    <!--div
-      class="card-header border-0"
-      :class="type === 'dark' ? 'bg-transparent' : ''"
-    >
-      <div class="row align-items-center">
-        <div class="col">
-          <h3 class="mb-0" :class="type === 'dark' ? 'text-white' : ''">
-            {{ $t("transactionList.title") }}
-          </h3>
-        </div>
-      </div>
-    </div-->
     <div class="table-responsive">
       <loading
         :is-full-page="false"
@@ -31,12 +22,16 @@
         :data="tableData"
       >
         <template v-slot:columns>
-          <th class="tableHeader">{{ $t("transactionList.transactionId") }}</th>
-          <th class="tableHeader shortHidden">
+          <th class="tableHeader txHeader" style="text-align: left">
+            {{ $t("transactionList.transactionId") }}
+          </th>
+          <th class="tableHeader shortHidden txHeader" style="text-align: left">
             {{ $t("transactionList.blockHeight") }}
           </th>
-          <th class="tableHeader">{{ $t("transactionList.size") }}</th>
-          <th class="tableHeader">
+          <th class="tableHeader txHeader" style="text-align: left">
+            {{ $t("transactionList.size") }}
+          </th>
+          <th class="tableHeader txHeader" style="text-align: left">
             {{ $t("transactionList.time") }}
             <el-button
               type="info"
@@ -48,12 +43,14 @@
               Format</el-button
             >
           </th>
-          <th class="tableHeader">{{ $t("transactionList.gasConsumed") }}</th>
+          <th class="tableHeader txHeader" style="text-align: right">
+            {{ $t("transactionList.gasConsumed") }}
+          </th>
         </template>
 
         <template v-slot:default="row">
-          <td class="id">
-            <div class="short" style="text-align: center">
+          <td class="id txHeader" style="text-align: left">
+            <div class="short" style="text-align: left">
               <router-link
                 class="table-list-item-blue mb-0"
                 style="cursor: pointer"
@@ -62,7 +59,7 @@
               >
             </div>
           </td>
-          <td class="id shortHidden">
+          <td class="id shortHidden txHeader" style="text-align: left">
             <router-link
               class="table-list-item-blue mb-0"
               style="cursor: pointer"
@@ -70,8 +67,10 @@
               >{{ row.item.blockIndex }}</router-link
             >
           </td>
-          <td class="table-list-item">{{ row.item.size }} {{ $t("bytes") }}</td>
-          <td class="table-list-item">
+          <td class="table-list-item txHeader">
+            {{ row.item.size }} {{ $t("bytes") }}
+          </td>
+          <td class="table-list-item txHeader" style="text-align: left">
             {{
               time.state
                 ? this.convertTime(row.item.blocktime, this.$i18n.locale)
@@ -79,7 +78,7 @@
             }}
           </td>
 
-          <td class="table-list-item">
+          <td class="table-list-item txHeader" style="text-align: right">
             {{ this.convertGas(row.item.netfee + row.item.sysfee) }}
           </td>
         </template>
@@ -160,19 +159,6 @@ export default {
     this.getTransactionList((this.pagination - 1) * this.resultsPerPage);
     // console.log(this.net)
   },
-  // computed: {
-  //   showUrl(){
-  //     return this.$store.getters.showUrl
-  //   }
-  // },
-  // mounted() {
-  //   window.addEventListener('storage',(e) =>{
-  //     if(e.key &&e.key =='net' && e.newValue) {
-  //       console.log("i did it ")
-  //       this.getTransactionList(0,)
-  //     }
-  //   })
-  // },
   watch: {
     $route: "watchrouter",
   },
@@ -245,5 +231,30 @@ export default {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+.list-style {
+  width: 85%;
+  margin: 0 auto;
+  background: #f7f8fa;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: -3rem;
+}
+.transaction-table-title {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: bold !important;
+  font-size: 45px !important;
+  line-height: 58px;
+  text-align: center;
+  /* identical to box height */
+  color: black;
+}
+.txHeader {
+  padding-left: 0.5rem !important;
+  padding-right: 0.5rem !important;
 }
 </style>

@@ -1,6 +1,9 @@
 <template>
-  <div class="col list-title">
-    <h1 class="mb-0" :class="type === 'dark' ? 'text-white' : ''">
+  <div class="col list-title list-style">
+    <h1
+      class="mb-0 contract-table-title"
+      :class="type === 'dark' ? 'text-white' : ''"
+    >
       {{ title }}
     </h1>
   </div>
@@ -344,5 +347,26 @@ export default {
   .searchNameContent {
     display: none !important;
   }
+}
+.list-style {
+  width: 85%;
+  margin: 0 auto;
+  background: #f7f8fa;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: -3rem;
+}
+.contract-table-title {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: bold !important;
+  font-size: 45px !important;
+  line-height: 58px;
+  text-align: center;
+  /* identical to box height */
+  color: black;
 }
 </style>

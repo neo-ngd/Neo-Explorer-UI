@@ -1642,11 +1642,12 @@
                   </template>
                 </el-dropdown>
               </div>
-              <div class="col-lg-3">
+              <div class="col-lg-3" style="line-height: 28px">
                 <div class="mb-3">
                   <strong>{{ $t("authLayout.help") }}</strong>
+                  <!--wallet-->
                 </div>
-                <div>
+                <div style="padding-bottom: 14px">
                   <a
                     class="text-muted"
                     title="Coming Soon~"
@@ -1655,6 +1656,7 @@
                     rel="noopener noreferrer"
                     >{{ $t("authLayout.wallet") }}</a
                   >
+                <!--nft-->
                 </div>
                 <div>
                   <a
@@ -1667,7 +1669,7 @@
                   >
                 </div>
               </div>
-              <div class="col-lg-3">
+              <div class="col-lg-3" style="line-height: 28px">
                 <div class="mb-3">
                   <strong>{{ $t("authLayout.developer") }}</strong>
                 </div>
@@ -1680,11 +1682,11 @@
                   >
                 </div>
               </div>
-              <div class="col-lg-3">
+              <div class="col-lg-3" style="line-height: 28px">
                 <div class="mb-3">
                   <strong>{{ $t("authLayout.contractUs") }}</strong>
                 </div>
-                <div>
+                <div style="padding-bottom: 14px">
                   <a
                     class="text-muted"
                     title="Twitter: OneGateWallet"

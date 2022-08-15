@@ -1,22 +1,10 @@
 <template>
-  <div class="col list-title">
-    <h1 class="mb-0" :class="type === 'dark' ? 'text-white' : ''">
+  <div class="col list-title list-style">
+    <h1 class="mb-0 address-table-title" :class="type === 'dark' ? 'text-white' : ''">
       {{ title }}
     </h1>
   </div>
   <div class="card shadow" :class="type === 'dark' ? 'bg-default' : ''">
-    <!--div
-        class="card-header border-0"
-        :class="type === 'dark' ? 'bg-transparent' : ''"
-    >
-      <div class="row align-items-center">
-        <div class="col">
-          <h3 class="mb-0" :class="type === 'dark' ? 'text-white' : ''">
-            {{ $t("addressPage.address") }}
-          </h3>
-        </div>
-      </div>
-    </div-->
     <div class="table-responsive">
       <loading
         :is-full-page="false"
@@ -198,8 +186,12 @@ export default {
     if (nodes.length != 0) {
       if (this.$i18n.locale === "cn") {
         render(nodes, "zh_CN");
-      } else {
-        render(nodes, this.$i18n.locale);
+      } else if (this.$i18n.locale === "en"){
+        render(nodes, "en_short");
+      }
+      else
+      {
+        render(nodes, "fr_short");
       }
     }
   },
@@ -447,4 +439,26 @@ export default {
   },
 };
 </script>
-<style></style>
+<style>
+.list-style {
+    width: 85%;
+    margin: 0 auto;
+    background: #f7f8fa;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: -3rem;
+}
+.address-table-title {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: bold !important;
+  font-size: 45px !important;
+  line-height: 58px;
+  text-align: center;
+  /* identical to box height */
+  color: black;
+}
+</style>
