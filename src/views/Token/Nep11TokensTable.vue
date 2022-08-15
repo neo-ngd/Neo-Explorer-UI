@@ -58,19 +58,19 @@
         :data="tokenList"
       >
         <template v-slot:columns>
-          <th class="tableHeader">{{ $t("tokensTable.name") }}</th>
-          <th class="tableHeader">{{ $t("tokensTable.symbol") }}</th>
-          <th class="tableHeader shortHidden">
+          <th class="tableHeader tableHeader-token11">{{ $t("tokensTable.name") }}</th>
+          <th class="tableHeader tableHeader-token11">{{ $t("tokensTable.symbol") }}</th>
+          <th class="tableHeader shortHidden tableHeader-token11">
             {{ $t("tokensTable.standard") }}
           </th>
-          <th class="tableHeader">{{ $t("tokensTable.decimal") }}</th>
-          <th class="tableHeader">{{ $t("tokensTable.totalSupply") }}</th>
-          <th class="tableHeader">{{ $t("tokensTable.holders") }}</th>
+          <th class="tableHeader tableHeader-token11">{{ $t("tokensTable.decimal") }}</th>
+          <th class="tableHeader tableHeader-token11">{{ $t("tokensTable.totalSupply") }}</th>
+          <th class="tableHeader tableHeader-token11 tableHeader-token11-right">{{ $t("tokensTable.holders") }}</th>
         </template>
 
         <template v-slot:default="row">
-          <td scope="row">
-            <div style="text-align: center">
+          <td scope="row tableContent-token11">
+            <div style="text-align:left">
               <div class="media-body">
                 <router-link
                   class="table-list-item-blue mb-0"
@@ -90,10 +90,10 @@
             </div>
           </td>
 
-          <td class="table-list-item">
+          <td class="table-list-item tableContent-token11">
             {{ row.item.symbol }}
           </td>
-          <td class="shortHidden">
+          <td class="shortHidden tableContent-token11">
             <el-tag v-if="row.item.type === 'NEP17'">
               <span class="">{{ row.item.type }}</span>
             </el-tag>
@@ -106,13 +106,13 @@
               }}</span>
             </el-tag>
           </td>
-          <td class="table-list-item">
+          <td class="table-list-item tableContent-token11">
             {{ row.item.decimals }}
           </td>
-          <td class="table-list-item">
+          <td class="table-list-item tableContent-token11">
             {{ numFormat(row.item.totalsupply) }}
           </td>
-          <td class="table-list-item">
+          <td class="table-list-item tableContent-token11 tableContent-token11 tableContent-token11-right">
             {{ row.item.holders }}
           </td>
         </template>
@@ -310,5 +310,13 @@ export default {
   border-radius: 4px;
   color: black;
   outline: none;
+}
+.tableHeader-token11,
+.tableContent-token11 {
+  text-align: left;
+}
+.tableHeader-token11-right,
+.tableContent-token11-right {
+  text-align: right;
 }
 </style>

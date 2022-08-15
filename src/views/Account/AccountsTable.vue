@@ -1,6 +1,9 @@
 <template>
   <div class="col list-title list-style">
-    <h1 class="mb-0 address-table-title" :class="type === 'dark' ? 'text-white' : ''">
+    <h1
+      class="mb-0 address-table-title"
+      :class="type === 'dark' ? 'text-white' : ''"
+    >
       {{ title }}
     </h1>
   </div>
@@ -19,7 +22,7 @@
         :data="tableData"
       >
         <template v-slot:columns>
-          <th class="tableHeader">
+          <th class="tableHeader tableHeader-address">
             {{ $t("addressPage.accountsTable") }}
             <el-button
               type="info"
@@ -31,7 +34,7 @@
               {{ this.button.buttonName }}</el-button
             >
           </th>
-          <th class="tableHeader">
+          <th class="tableHeader tableHeader-address">
             {{ $t("addressPage.createdTime") }}
             <el-button
               type="info"
@@ -43,16 +46,16 @@
               Format</el-button
             >
           </th>
-          <th class="tableHeader">{{ $t("addressPage.neoBalance") }}</th>
-          <th class="tableHeader">{{ $t("addressPage.gasBalance") }}</th>
-          <th class="tableHeader">{{ $t("addressPage.Nep17Transfers") }}</th>
-          <th class="tableHeader">{{ $t("addressPage.Nep11Transfers") }}</th>
+          <th class="tableHeader tableHeader-address">{{ $t("addressPage.neoBalance") }}</th>
+          <th class="tableHeader tableHeader-address">{{ $t("addressPage.gasBalance") }}</th>
+          <th class="tableHeader tableHeader-address">{{ $t("addressPage.Nep17Transfers") }}</th>
+          <th class="tableHeader tableHeader-address tableHeader-right">{{ $t("addressPage.Nep11Transfers") }}</th>
         </template>
         <template v-slot:default="row">
-          <td class="address">
+          <td class="address table-content">
             <div class="short">
               <router-link
-                class="mb-0 table-list-item-blue"
+                class="mb-0 table-list-item-blue table-content"
                 v-if="this.button.state"
                 style="cursor: pointer"
                 :to="'/accountprofile/' + row.item.address"
@@ -78,23 +81,23 @@
 
             <!--a class="name mb-0 text-sm" style="cursor: pointer" @click="getAddress(row.item.address)">{{ row.item.address }}</a-->
           </td>
-          <td class="table-list-item">
+          <td class="table-list-item table-content">
             {{
               time.state
                 ? this.convertTime(row.item.firstusetime, this.$i18n.locale)
                 : this.convertISOTime(row.item.firstusetime)
             }}
           </td>
-          <td class="table-list-item">
+          <td class="table-list-item table-content">
             {{ numFormat(row.item.neoBalance) }}
           </td>
-          <td class="table-list-item">
+          <td class="table-list-item table-content">
             {{ row.item.gasBalance }}
           </td>
-          <td class="table-list-item">
+          <td class="table-list-item table-content">
             {{ row.item.Nep17Transfers }}
           </td>
-          <td class="table-list-item">
+          <td class="table-list-item table-content-right">
             {{ row.item.Nep11Transfers }}
           </td>
         </template>
@@ -186,11 +189,9 @@ export default {
     if (nodes.length != 0) {
       if (this.$i18n.locale === "cn") {
         render(nodes, "zh_CN");
-      } else if (this.$i18n.locale === "en"){
+      } else if (this.$i18n.locale === "en") {
         render(nodes, "en_short");
-      }
-      else
-      {
+      } else {
         render(nodes, "fr_short");
       }
     }
@@ -441,15 +442,15 @@ export default {
 </script>
 <style>
 .list-style {
-    width: 85%;
-    margin: 0 auto;
-    background: #f7f8fa;
-    height: 200px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    margin-bottom: -3rem;
+  width: 85%;
+  margin: 0 auto;
+  background: #f7f8fa;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: -3rem;
 }
 .address-table-title {
   font-family: Inter;
@@ -460,5 +461,23 @@ export default {
   text-align: center;
   /* identical to box height */
   color: black;
+}
+.tableHeader-address {
+  text-align: left;
+  padding-left: 0.5rem !important;
+  padding-right: 0.5rem !important;
+}
+.tableHeader-right {
+  text-align: right;
+}
+.table-content {
+  text-align: left;
+  padding-left: 0.5rem !important;
+  padding-right: 0.5rem !important;
+}
+.table-content-right {
+  text-align: right;
+  padding-left: 0.5rem !important;
+  padding-right: 0.5rem !important;
 }
 </style>

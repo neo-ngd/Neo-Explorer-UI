@@ -42,15 +42,6 @@
         />
       </div>
     </div>
-    <!-- <div style="margin-right: 2%; float: right">
-      <el-button
-        @click="fresh()"
-        title="click to fresh the page"
-        size="small"
-        style="background-color: white"
-        ><i class="el-icon-refresh" style="font-size: 20px"></i
-      ></el-button>
-    </div> -->
   </div>
 
   <div class="card shadow" :class="type === 'dark' ? 'bg-default' : ''">
@@ -68,19 +59,29 @@
         :data="tokenList"
       >
         <template v-slot:columns>
-          <th class="tableHeader">{{ $t("tokensTable.name") }}</th>
-          <th class="tableHeader">{{ $t("tokensTable.symbol") }}</th>
-          <th class="tableHeader shortHidden">
+          <th class="tableHeader tableHeader-token17">
+            {{ $t("tokensTable.name") }}
+          </th>
+          <th class="tableHeader tableHeader-token17">
+            {{ $t("tokensTable.symbol") }}
+          </th>
+          <th class="tableHeader tableHeader-token17 shortHidden">
             {{ $t("tokensTable.standard") }}
           </th>
-          <th class="tableHeader">{{ $t("tokensTable.decimal") }}</th>
-          <th class="tableHeader">{{ $t("tokensTable.totalSupply") }}</th>
-          <th class="tableHeader">{{ $t("tokensTable.holders") }}</th>
+          <th class="tableHeader tableHeader-token17">
+            {{ $t("tokensTable.decimal") }}
+          </th>
+          <th class="tableHeader tableHeader-token17">
+            {{ $t("tokensTable.totalSupply") }}
+          </th>
+          <th class="tableHeader tableHeader-token17-right">
+            {{ $t("tokensTable.holders") }}
+          </th>
         </template>
 
         <template v-slot:default="row">
-          <td scope="row">
-            <div style="text-align: center">
+          <td scope="row tableContent-token17">
+            <div style="text-align: left">
               <div v-if="row.item.type === 'NEP17'" class="media-body">
                 <router-link
                   class="table-list-item-blue mb-0"
@@ -116,10 +117,10 @@
             </div>
           </td>
 
-          <td class="table-list-item">
+          <td class="table-list-item tableContent-token17">
             {{ row.item.symbol }}
           </td>
-          <td class="shortHidden">
+          <td class="shortHidden tableContent-token17">
             <el-tag v-if="row.item.type === 'NEP17'">
               <span class="">{{ row.item.type }}</span>
             </el-tag>
@@ -132,13 +133,15 @@
               }}</span>
             </el-tag>
           </td>
-          <td class="table-list-item">
+          <td class="table-list-item tableContent-token17">
             {{ row.item.decimals }}
           </td>
-          <td class="table-list-item">
+          <td class="table-list-item tableContent-token17">
             {{ convertTotalSupply(row.item.totalsupply, row.item.decimals) }}
           </td>
-          <td class="table-list-item">
+          <td
+            class="table-list-item tableContent-token17 tableContent-token17-right"
+          >
             {{ row.item.holders }}
           </td>
         </template>
@@ -338,5 +341,13 @@ export default {
   border-radius: 4px;
   color: black;
   outline: none;
+}
+.tableHeader-token17,
+.tableContent-token17 {
+  text-align: left;
+}
+.tableHeader-token17-right,
+.tableContent-token17-right {
+  text-align: right;
 }
 </style>

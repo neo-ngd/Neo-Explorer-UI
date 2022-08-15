@@ -1,6 +1,9 @@
 <template>
   <div class="col list-title list-style">
-    <h1 class="mb-0 candidate-table-title" :class="type === 'dark' ? 'text-white' : ''">
+    <h1
+      class="mb-0 candidate-table-title"
+      :class="type === 'dark' ? 'text-white' : ''"
+    >
       {{ title }}
     </h1>
   </div>
@@ -20,23 +23,33 @@
         :data="tableData"
       >
         <template v-slot:columns>
-          <th class="tableHeader">{{ $t("candidate.address") }}</th>
-          <th class="tableHeader">
+          <th class="tableHeader tableHeader-candidate">
+            {{ $t("candidate.address") }}
+          </th>
+          <th class="tableHeader tableHeader-candidate">
             {{ $t("candidate.committee") }}
             <el-tooltip :content="this.content" placement="top">
               <i class="el-icon-question" />
             </el-tooltip>
           </th>
-          <th class="tableHeader">{{ $t("candidate.rank") }}</th>
-          <th class="tableHeader">{{ $t("candidate.votes") }}</th>
-          <th class="tableHeader">{{ $t("candidate.percentage") }}</th>
+          <th class="tableHeader tableHeader-candidate">
+            {{ $t("candidate.rank") }}
+          </th>
+          <th class="tableHeader tableHeader-candidate">
+            {{ $t("candidate.votes") }}
+          </th>
+          <th
+            class="tableHeader tableHeader-candidate tableHeader-candidate-right"
+          >
+            {{ $t("candidate.percentage") }}
+          </th>
         </template>
 
         <template v-slot:default="row">
           <td class="budget tableContent">
-            <div class="short tableContent" style="text-align: center">
+            <div class="short tableContent">
               <router-link
-                class="table-list-item-blue mb-0"
+                class="table-list-item-blue mb-0 tableContent"
                 style="cursor: pointer"
                 :to="'/accountprofile/' + row.item.candidate"
               >
@@ -68,7 +81,7 @@
           <td class="table-list-item tableContent">
             {{ row.item.votesOfCandidate }}
           </td>
-          <td class="table-list-item tableContent">
+          <td class="table-list-item tableContent tableContent-right">
             {{ getVotePercentage(row.item.votesOfCandidate) }}
           </td>
         </template>
@@ -252,15 +265,15 @@ export default {
   text-overflow: ellipsis;
 }
 .list-style {
-    width: 85%;
-    margin: 0 auto;
-    background: #f7f8fa;
-    height: 200px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    margin-bottom: -3rem;
+  width: 85%;
+  margin: 0 auto;
+  background: #f7f8fa;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: -3rem;
 }
 .candidate-table-title {
   font-family: Inter;
@@ -275,7 +288,16 @@ export default {
 .tableHeader {
   text-align: left;
 }
+.tableHeader-candidate {
+  text-align: left;
+}
+.tableHeader-candidate-right {
+  text-align: right;
+}
 .tableContent {
   text-align: left;
+}
+.tableContent-right {
+  text-align: right;
 }
 </style>

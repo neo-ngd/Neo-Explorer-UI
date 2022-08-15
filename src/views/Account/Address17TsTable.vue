@@ -88,9 +88,13 @@
           :data="tableData"
         >
           <template v-slot:columns>
-            <th class="tableHeader">{{ $t("tokenTx.txid") }}</th>
-            <th class="tableHeader">{{ $t("transferList.token") }}</th>
-            <th class="tableHeader">
+            <th class="tableHeader tableHeader-address">
+              {{ $t("tokenTx.txid") }}
+            </th>
+            <th class="tableHeader tableHeader-address">
+              {{ $t("transferList.token") }}
+            </th>
+            <th class="tableHeader tableHeader-address">
               {{ $t("transferList.from") }}
               <el-button
                 type="info"
@@ -102,11 +106,14 @@
                 {{ fromButton.buttonName }}</el-button
               >
             </th>
-            <th class="tableHeader"></th>
-            <th class="tableHeader" style="text-align: center">
+            <th class="tableHeader tableHeader-address"></th>
+            <th
+              class="tableHeader tableHeader-address"
+              style="text-align: center"
+            >
               {{ $t("transferList.amount") }}
             </th>
-            <th class="tableHeader">
+            <th class="tableHeader tableHeader-address">
               {{ $t("transferList.to") }}
               <el-button
                 type="info"
@@ -119,7 +126,9 @@
               >
             </th>
 
-            <th class="tableHeader">
+            <th
+              class="tableHeader tableHeader-address tableHeader-address-right"
+            >
               {{ $t("tokenTx.time") }}
               <el-button
                 type="info"
@@ -788,5 +797,11 @@ export default {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+.tableHeader-address {
+  text-align: left;
+}
+.tableHeader-address-right {
+  text-align: right;
 }
 </style>

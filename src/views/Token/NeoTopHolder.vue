@@ -37,15 +37,6 @@
         />
       </div>
     </div>
-    <!-- <div style="margin-right: 2%; float: right">
-      <el-button
-        @click="fresh()"
-        title="click to fresh the page"
-        size="small"
-        style="background-color: white"
-        ><i class="el-icon-refresh" style="font-size: 20px"></i
-      ></el-button>
-    </div> -->
   </div>
   <div class="card shadow" :class="type === 'dark' ? 'bg-default' : ''">
     <div class="table-responsive">
@@ -77,7 +68,7 @@
           </th>
           <th class="tableHeader">{{ $t("tokenHolder.balance") }}</th>
           <!--          <th>Last Transferred</th>-->
-          <th class="tableHeader">{{ $t("tokenHolder.percentage") }}</th>
+          <th class="tableHeader" style="text-align: right">{{ $t("tokenHolder.percentage") }}</th>
         </template>
 
         <template v-slot:default="row">
@@ -142,7 +133,7 @@
           <!--          <td class="firstused">-->
           <!--            {{ convertTime(row.item.lasttx.timestamp) }}-->
           <!--          </td>-->
-          <td class="table-list-item">
+          <td class="table-list-item" style="text-align: right">
             {{ toPercentage(row.item.percentage) }}
           </td>
         </template>
