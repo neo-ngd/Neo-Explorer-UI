@@ -14,18 +14,34 @@
           :data="tokenList"
         >
           <template v-slot:columns>
-            <th class="tableHeader">#</th>
-            <th class="tableHeader">{{ $t("tokensTable.name") }}</th>
-            <th class="tableHeader">{{ $t("hash") }}</th>
-            <th class="tableHeader">{{ $t("tokensTable.tokenId") }}</th>
-            <th class="tableHeader">{{ $t("tokensTable.nftName") }}</th>
-            <th class="tableHeader">{{ $t("tokensTable.symbol") }}</th>
-            <th class="tableHeader">{{ $t("tokensTable.standard") }}</th>
-            <th class="tableHeader">{{ $t("tokenHolder.balance") }}</th>
+            <th class="tableHeader tableHeader-AddressToken">#</th>
+            <th class="tableHeader tableHeader-AddressToken">
+              {{ $t("tokensTable.name") }}
+            </th>
+            <th class="tableHeader tableHeader-AddressToken">
+              {{ $t("hash") }}
+            </th>
+            <th class="tableHeader tableHeader-AddressToken">
+              {{ $t("tokensTable.tokenId") }}
+            </th>
+            <th class="tableHeader tableHeader-AddressToken">
+              {{ $t("tokensTable.nftName") }}
+            </th>
+            <th class="tableHeader tableHeader-AddressToken">
+              {{ $t("tokensTable.symbol") }}
+            </th>
+            <th class="tableHeader tableHeader-AddressToken">
+              {{ $t("tokensTable.standard") }}
+            </th>
+            <th
+              class="tableHeader tableHeader-AddressToken tableHeader-AddressToken-right"
+            >
+              {{ $t("tokenHolder.balance") }}
+            </th>
           </template>
 
           <template v-slot:default="row">
-            <td>
+            <td class="tableContent-AddressToken">
               <el-image
                 style="width: 100px"
                 :src="row.item.image"
@@ -39,11 +55,15 @@
                 </template>
               </el-image>
             </td>
-            <td class="table-list-item">
+            <td class="table-list-item tableContent-AddressToken">
               {{ row.item.tokenname }}
             </td>
-            <th scope="row">
-              <div class="media align-items-center">
+            <th
+              scope="row"
+              class="tableContent-AddressToken"
+              style="text-align: left"
+            >
+              <div style="text-align: left">
                 <div
                   v-if="row.item.standard === 'NEP11'"
                   class="media-body short"
@@ -65,12 +85,15 @@
                 </div>
               </div>
             </th>
-            <td v-if="row.item.tokenid === ''" class="table-list-item"></td>
-            <td v-else class="table-list-item">
-              <div class="short">
+            <td
+              v-if="row.item.tokenid === ''"
+              class="table-list-item tableContent-AddressToken"
+            ></td>
+            <td v-else class="table-list-item tableContent-AddressToken">
+              <div class="short" style="text-align: left">
                 <router-link
                   class="mb-0 table-list-item-blue"
-                  style="cursor: pointer"
+                  style="cursor: pointer; text-align: left"
                   :to="
                     '/NFTinfo/' +
                     row.item.asset +
@@ -83,10 +106,10 @@
                 >
               </div>
             </td>
-            <td class="table-list-item">
+            <td class="table-list-item tableContent-AddressToken">
               {{ row.item.nftName }}
             </td>
-            <td class="table-list-item">
+            <td class="table-list-item tableContent-AddressToken">
               {{ row.item.symbol }}
             </td>
             <td>
@@ -97,7 +120,9 @@
                 <span class="">{{ row.item.standard }}</span>
               </el-tag>
             </td>
-            <td class="table-list-item">
+            <td
+              class="table-list-item tableContent-AddressToken tableContent-AddressToken-right"
+            >
               {{ convertToken(row.item.balance, row.item.decimals) }}
             </td>
           </template>
@@ -293,4 +318,17 @@ export default {
   },
 };
 </script>
-<style></style>
+<style>
+.tableHeader-AddressToken,
+.tableContent-AddressToken {
+  text-align: left;
+  padding-left: 0.5rem !important;
+  padding-right: 0.5rem !important;
+}
+.tableHeader-AddressToken-right,
+.tableContent-AddressToken-right {
+  text-align: right;
+  padding-left: 0.5rem !important;
+  padding-right: 0.5rem !important;
+}
+</style>

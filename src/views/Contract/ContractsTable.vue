@@ -64,9 +64,9 @@
         :data="contractList"
       >
         <template v-slot:columns>
-          <th class="tableHeader">{{ $t("contract.name") }}</th>
-          <th class="tableHeader">{{ $t("contract.hash") }}</th>
-          <th class="tableHeader">
+          <th class="tableHeader tableHeader-contract">{{ $t("contract.name") }}</th>
+          <th class="tableHeader tableHeader-contract">{{ $t("contract.hash") }}</th>
+          <th class="tableHeader tableHeader-contract">
             {{ $t("contract.creator") }}
             <el-button
               type="info"
@@ -78,8 +78,8 @@
               {{ this.button.buttonName }}</el-button
             >
           </th>
-          <th class="tableHeader">{{ $t("contract.updates") }}</th>
-          <th class="tableHeader">
+          <th class="tableHeader tableHeader-contract">{{ $t("contract.updates") }}</th>
+          <th class="tableHeader tableHeader-contract tableHeader-contract-right">
             {{ $t("contract.time") }}
             <el-button
               type="info"
@@ -94,7 +94,7 @@
         </template>
 
         <template v-slot:default="row">
-          <td class="table-list-item">
+          <td class="table-list-item tableContent-contract">
             <router-link
               class="table-list-item-blue mb-0"
               style="cursor: pointer"
@@ -102,15 +102,15 @@
               >{{ row.item.name }}</router-link
             >
           </td>
-          <td scope="row" v-if="row.item">
-            <div style="text-align: center">
+          <td scope="row" v-if="row.item" class="tableContent-contract">
+            <div>
               <div class="media-body short">
                 {{ row.item.hash }}
               </div>
             </div>
           </td>
 
-          <td class="table-list-item-blue">
+          <td class="table-list-item-blue tableContent-contract">
             <div class="short">
               <span
                 class="text-muted"
@@ -141,10 +141,10 @@
               </router-link>
             </div>
           </td>
-          <td class="table-list-item">
+          <td class="table-list-item tableContent-contract">
             {{ row.item.updatecounter }}
           </td>
-          <td class="table-list-item">
+          <td class="table-list-item tableContent-contract tableContent-contract-right">
             {{
               time.state
                 ? this.convertTime(row.item.createtime, this.$i18n.locale)
@@ -369,4 +369,17 @@ export default {
   /* identical to box height */
   color: black;
 }
+.tableHeader-contract,
+.tableContent-contract {
+  text-align: left;
+  padding-left: 0.5rem !important;
+  padding-right: 0.5rem !important;
+}
+.tableHeader-contract-right,
+.tableContent-contract-right {
+  text-align: right;
+  padding-left: 0.5rem !important;
+  padding-right: 0.5rem !important;
+}
+
 </style>

@@ -14,12 +14,16 @@
           :data="tableData"
         >
           <template v-slot:columns>
-            <th class="tableHeader">
+            <th class="tableHeader tableHeader-transition">
               {{ $t("transactionList.transactionId") }}
             </th>
-            <th class="tableHeader">{{ $t("transactionList.blockHeight") }}</th>
-            <th class="tableHeader">{{ $t("transactionList.size") }}</th>
-            <th class="tableHeader">
+            <th class="tableHeader tableHeader-transition">
+              {{ $t("transactionList.blockHeight") }}
+            </th>
+            <th class="tableHeader tableHeader-transition">
+              {{ $t("transactionList.size") }}
+            </th>
+            <th class="tableHeader tableHeader-transition">
               {{ $t("transactionList.time") }}
               <el-button
                 type="info"
@@ -31,11 +35,15 @@
                 Format</el-button
               >
             </th>
-            <th class="tableHeader">{{ $t("transactionList.gasConsumed") }}</th>
+            <th
+              class="tableHeader tableHeader-transition tableHeader-transition-right"
+            >
+              {{ $t("transactionList.gasConsumed") }}
+            </th>
           </template>
           <template v-slot:default="row">
             <td>
-              <div class="txid">
+              <div class="txid tableContent-transition">
                 <router-link
                   class="mb-0 table-list-item-blue"
                   style="cursor: pointer"
@@ -44,7 +52,7 @@
                 >
               </div>
             </td>
-            <td class="table-list-item">
+            <td class="table-list-item tableContent-transition">
               <router-link
                 class="mb-0 table-list-item-blue"
                 style="cursor: pointer"
@@ -52,8 +60,10 @@
                 >{{ row.item.blockIndex }}</router-link
               >
             </td>
-            <td class="table-list-item">{{ row.item.size }} bytes</td>
-            <td class="table-list-item">
+            <td class="table-list-item tableContent-transition">
+              {{ row.item.size }} bytes
+            </td>
+            <td class="table-list-item tableContent-transition">
               {{
                 time.state
                   ? this.convertTime(row.item.blocktime, this.$i18n.locale)
@@ -61,7 +71,9 @@
               }}
             </td>
 
-            <td class="table-list-item">
+            <td
+              class="table-list-item tableContent-transition tableContent-transition-right"
+            >
               {{ this.convertGas(row.item.netfee + row.item.sysfee) }}
             </td>
           </template>
@@ -214,5 +226,17 @@ export default {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+.tableHeader-transition {
+  text-align: left;
+}
+.tableHeader-transition-right {
+  text-align: right;
+}
+.tableContent-transition {
+  text-align: left;
+}
+.tableContent-transition-right {
+  text-align: right;
 }
 </style>

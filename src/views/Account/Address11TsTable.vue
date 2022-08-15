@@ -41,7 +41,7 @@
             >
           </th>
 
-          <th class="tableHeader">
+          <th class="tableHeader" style="text-align: right">
             {{ $t("tokenTx.time") }}
             <el-button
               type="info"
@@ -273,7 +273,7 @@
             </div>
           </td>
 
-          <td class="table-list-item">
+          <td class="table-list-item" style="text-align: right">
             {{
               time.state
                 ? this.convertTime(row.item.timestamp, this.$i18n.locale)

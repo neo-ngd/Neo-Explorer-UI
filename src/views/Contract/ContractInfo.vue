@@ -9,7 +9,10 @@
               :opacity="0.9"
               :active="isLoading"
             ></loading>
-            <div class="row mt-3 mb-5 title1 shortTitle">
+            <div
+              class="row mt-3 mb-5 title1 shortTitle"
+              style="font-size: 36px; height: 100px; align-items: end"
+            >
               {{ $t("contractDetail") }}
             </div>
             <div class="row mt-3 mb-3 title2 shortTitle">

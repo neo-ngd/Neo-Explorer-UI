@@ -141,7 +141,7 @@
               >
             </th>
           </template>
-          <template v-slot:default="row">
+          <template v-slot:default="row" style="text-align: left">
             <td class="table-list-item">
               <div>
                 <div
@@ -239,7 +239,7 @@
                 ><span style="font-weight: bold; font-size: 15px">Out</span>
               </el-tag>
             </td>
-            <td class="pt-4" style="text-align: center">
+            <td class="pt-4" style="text-align: left">
               <div class="table-list-item mt-2" style="text-align: center">
                 {{ convertToken(row.item.value, row.item.decimals) }}
                 {{ row.item.symbol }}
@@ -343,7 +343,7 @@
             </td>
 
             <td class="table-list-item">
-              <div>
+              <div style="text-align: right">
                 {{
                   time.state
                     ? this.convertTime(row.item.timestamp, this.$i18n.locale)

@@ -10,7 +10,10 @@
               :active="isLoading"
             ></loading>
             <div class="bat">
-              <div class="row mt-3 mb-5 title1 shortTitle">
+              <div
+                class="row mt-3 mb-5 title1 shortTitle"
+                style="font-size: 36px; height: 100px; align-items: end"
+              >
                 <span
                   v-if="this.type === 'normal' || this.type === 'candidate'"
                   class="mb-0"
