@@ -572,7 +572,6 @@ export default {
         },
       }).then((res) => {
         this.tableData = res["data"]["result"]["result"];
-        console.log(this.tableData);
         this.totalCount = res["data"]["result"]["totalCount"];
         for (let k = 0; k < this.tableData.length; k++) {
           axios({

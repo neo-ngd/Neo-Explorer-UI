@@ -649,6 +649,7 @@
       <!-- Search -->
       <div class="searchDiv" v-if="$route.meta.showSearch">
         <input
+          style="font-size: 12px"
           type="text"
           class="over-ellipsis-Auth"
           :placeholder="$t('search.placeholder')"

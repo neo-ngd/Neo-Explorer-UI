@@ -45,7 +45,7 @@
             <td class="tableContent-AddressToken">
               <el-image
                 style="width: 100px"
-                :src="row.item.image"
+                :src="require('@/assets/gui/' + row.item.asset + '.png')"
                 :preview-src-list="row.item.imageList"
                 :hide-on-click-modal="true"
               >
@@ -236,7 +236,6 @@ export default {
         },
       }).then((res) => {
         let temp = res["data"]["result"]["result"];
-        console.log(temp);
         this.totalCount = res["data"]["result"]["totalCount"];
         this.countPage =
           this.totalCount === 0
@@ -246,7 +245,6 @@ export default {
         for (let j = 0; j < temp.length; j++) {
           address_list.push(temp[j]["asset"]);
         }
-        // console.log("address_list", address_list)
         this.tokenList = temp;
         for (let k = 0; k < temp.length; k++) {
           if (this.tokenList[k]["tokenid"] === "") {
@@ -270,12 +268,8 @@ export default {
               crossDomain: "true",
             },
           }).then((res) => {
-            console.log(res);
-            // console.log(this.tableData)
             this.isLoading = false;
             var value = res["data"]["result"]["result"][0];
-            // console.log(value["asset"])
-            // console.log(value["properties"])
             this.tokenList[k]["nftName"] = value["name"];
             this.tokenList[k]["image"] = value["image"].startsWith("ipfs")
               ? value["image"].replace(
@@ -283,6 +277,7 @@ export default {
                   "https://ipfs.infura.io/ipfs/"
                 )
               : value["image"];
+            console.log(this.tokenList[k]["image"]);
             this.tokenList[k]["imageList"] = [this.tokenList[k]["image"]];
           });
         }
