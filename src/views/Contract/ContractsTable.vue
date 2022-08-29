@@ -87,6 +87,7 @@
           </th>
           <th
             class="tableHeader tableHeader-contract tableHeader-contract-right"
+            style="text-align: right"
           >
             {{ $t("contract.time") }}
             <el-button

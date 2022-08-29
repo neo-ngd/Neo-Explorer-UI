@@ -67,7 +67,7 @@
               >{{ row.item.blockIndex }}</router-link
             >
           </td>
-          <td class="table-list-item txHeader">
+          <td class="table-list-item txHeader" style="text-align: left">
             {{ row.item.size }} {{ $t("bytes") }}
           </td>
           <td class="table-list-item txHeader" style="text-align: left">
