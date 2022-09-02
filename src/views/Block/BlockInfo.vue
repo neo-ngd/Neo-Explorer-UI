@@ -395,7 +395,6 @@ export default {
         },
       })
         .then((res) => {
-          console.log(res);
           this.block_info = res["data"]["result"];
           this.block_info["witnesses"][0]["invocation"] = toOpcode(
             this.block_info["witnesses"][0]["invocation"]
@@ -407,10 +406,13 @@ export default {
           let words = this.block_info["witnesses"][0]["verification"].split(
             "<br>"
           );
-          console.log(this.block_info["primary"] + 1);
-          this.block_info["speaker"] = words[
-            this.block_info["primary"] + 1
-          ].substring(10);
+          if (words[this.block_info["primary"] + 1] == undefined)
+            this.block_info["speaker"] = null;
+          else {
+            this.block_info["speaker"] = words[
+              this.block_info["primary"] + 1
+            ].substring(10);
+          }
           this.isLoading = false;
         })
         .catch((e) => {
