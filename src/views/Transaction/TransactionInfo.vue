@@ -595,7 +595,7 @@
                     class="ml-4"
                     v-for="(item, index) in this.tabledata['signers']"
                     :key="index"
-                    style="margin-left: 5%"
+                    style="margin-left: 5%  !important"
                   >
                     {{ item["account"] }}
                   </div>
@@ -608,7 +608,7 @@
                     class="ml-4"
                     v-for="(item, index) in this.tabledata['signers']"
                     :key="index"
-                    style="margin-left: 5%"
+                    style="margin-left: 5%  !important"
                   >
                     {{ item["scopes"] }}
                   </div>
@@ -630,7 +630,7 @@
                     class="ml-4"
                     v-for="(item, index) in this.tabledata['witnesses']"
                     :key="index"
-                    style="margin-left: 5%"
+                    style="margin-left: 5% !important"
                   >
                     <span v-html="item['invocation']"> </span>
                   </div>
@@ -643,7 +643,7 @@
                     class="ml-4"
                     v-for="(item, index) in this.tabledata['witnesses']"
                     :key="index"
-                    style="margin-left: 5%"
+                    style="margin-left: 5% !important"
                   >
                     <span v-html="item['verification']"></span>
                   </div>
@@ -663,7 +663,7 @@
                   <div
                     class="ml-4"
                     v-html="this.tabledata['script']"
-                    style="margin-left: 5%"
+                    style="margin-left: 5% !important"
                   ></div>
                 </el-collapse-item>
               </el-collapse>
