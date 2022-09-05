@@ -406,9 +406,9 @@ export default {
           let words = this.block_info["witnesses"][0]["verification"].split(
             "<br>"
           );
-          if (words[this.block_info["primary"] + 1] == undefined)
+          if (this.block_info["speaker"] == undefined) {
             this.block_info["speaker"] = null;
-          else {
+          } else {
             this.block_info["speaker"] = words[
               this.block_info["primary"] + 1
             ].substring(10);

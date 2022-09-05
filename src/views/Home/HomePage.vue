@@ -23,7 +23,6 @@
               </svg>
             </button>
             <input
-              style="font-size: 12px"
               type="text"
               class="over-ellipsis"
               :placeholder="$t('search.placeholder')"
