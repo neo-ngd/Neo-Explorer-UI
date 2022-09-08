@@ -45,7 +45,7 @@
             <td class="tableContent-AddressToken">
               <el-image
                 style="width: 100px"
-                :src="require('@/assets/gui/' + row.item.asset + '.png')"
+                :src="getImage('@/assets/gui/' + row.item.asset + '.png')"
                 :preview-src-list="row.item.imageList"
                 :hide-on-click-modal="true"
               >
@@ -196,6 +196,13 @@ export default {
     account_address: "watchaddress",
   },
   methods: {
+    getImage(url) {
+      try {
+        return require(url);
+      } catch (e) {
+        return require("@/assets/gui/default.png");
+      }
+    },
     convertToken,
     watchaddress() {
       this.getTokenListWithBalance(0);

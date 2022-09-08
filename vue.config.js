@@ -30,7 +30,7 @@ module.exports = {
         // 主网
         // target: "https://neofura.ngd.network",
         // t5
-        target:"https://testmagnet.ngd.network",
+        target: "https://testmagnet.ngd.network",
         // target: "http://106.14.204.151:1926",
         // target: "http://192.168.1.89:1926"
       },
