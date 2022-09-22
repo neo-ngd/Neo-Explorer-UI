@@ -56,9 +56,9 @@ module.exports = {
   configureWebpack: {
     // Set up all the aliases we use in our app.
     externals: {
-      vue: "Vue",
+      // vue: "Vue",
       // axios: "axios",
-      "element-plus": "ElementPlus",
+      // "element-plus": "ElementPlus",
     },
     plugins: [
       new CompressionWebpackPlugin({
