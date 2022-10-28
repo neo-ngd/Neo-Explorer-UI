@@ -2,7 +2,7 @@ const en = {
   home: "Welcome To OneGate Explorer",
   na: "Not Available",
   blockReward: "Block Reward",
-  networkFeeReward: "Network Fee Reward",
+  networkFeeReward: "Oracle Fee Reward",
   feeBurn: "Transaction Fee Burn",
   transferReward: "Transfer Reward",
   mint: "Mint",
