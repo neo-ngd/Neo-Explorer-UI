@@ -267,11 +267,11 @@ export default {
             this.tableData[k]["nftname"] = "——";
 
             this.tableData[k]["description"] = "No description";
-            if (value["name"] !== "") {
+            if (value["name"]) {
               this.tableData[k]["nftname"] = value["name"];
               // console.log(this.tableData[k]["nftname"])
             }
-            if (value["image"] !== "") {
+            if (value["image"]) {
               this.tableData[k]["image"] = value["image"].startsWith("ipfs")
                 ? value["image"].replace(
                     /^(ipfs:\/\/)|^(ipfs-video:\/\/)/,
@@ -281,7 +281,7 @@ export default {
               this.tableData[k]["imageList"] = [this.tableData[k]["image"]];
               // console.log( this.tableData[k]["image"])
             }
-            if (value["description"] !== "") {
+            if (value["description"]) {
               this.tableData[k]["description"] = value["description"];
             }
             this.isLoading = false;

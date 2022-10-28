@@ -44,14 +44,21 @@
           <template v-slot:default="row">
             <td class="tableContent-AddressToken">
               <el-image
-                style="width: 100px"
-                :src="require('@/assets/gui/' + row.item.asset + '.png')"
+                fit="contain"
+                class="address-token-img"
+                :src="
+                  getImage(row.item.asset, row.item.tokenid, row.item.image)
+                "
                 :preview-src-list="row.item.imageList"
                 :hide-on-click-modal="true"
               >
                 <template #error>
                   <div class="image-slot">
-                    <i class="ni ni-image"> </i>
+                    <!-- <i class="ni ni-image"> </i> -->
+                    <el-image
+                      :src="getImage()"
+                      :hide-on-click-modal="true"
+                    ></el-image>
                   </div>
                 </template>
               </el-image>
@@ -169,6 +176,8 @@ import axios from "axios";
 import { convertToken } from "../../store/util";
 import net from "../../store/store";
 import Neon from "@cityofzion/neon-js";
+import defaultTokenImg from "@/assets/gui/default.png";
+
 export default {
   name: "address-tokens-table",
   props: {
@@ -196,6 +205,20 @@ export default {
     account_address: "watchaddress",
   },
   methods: {
+    getImage(asset, isNep11, nftImg) {
+      try {
+        if (isNep11) {
+          return nftImg || defaultTokenImg;
+        } else {
+          return asset
+            ? require("@/assets/gui/" + asset + ".png")
+            : defaultTokenImg;
+          // return `https://neo.org/images/gui/${asset}.png`;
+        }
+      } catch (e) {
+        return defaultTokenImg;
+      }
+    },
     convertToken,
     watchaddress() {
       this.getTokenListWithBalance(0);
@@ -326,5 +349,9 @@ export default {
   text-align: right;
   padding-left: 0.5rem !important;
   padding-right: 0.5rem !important;
+}
+.address-token-img {
+  width: 60px;
+  height: 60px;
 }
 </style>

@@ -6,7 +6,7 @@ import i18n from "./lang/i18n.js";
 import ElementPlus from "element-plus";
 
 // import Vuex  from "vuex";
-
+import "element-plus/lib/theme-chalk/index.css";
 import "./assets/css/global.css";
 
 const appInstance = createApp(App);
