@@ -2,7 +2,7 @@ const fr = {
   home: "Bienvenue sur OneGate Explorer",
   na: "non disponible",
   blockReward: " Bloc Récompense",
-  networkFeeReward: "Récompense de frais Oracle",
+  networkFeeReward: "Récompense de frais de système",
   feeBurn: " Brûler la frais de transaction ",
   transferReward: "Récompense Transfert",
   mint: "Mouler",

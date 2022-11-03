@@ -2,7 +2,7 @@ const zh = {
   home: "欢迎使用OneGate Explorer",
   na: "不适用",
   blockReward: "区块奖励",
-  networkFeeReward: "预言机奖励",
+  networkFeeReward: "网络费奖励",
   feeBurn: "手续费燃烧",
   transferReward: "转账奖励",
   mint: "铸币交易",
