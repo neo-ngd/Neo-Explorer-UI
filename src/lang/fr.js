@@ -3,6 +3,7 @@ const fr = {
   na: "non disponible",
   blockReward: " Bloc Récompense",
   networkFeeReward: "Récompense de frais de système",
+  oracleFeeReward: "Récompense de frais Oracle",
   feeBurn: " Brûler la frais de transaction ",
   transferReward: "Récompense Transfert",
   mint: "Mouler",

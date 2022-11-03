@@ -78,6 +78,12 @@
               >
               <span
                 class="text-warning"
+                v-else-if="isOracleReward(row.item)"
+                type="primary"
+                >{{ $t("oracleFeeReward") }}</span
+              >
+              <span
+                class="text-warning"
                 v-else-if="
                   row.item.txid ===
                     '0x0000000000000000000000000000000000000000000000000000000000000000' &&
@@ -249,6 +255,7 @@ import {
   convertISOTime,
   switchTime,
 } from "../../store/util";
+import isOracleReward from "../../utils/isOracleReward";
 import net from "../../store/store";
 
 export default {
@@ -292,6 +299,7 @@ export default {
     switchTime,
     scriptHashToAddress,
     changeFormat,
+    isOracleReward,
     watchcontract() {
       //如果路由有变化，执行的对应的动作
       this.getTokenList(0);

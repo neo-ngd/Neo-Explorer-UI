@@ -260,6 +260,12 @@
                 >
                 <span
                   class="text-warning"
+                  v-else-if="isOracleReward(row.item)"
+                  type="primary"
+                  >{{ $t("oracleFeeReward") }}</span
+                >
+                <span
+                  class="text-warning"
                   v-else-if="
                     row.item.txid ===
                       '0x0000000000000000000000000000000000000000000000000000000000000000' &&
@@ -404,6 +410,7 @@ import {
   scriptHashToAddress,
   convertGas,
 } from "../../store/util";
+import isOracleReward from "../../utils/isOracleReward";
 import net from "../../store/store";
 import { ElMessage } from "element-plus";
 // import {ref} from 'vue'
@@ -471,6 +478,7 @@ export default {
     switchTime,
     addressToScriptHash,
     scriptHashToAddress,
+    isOracleReward,
     watchaddress() {
       this.GetNep17TransferByAddress(0, this.listButton.flag);
     },

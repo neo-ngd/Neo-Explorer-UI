@@ -3,6 +3,7 @@ const en = {
   na: "Not Available",
   blockReward: "Block Reward",
   networkFeeReward: "Network Fee Reward",
+  oracleFeeReward: "Oracle Fee Reward",
   feeBurn: "Transaction Fee Burn",
   transferReward: "Transfer Reward",
   mint: "Mint",

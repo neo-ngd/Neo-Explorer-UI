@@ -1,21 +1,3 @@
-// const LOCAL_API = 'http://192.168.1.89:1926';
-// const VINCENT_API = 'https://testneofura.ngd.network:444';
-// const proxy = {};
-// const proxyInfo = (path) => {
-//   return {
-//     target: path,
-//     changeOrigin: true,
-//     // pathRewrite: {
-//     //   [`^/${path}`]: `/`
-//     // }
-//   }
-// };
-// function setProxy(localApiPath){
-//   proxy[`/api`] = proxyInfo(localApiPath)
-//   console.log(proxy)
-// }
-// setProxy(VINCENT_API)
-
 const webpack = require("webpack");
 const CompressionWebpackPlugin = require("compression-webpack-plugin");
 const productionGzipExtensions = ["js", "css"];
@@ -28,7 +10,10 @@ module.exports = {
         // target: "http://127.0.0.1:1926",
         // target: "https://testneofura.ngd.network:444",
         // 主网
-        target: "https://neofura.ngd.network",
+        target:
+          process.env.VUE_APP_DEV_ENV === "Testmagnet"
+            ? "https://testmagnet.ngd.network"
+            : "https://neofura.ngd.network",
         // t5
         // target:"https://testmagnet.ngd.network",
         // target: "http://106.14.204.151:1926",

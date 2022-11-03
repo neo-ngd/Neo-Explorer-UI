@@ -69,6 +69,12 @@
               >
               <span
                 class="text-warning"
+                v-else-if="isOracleReward(row.item)"
+                type="primary"
+                >{{ $t("oracleFeeReward") }}</span
+              >
+              <span
+                class="text-warning"
                 v-else-if="row.item.from === null"
                 type="primary"
                 >{{ $t("networkFeeReward") }}</span
@@ -180,6 +186,7 @@ import {
   convertISOTime,
   switchTime,
 } from "../../store/util";
+import isOracleReward from "../../utils/isOracleReward";
 import net from "../../store/store";
 
 export default {
@@ -220,6 +227,7 @@ export default {
     scriptHashToAddress,
     convertISOTime,
     switchTime,
+    isOracleReward,
     watchblock() {
       //如果路由有变化，执行的对应的动作
       this.getTransferList(0);
