@@ -177,6 +177,8 @@ import { convertToken } from "../../store/util";
 import net from "../../store/store";
 import Neon from "@cityofzion/neon-js";
 import defaultTokenImg from "@/assets/gui/default.png";
+import defaultNep11TokenImg from "@/assets/gui/defaultNep11.png";
+import defaultNep17TokenImg from "@/assets/gui/defaultNep17.png";
 
 export default {
   name: "address-tokens-table",
@@ -206,13 +208,14 @@ export default {
   },
   methods: {
     getImage(asset, isNep11, nftImg) {
+      const defaultIcon = isNep11 ? defaultNep11TokenImg : defaultNep17TokenImg;
       try {
         if (isNep11) {
           return nftImg || defaultTokenImg;
         } else {
           return asset
             ? require("@/assets/gui/" + asset + ".png")
-            : defaultTokenImg;
+            : defaultIcon;
           // return `https://neo.org/images/gui/${asset}.png`;
         }
       } catch (e) {
