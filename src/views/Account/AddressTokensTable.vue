@@ -46,9 +46,7 @@
               <el-image
                 fit="contain"
                 class="address-token-img"
-                :src="
-                  getImage(row.item.asset, row.item.tokenid, row.item.image)
-                "
+                :src="getImage(row.item)"
                 :preview-src-list="row.item.imageList"
                 :hide-on-click-modal="true"
               >
@@ -56,7 +54,7 @@
                   <div class="image-slot">
                     <!-- <i class="ni ni-image"> </i> -->
                     <el-image
-                      :src="getImage()"
+                      :src="getImage(row.item)"
                       :hide-on-click-modal="true"
                     ></el-image>
                   </div>
@@ -176,7 +174,6 @@ import axios from "axios";
 import { convertToken } from "../../store/util";
 import net from "../../store/store";
 import Neon from "@cityofzion/neon-js";
-import defaultTokenImg from "@/assets/gui/default.png";
 import defaultNep11TokenImg from "@/assets/gui/defaultNep11.png";
 import defaultNep17TokenImg from "@/assets/gui/defaultNep17.png";
 
@@ -207,19 +204,23 @@ export default {
     account_address: "watchaddress",
   },
   methods: {
-    getImage(asset, isNep11, nftImg) {
-      const defaultIcon = isNep11 ? defaultNep11TokenImg : defaultNep17TokenImg;
-      try {
-        if (isNep11) {
-          return nftImg || defaultTokenImg;
-        } else {
-          return asset
-            ? require("@/assets/gui/" + asset + ".png")
-            : defaultIcon;
-          // return `https://neo.org/images/gui/${asset}.png`;
+    getImage(item) {
+      if (item) {
+        const asset = item.asset;
+        const isNep11 = item.tokenid;
+        const nftImg = item.image;
+        const defaultIcon = isNep11
+          ? defaultNep11TokenImg
+          : defaultNep17TokenImg;
+        try {
+          if (isNep11) {
+            return nftImg || require("@/assets/gui/" + asset + ".png");
+          } else {
+            return `https://neo.org/images/gui/${asset}.png`;
+          }
+        } catch (e) {
+          return defaultIcon;
         }
-      } catch (e) {
-        return defaultTokenImg;
       }
     },
     convertToken,
