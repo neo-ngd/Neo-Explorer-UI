@@ -64,6 +64,14 @@
                   value="Neo.Compiler.CSharp 3.3.0"
                 ></el-option>
                 <el-option
+                  label="Neo.Compiler.CSharp 3.4.0"
+                  value="Neo.Compiler.CSharp 3.4.0"
+                ></el-option>
+                <el-option
+                  label="Neo3-boa 0.11.4"
+                  value="neo3-boa 0.11.4"
+                ></el-option>
+                <el-option
                   label="Neo3-boa 0.11.3"
                   value="neo3-boa 0.11.3"
                 ></el-option>
@@ -121,7 +129,8 @@
                 this.form.version === 'Neo.Compiler.CSharp 3.0.2' ||
                 this.form.version === 'Neo.Compiler.CSharp 3.0.3' ||
                 this.form.version === 'Neo.Compiler.CSharp 3.1.0' ||
-                this.form.version === 'Neo.Compiler.CSharp 3.3.0'
+                this.form.version === 'Neo.Compiler.CSharp 3.3.0' ||
+                this.form.version === 'Neo.Compiler.CSharp 3.4.0'
               "
               label="Compile Command"
               prop="command"
@@ -186,6 +195,7 @@
               </div>
               <div
                 v-else-if="
+                  this.form.version === 'neo3-boa 0.11.4' ||
                   this.form.version === 'neo3-boa 0.11.3' ||
                   this.form.version === 'neo3-boa 0.11.2' ||
                   this.form.version === 'neo3-boa 0.11.1' ||
@@ -217,7 +227,8 @@
                   this.form.version === 'Neo.Compiler.CSharp 3.0.2' ||
                   this.form.version === 'Neo.Compiler.CSharp 3.0.3' ||
                   this.form.version === 'Neo.Compiler.CSharp 3.1.0' ||
-                  this.form.version === 'Neo.Compiler.CSharp 3.3.0'
+                  this.form.version === 'Neo.Compiler.CSharp 3.3.0' ||
+                  this.form.version === 'Neo.Compiler.CSharp 3.4.0'
                 "
                 class="el-upload__tip"
               >
@@ -361,7 +372,8 @@ export default {
             this.form.version === "Neo.Compiler.CSharp 3.0.2" ||
             this.form.version === "Neo.Compiler.CSharp 3.0.3" ||
             this.form.version === "Neo.Compiler.CSharp 3.1.0" ||
-            this.form.version === "Neo.Compiler.CSharp 3.3.0"
+            this.form.version === "Neo.Compiler.CSharp 3.3.0" ||
+            this.form.version === "Neo.Compiler.CSharp 3.4.0"
           ) {
             ElMessage({
               showClose: true,
@@ -371,6 +383,7 @@ export default {
                 "Compilation failed! We can not generate a .nef file based on the files you uploaded, please check if you have uploaded all files with .cs and .csproj extension in your project.",
             });
           } else if (
+            this.form.version === "neo3-boa 0.11.4" ||
             this.form.version === "neo3-boa 0.11.3" ||
             this.form.version === "neo3-boa 0.11.2" ||
             this.form.version === "neo3-boa 0.11.1" ||
