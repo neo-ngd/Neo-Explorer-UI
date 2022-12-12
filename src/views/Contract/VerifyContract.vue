@@ -68,6 +68,10 @@
                   value="Neo.Compiler.CSharp 3.4.0"
                 ></el-option>
                 <el-option
+                  label="Neo.Compiler.CSharp 3.5.0"
+                  value="Neo.Compiler.CSharp 3.5.0"
+                ></el-option>
+                <el-option
                   label="Neo3-boa 0.11.4"
                   value="neo3-boa 0.11.4"
                 ></el-option>
@@ -130,7 +134,8 @@
                 this.form.version === 'Neo.Compiler.CSharp 3.0.3' ||
                 this.form.version === 'Neo.Compiler.CSharp 3.1.0' ||
                 this.form.version === 'Neo.Compiler.CSharp 3.3.0' ||
-                this.form.version === 'Neo.Compiler.CSharp 3.4.0'
+                this.form.version === 'Neo.Compiler.CSharp 3.4.0' ||
+                this.form.version === 'Neo.Compiler.CSharp 3.5.0'
               "
               label="Compile Command"
               prop="command"
@@ -228,7 +233,8 @@
                   this.form.version === 'Neo.Compiler.CSharp 3.0.3' ||
                   this.form.version === 'Neo.Compiler.CSharp 3.1.0' ||
                   this.form.version === 'Neo.Compiler.CSharp 3.3.0' ||
-                  this.form.version === 'Neo.Compiler.CSharp 3.4.0'
+                  this.form.version === 'Neo.Compiler.CSharp 3.4.0' ||
+                  this.form.version === 'Neo.Compiler.CSharp 3.5.0'
                 "
                 class="el-upload__tip"
               >
@@ -373,7 +379,8 @@ export default {
             this.form.version === "Neo.Compiler.CSharp 3.0.3" ||
             this.form.version === "Neo.Compiler.CSharp 3.1.0" ||
             this.form.version === "Neo.Compiler.CSharp 3.3.0" ||
-            this.form.version === "Neo.Compiler.CSharp 3.4.0"
+            this.form.version === "Neo.Compiler.CSharp 3.4.0" ||
+            this.form.version === "Neo.Compiler.CSharp 3.5.0"
           ) {
             ElMessage({
               showClose: true,
