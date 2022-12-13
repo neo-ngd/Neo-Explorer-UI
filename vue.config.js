@@ -11,7 +11,7 @@ module.exports = {
         // target: "https://testneofura.ngd.network:444",
         // 主网
         target:
-          process.env.VUE_APP_DEV_ENV === "Testmagnet"
+          process.env.VUE_APP_DEV_ENV === "TestT5"
             ? "https://testmagnet.ngd.network"
             : "https://neofura.ngd.network",
         // t5

@@ -7,7 +7,7 @@ const validateAddressConfig = {
     "0x653d7796269ebfa14b632f9a7f09560868d9f646",
     "0x4362251333904b780d5301477f911cea22e477b5",
   ],
-  [NET_ENV.Testmagnet]: [
+  [NET_ENV.TestT5]: [
     "0x196b66dd7f8f46a86aa8ef1e845fa10dcecfcbcc",
     "0xcb4426a0592481b6133a0a95ff49846e9b9bb431",
     "0x4362251333904b780d5301477f911cea22e477b5",

@@ -346,16 +346,6 @@ export default {
         } else {
           node = "https://mainnet.n3magnet.xyz:3027/upload";
         }
-      } else if (`${location.hostname}` === "testnet.explorer.onegate.space") {
-        if (
-          this.form.version === "Neo.Compiler.CSharp 3.0.0" ||
-          this.form.version === "Neo.Compiler.CSharp 3.0.2" ||
-          this.form.version === "Neo.Compiler.CSharp 3.0.3"
-        ) {
-          node = "https://testneofura.ngd.network:444/upload";
-        } else {
-          node = "https://n3t4.n3magnet.xyz:3026/upload";
-        }
       } else if (
         `${location.hostname}` === "testmagnet.explorer.onegate.space"
       ) {

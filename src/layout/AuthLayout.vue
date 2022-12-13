@@ -880,11 +880,8 @@
               <el-dropdown-item @click="switchNet('main')"
                 >MainNet</el-dropdown-item
               >
-              <el-dropdown-item @click="switchNet('test')"
-                >TestNet</el-dropdown-item
-              >
-              <el-dropdown-item @click="switchNet('testmagnet')"
-                >TestMagnet</el-dropdown-item
+              <el-dropdown-item @click="switchNet('testT5')"
+                >TestT5</el-dropdown-item
               >
             </el-dropdown-menu>
           </template>
@@ -1633,11 +1630,8 @@
                       <el-dropdown-item @click="switchNet('main')"
                         >MainNet</el-dropdown-item
                       >
-                      <el-dropdown-item @click="switchNet('test')"
-                        >TestNet</el-dropdown-item
-                      >
-                      <el-dropdown-item @click="switchNet('testmagnet')"
-                        >TestMagnet</el-dropdown-item
+                      <el-dropdown-item @click="switchNet('testT5')"
+                        >TestT5</el-dropdown-item
                       >
                     </el-dropdown-menu>
                   </template>
@@ -1790,21 +1784,13 @@ export default {
       } else if (this.$i18n.locale === "fr") {
         this.netShow = "Mainnet";
       }
-    } else if (`${location.hostname}` === "testnet.explorer.onegate.space") {
-      if (this.$i18n.locale === "cn") {
-        this.netShow = "测试网";
-      } else if (this.$i18n.locale === "en") {
-        this.netShow = "Testnet";
-      } else if (this.$i18n.locale === "fr") {
-        this.netShow = "Testnet";
-      }
     } else if (`${location.hostname}` === "testmagnet.explorer.onegate.space") {
       if (this.$i18n.locale === "cn") {
-        this.netShow = "测试网一";
+        this.netShow = "T5测试网";
       } else if (this.$i18n.locale === "en") {
-        this.netShow = "Testmagnet";
+        this.netShow = "TestT5";
       } else if (this.$i18n.locale === "fr") {
-        this.netShow = "Testmagnet";
+        this.netShow = "TestT5";
       }
     }
   },
@@ -1835,13 +1821,9 @@ export default {
     switchNet(net) {
       if (net == "main") {
         // localStorage.setItem("net","/bpi")
-
         location.href =
           "https://explorer.onegate.space" + `${location.pathname}`;
-      } else if (net == "test") {
-        location.href =
-          "https://testnet.explorer.onegate.space" + `${location.pathname}`;
-      } else if (net == "testmagnet") {
+      } else if (net == "testT5") {
         location.href =
           "https://testmagnet.explorer.onegate.space" + `${location.pathname}`;
       }
