@@ -409,10 +409,9 @@ import {
   convertPreciseTime,
   convertToken,
   responseConverter,
-  RPC_NODE,
   copyItem,
   RPC_NODE_MAIN,
-  RPC_NODE_MAGNET,
+  RPC_NODE_TEST_T5,
 } from "../../store/util";
 import net from "../../store/store";
 
@@ -549,12 +548,10 @@ export default {
       let client = "";
       if (`${location.hostname}` === "explorer.onegate.space") {
         client = Neon.create.rpcClient(RPC_NODE_MAIN);
-      } else if (`${location.hostname}` === "testnet.explorer.onegate.space") {
-        client = Neon.create.rpcClient(RPC_NODE);
       } else if (
         `${location.hostname}` === "testmagnet.explorer.onegate.space"
       ) {
-        client = Neon.create.rpcClient(RPC_NODE_MAGNET);
+        client = Neon.create.rpcClient(RPC_NODE_TEST_T5);
       }
 
       client

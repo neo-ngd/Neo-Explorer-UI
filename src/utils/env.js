@@ -1,13 +1,11 @@
 export const NET_ENV = {
   Mainnet: "Mainnet",
-  Testnet: "Testnet",
-  Testmagnet: "Testmagnet",
+  TestT5: "TestT5",
 };
 
 export const APP_URL = {
   [NET_ENV.Mainnet]: "explorer.onegate.space",
-  [NET_ENV.Testnet]: "testnet.explorer.onegate.space",
-  [NET_ENV.Testmagnet]: "testmagnet.explorer.onegate.space",
+  [NET_ENV.TestT5]: "testmagnet.explorer.onegate.space",
 };
 
 export const inProduction = process.env.NODE_ENV === "production";
@@ -19,8 +17,7 @@ export const getCurrentEnv = () => {
 
   const env = {
     [APP_URL[NET_ENV.Mainnet]]: NET_ENV.Mainnet,
-    [APP_URL[NET_ENV.Testnet]]: NET_ENV.Testnet,
-    [APP_URL[NET_ENV.Testmagnet]]: NET_ENV.Testmagnet,
+    [APP_URL[NET_ENV.TestT5]]: NET_ENV.TestT5,
   }[hostname];
 
   return env || NET_ENV.Mainnet;

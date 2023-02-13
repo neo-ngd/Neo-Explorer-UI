@@ -4,9 +4,8 @@ import Neon from "@cityofzion/neon-js";
 
 
 // const RPC_NODE = "http://seed2t4.neo.org:20332";
-const RPC_NODE = "https://testneofura.ngd.network:444"
 const RPC_NODE_MAIN = "https://neofura.ngd.network"
-const RPC_NODE_MAGNET = "https://testmagnet.ngd.network"
+const RPC_NODE_TEST_T5 = "https://testmagnet.ngd.network"
 
 function changeFormat(button) {
     if(button.state) {
@@ -170,9 +169,8 @@ function responseConverter(key, val) {
 
 
 export {
-    RPC_NODE,
     RPC_NODE_MAIN,
-    RPC_NODE_MAGNET,
+    RPC_NODE_TEST_T5,
     switchTime,
     numFormat,
     changeFormat,
