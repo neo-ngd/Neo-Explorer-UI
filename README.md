@@ -13,10 +13,10 @@ git clone https://github.com/RookieCoderrr/Neo-Explorer-UI.git
 cd Neo-Explorer-UI-main
 
 # install dependencies
-npm install
+yarn run install
 
 # start vue project
-npm run serve
+yarn run serve
 ```
 
 

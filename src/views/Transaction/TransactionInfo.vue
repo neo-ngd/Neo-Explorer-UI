@@ -595,7 +595,7 @@
                     class="ml-4"
                     v-for="(item, index) in this.tabledata['signers']"
                     :key="index"
-                    style="margin-left: 5%  !important"
+                    style="margin-left: 5% !important"
                   >
                     {{ item["account"] }}
                   </div>
@@ -608,7 +608,7 @@
                     class="ml-4"
                     v-for="(item, index) in this.tabledata['signers']"
                     :key="index"
-                    style="margin-left: 5%  !important"
+                    style="margin-left: 5% !important"
                   >
                     {{ item["scopes"] }}
                   </div>
