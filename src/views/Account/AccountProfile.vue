@@ -35,7 +35,7 @@
                 <div class="col-md-3 lable-title">
                   {{ $t("addressPage.addressProfile.address") }}
                 </div>
-                <div class="col-md-9 context-black">
+                <div class="col-md-9 context-black d-flex align-items-center">
                   <span id="address">
                     {{ this.scriptHashToAddress(this.accountAddress) }}
                   </span>
@@ -55,6 +55,15 @@
                     @click="copyItem('address', 'addressButton', 'addressSpan')"
                   ></i>
                   <span style="color: #42b983" id="addressSpan"></span>
+                  <a
+                    class="d-flex"
+                    :href="`https://chat.neo.org?newPeer=${scriptHashToAddress(
+                      accountAddress
+                    )}`"
+                    target="_blank"
+                  >
+                    <img class="ml-2 neo-chat-logo" :src="neochatLogo" />
+                  </a>
                 </div>
               </div>
               <div class="row info mt-3 mb-1">
@@ -190,6 +199,7 @@ import {
   copyItem,
 } from "../../store/util";
 import net from "../../store/store";
+import neochatLogo from "@/assets/neochat.svg";
 
 export default {
   name: "account-profile",
@@ -209,6 +219,7 @@ export default {
       type: "normal",
       activeName: "first",
       net: window.URL,
+      neochatLogo,
     };
   },
   components: {
@@ -465,5 +476,10 @@ export default {
     margin-top: 1.5rem !important;
     margin-bottom: 1.5rem !important;
   }
+}
+
+.neo-chat-logo {
+  width: 18px;
+  height: 18px;
 }
 </style>
