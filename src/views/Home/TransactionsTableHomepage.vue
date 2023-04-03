@@ -59,10 +59,7 @@
               <div>{{ row.item.size }} {{ $t("bytes") }}</div>
             </td>
             <td class="hometxcontent hometxcontentright">
-              <div
-                class="timeago"
-                :datetime="convertISOTime(row.item.blocktime).toString()"
-              ></div>
+              <div>{{ convertTime(row.item.timestamp, $i18n.locale) }}</div>
             </td>
           </template>
         </base-table>
@@ -71,7 +68,7 @@
   </div>
 </template>
 <script>
-import { convertGas, convertTime, convertISOTime } from "../../store/util";
+import { convertGas, convertTime } from "../../store/util";
 import net from "../../store/store";
 
 export default {
@@ -95,7 +92,6 @@ export default {
   methods: {
     convertGas,
     convertTime,
-    convertISOTime,
     toTransactionsTable() {
       this.$router.push({
         path: `/Transactions/1`,
