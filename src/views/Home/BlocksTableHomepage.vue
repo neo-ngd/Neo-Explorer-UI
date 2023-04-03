@@ -57,10 +57,7 @@
               </div>
             </td>
             <td class="homeblockcontent hometableRight">
-              <div
-                class="timeago"
-                :datetime="convertISOTime(row.item.timestamp).toString()"
-              ></div>
+              <div>{{ convertTime(row.item.timestamp, $i18n.locale) }}</div>
             </td>
           </template>
         </base-table>
@@ -69,7 +66,7 @@
   </div>
 </template>
 <script>
-import { convertTime, convertISOTime } from "../../store/util";
+import { convertTime } from "../../store/util";
 import net from "../../store/store";
 
 export default {
@@ -98,7 +95,6 @@ export default {
 
   methods: {
     convertTime,
-    convertISOTime,
     toBlocksTable() {
       this.$router.push({
         path: `/blocks/1`,

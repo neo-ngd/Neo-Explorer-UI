@@ -556,7 +556,6 @@ import BlocksTableHomepage from "./BlocksTableHomepage";
 import TransactionTableHomepage from "./TransactionsTableHomepage";
 import axios from "axios";
 import Neon from "@cityofzion/neon-js";
-import { render } from "timeago.js";
 import CountTo from "../../components/countTo";
 import en from "../../lang/en.js";
 import zh from "../../lang/zh_cn.js";
@@ -618,18 +617,6 @@ export default {
     this.getBlockList();
     this.getTransactionList();
     this.initWebSocket();
-  },
-  updated() {
-    const nodes = document.getElementsByClassName("timeago");
-    if (nodes.length != 0) {
-      if (this.$i18n.locale === "cn") {
-        render(nodes, "zh_CN");
-      } else if (this.$i18n.locale === "en") {
-        render(nodes, "en_US");
-      } else {
-        render(nodes, "fr");
-      }
-    }
   },
   computed: {
     filterName: function () {
