@@ -56,7 +56,9 @@
                   {{ $t("hash") }}
                 </div>
                 <div class="col-md-9 context-black" id="token">
-                  {{ this.token_info["hash"] }}
+                  <span>
+                    {{ this.token_info["hash"] }}
+                  </span>
 
                   <i
                     class="ni ni-single-copy-04"
