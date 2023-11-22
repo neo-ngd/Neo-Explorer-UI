@@ -142,7 +142,7 @@ export default {
       if (this.$i18n.locale === "en") {
         return "Account includes consensus, committee, candidate, normal, 4 types.";
       } else if (this.$i18n.locale === "cn") {
-        return "账户包括 共识结点，委员会结点，候选人结点，普通结点四种类型";
+        return "账户包括 共识节点，委员会节点，候选人节点，普通节点四种类型";
       } else {
         return "Le compte contiens 4 types: consensus, comité, candidature, normal";
       }

@@ -346,7 +346,7 @@ const fr = {
     dataSupport: "Format de données qu'on supporte maintenant:",
     block: "Bloc Hash (UInt256), Bloc Index (Int)",
     transaction: "Transaction ID (UInt256)",
-    account: "Compte Script Hash (UInt160), Compte Addresse (WIF)",
+    account: "Compte Script Hash (UInt160), Compte Addresse (String)",
     token: "Jeton / Contrat Script Hash (UInt160)",
     button: "Retourner à la page d'accueil",
   },

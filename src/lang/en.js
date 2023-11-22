@@ -346,7 +346,7 @@ const en = {
     dataSupport: " Data formats we currently support:",
     block: "Block Hash (UInt256), Block Height (Int)",
     transaction: "Transaction ID (UInt256)",
-    account: "Address Script Hash (UInt160), Address (WIF)",
+    account: "Address Script Hash (UInt160), Address (String)",
     token: "Token / Contract Script Hash (UInt160)",
     button: "Back to Home Page",
   },
