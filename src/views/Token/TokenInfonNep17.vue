@@ -70,7 +70,9 @@
                   id="token"
                   style="color: #165dff"
                 >
-                  {{ this.token_info["hash"] }}
+                  <span>
+                    {{ this.token_info["hash"] }}
+                  </span>
 
                   <i
                     class="ni ni-single-copy-04"
