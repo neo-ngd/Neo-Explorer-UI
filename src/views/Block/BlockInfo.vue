@@ -169,7 +169,9 @@
                   v-if="block_info.hash"
                   id="Hash"
                 >
-                  {{ block_info.hash }}
+                  <span>
+                    {{ block_info.hash }}
+                  </span>
                   <i
                     class="ni ni-single-copy-04"
                     id="HashButton"
@@ -350,7 +352,7 @@ export default {
       if (this.$i18n.locale === "en") {
         return "Speaker is the node who invokes this block";
       } else if (this.$i18n.locale === "cn") {
-        return "议长结点是提出该区块的结点";
+        return "议长节点是提出该区块的节点";
       } else {
         return "Speaker est le nœud qui invoque ce bloc";
       }
