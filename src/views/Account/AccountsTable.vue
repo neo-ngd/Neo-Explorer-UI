@@ -160,7 +160,6 @@ import {
   addressToScriptHash,
   changeFormat,
 } from "../../store/util";
-import { render } from "timeago.js";
 import net from "../../store/store";
 
 export default {
@@ -193,19 +192,6 @@ export default {
   created() {
     window.scroll(0, 0);
     this.getAccoutsList((this.pagination - 1) * this.resultsPerPage);
-  },
-  updated() {
-    const nodes = document.getElementsByClassName("timeago");
-    // console.log(nodes);
-    if (nodes.length != 0) {
-      if (this.$i18n.locale === "cn") {
-        render(nodes, "zh_CN");
-      } else if (this.$i18n.locale === "en") {
-        render(nodes, "en_short");
-      } else {
-        render(nodes, "fr_short");
-      }
-    }
   },
   watch: {
     $route: "watchrouter",
