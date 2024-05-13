@@ -323,11 +323,8 @@
                       style="margin-bottom: 20px"
                     >
                       <div class="row">
-                        <div
-                          class="col"
-                          style="margin-left: 4%"
-                          v-if="item['safe']"
-                        >
+                        <div class="col" style="margin-left: 4%">
+                          <!-- v-if="item['safe']" -->
                           <button
                             class="btn btn-sm btn-primary"
                             @click="onQuery(index)"
@@ -343,7 +340,7 @@
                               {{ $t("tokenInfo.params") }}
                             </div>
                             <div v-if="item['parameters'].length !== 0">
-                              <div v-if="item['safe']">
+                              <div v-if="true">
                                 <div
                                   v-for="(param, ind) in item['parameters']"
                                   :key="ind"
@@ -768,6 +765,7 @@ export default {
       ) {
         client = Neon.create.rpcClient(RPC_NODE_TEST_T5);
       }
+      client = Neon.create.rpcClient(RPC_NODE_TEST_T5);
 
       client
         .invokeFunction(this.contract_id, name, contractParams)
