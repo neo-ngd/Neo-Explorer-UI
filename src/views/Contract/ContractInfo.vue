@@ -765,7 +765,6 @@ export default {
       ) {
         client = Neon.create.rpcClient(RPC_NODE_TEST_T5);
       }
-      client = Neon.create.rpcClient(RPC_NODE_TEST_T5);
 
       client
         .invokeFunction(this.contract_id, name, contractParams)
