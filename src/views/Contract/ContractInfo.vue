@@ -114,7 +114,9 @@
                   {{ $t("contract.hash") }}
                 </div>
                 <div class="col-md-9 context-black" id="contract">
-                  {{ this.contract_info["hash"] }}
+                  <span>
+                    {{ this.contract_info["hash"] }}
+                  </span>
                   <i
                     class="ni ni-single-copy-04"
                     id="contractButton"
