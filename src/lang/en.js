@@ -175,6 +175,8 @@ const en = {
     params: "Params",
     eventnull: "This transaction has no events.",
     syscallnull: "This transaction has no systemCall.",
+    askAI: "Ask AI 🪄",
+    askAInull: "No AI analysis available for this transaction.",
   },
   transactionTransfer: {
     contract: "Contract",

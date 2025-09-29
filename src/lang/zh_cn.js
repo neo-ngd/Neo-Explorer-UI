@@ -173,6 +173,8 @@ const zh = {
     params: "传入参数",
     eventnull: "这笔交易不包含事件.",
     syscallnull: "这笔交易不包含合约调用.",
+    askAI: "AI分析 🪄",
+    askAInull: "该交易暂无AI分析数据。",
   },
   transactionTransfer: {
     contract: "合约",

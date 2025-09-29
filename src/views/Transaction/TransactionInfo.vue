@@ -579,6 +579,27 @@
                   {{ $t("transactionInfo.syscallnull") }}
                 </card>
               </el-tab-pane>
+              <el-tab-pane :label="$t('transactionInfo.askAI')" name="third">
+                <div v-if="askAILoading" class="text-center askAI-loading">
+                  <loading
+                    :is-full-page="false"
+                    :opacity="0.9"
+                    :active="askAILoading"
+                    loader="spinner"
+                    width="30"
+                    height="30"
+                  ></loading>
+                </div>
+                <card shadow v-else-if="tabledataAskAI">
+                  <div
+                    v-html="formatAIResponse(tabledataAskAI)"
+                    class="askAI-result"
+                  ></div>
+                </card>
+                <card shadow v-else class="text-center">
+                  {{ $t("transactionInfo.askAInull") }}
+                </card>
+              </el-tab-pane>
             </el-tabs>
 
             <div class="row mt-5 mb-3 title2 list">
@@ -692,6 +713,8 @@ import {
   addressToScriptHash,
   copyItem,
 } from "../../store/util";
+import { AI_API, getRpcUrl } from "../../utils/env";
+const { marked } = require("marked");
 import net from "../../store/store";
 
 export default {
@@ -706,6 +729,10 @@ export default {
       tabledata: [],
       tabledataApp: [],
       tabledataCall: [],
+      tabledataAskAI: null,
+      askAIRequested: false,
+      askAILoading: true,
+      askAIRequesting: false,
       tableEvent: [],
       txhash: "",
       isLoading: true,
@@ -766,6 +793,11 @@ export default {
   },
   watch: {
     $route: "watchrouter",
+    activeName: function (newVal) {
+      if (newVal === "third" && !this.askAIRequested && !this.askAIRequesting) {
+        this.getAskAIByTransactionHash(this.txhash);
+      }
+    },
   },
   methods: {
     addressToScriptHash,
@@ -1036,6 +1068,40 @@ export default {
         // console.log(this.List);
       });
     },
+    getAskAIByTransactionHash(tx_id) {
+      this.askAILoading = true;
+      this.askAIRequesting = true; // Set requesting flag to prevent concurrent requests
+
+      axios({
+        method: "post",
+        url: AI_API.BASE_URL,
+        data: {
+          method: AI_API.METHOD,
+          params: [tx_id, getRpcUrl()],
+        },
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((res) => {
+          this.askAILoading = false;
+          this.askAIRequesting = false;
+          this.askAIRequested = true; // Only set to true on success
+          this.tabledataAskAI = res.data.data.explanation;
+        })
+        .catch((error) => {
+          this.askAILoading = false;
+          this.askAIRequesting = false; // Reset requesting flag on failure
+          // Don't set askAIRequested to true on failure, allowing retry
+          console.error("AI analysis request failed:", error);
+          this.tabledataAskAI = null;
+        });
+    },
+    formatAIResponse(text) {
+      if (!text) return "";
+      // Use marked to parse Markdown and convert to HTML
+      return marked(text);
+    },
   },
 };
 </script>
@@ -1076,6 +1142,62 @@ export default {
   font-size: 14px;
   line-height: 18px;
 }
+.askAI-result {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  color: #86909c;
+}
+
+.askAI-result h1,
+.askAI-result h2,
+.askAI-result h3,
+.askAI-result h4,
+.askAI-result h5,
+.askAI-result h6 {
+  color: #86909c;
+  font-size: 14px !important;
+  font-family: "Inter" !important;
+  font-weight: 400 !important;
+  line-height: 18px !important;
+}
+
+.askAI-result p {
+  color: #86909c;
+  font-size: 14px !important;
+  font-family: "Inter" !important;
+  font-weight: 400 !important;
+  line-height: 18px !important;
+}
+
+.askAI-result ul,
+.askAI-result ol,
+.askAI-result li {
+  font-size: 14px !important;
+  font-family: "Inter" !important;
+  font-weight: 400 !important;
+  line-height: 18px !important;
+  color: #86909c;
+}
+
+.askAI-result code {
+  color: #e83e8c;
+  background-color: #f8f9fa;
+  padding: 2px 4px;
+  border-radius: 3px;
+  font-family: "Courier New", monospace;
+}
+
+.askAI-loading {
+  padding: 20px 50px !important;
+  min-height: 100px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
 @media screen and (max-width: 790px) {
   .info {
     margin-top: 1.5rem !important;
